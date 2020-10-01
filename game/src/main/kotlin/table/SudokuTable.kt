@@ -1,13 +1,13 @@
 package table
 
-import table.cells.BigCell
 import table.cells.Cell
 import table.cells.collection.Columns
 import table.cells.collection.Rows
+import table.cells.collection.SelectionOfCells
 import java.lang.IllegalStateException
 
 class SudokuTable(
-    private val bigCells: List<BigCell>,
+    private val bigCells: List<SelectionOfCells>,
     private val conflicts: MutableList<CellConflict>
 ) {
     fun fillCell(value: Int, coordinates: Coordinates) {
@@ -33,9 +33,11 @@ class SudokuTable(
     private fun findNewConflicts() {
         val rowConflicts = Rows(allCells()).findConflicts()
         val columnConflicts = Columns(allCells()).findConflicts()
+        val bigCellConflicts = bigCells.map { it.findConflicts() }.flatten()
 
         rowConflicts.forEach { conflicts.add(it) }
         columnConflicts.forEach { conflicts.add(it) }
+        bigCellConflicts.forEach { conflicts.add(it) }
     }
 
     private fun resolveConflicts() {

@@ -3,7 +3,7 @@ package table.cells.collection
 import table.CellConflict
 import table.cells.Cell
 
-class SelectionOfCells (
+open class SelectionOfCells (
     val cells: List<Cell>
 ) : CellCollection {
     override fun findConflicts(): List<CellConflict> {
