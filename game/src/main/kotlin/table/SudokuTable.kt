@@ -14,7 +14,7 @@ class SudokuTable(
         allCells()
             .find { it.findLocation().sameAs(coordinates) }
             ?.let {
-                it.writeValue(value)
+                it.fillValue(value)
                 resolveConflicts()
                 findNewConflicts()
             }
@@ -28,7 +28,7 @@ class SudokuTable(
        return conflicts.filter { it.isResolved() }
     }
 
-    private fun allCells(): List<Cell> = bigCells.flatMap { it.cells }
+    private fun allCells(): List<Cell> = bigCells.flatMap { it.content }
 
     private fun findNewConflicts() {
         val rowConflicts = Rows(allCells()).findConflicts()
@@ -41,7 +41,7 @@ class SudokuTable(
     }
 
     private fun resolveConflicts() {
-        conflicts.forEach { it.tryToResolve() }
+        conflicts.forEach { it.reEvaluate() }
         conflicts.removeAll (findResolvedConflicts())
     }
 

@@ -4,10 +4,10 @@ import table.CellConflict
 import table.cells.Cell
 
 open class SelectionOfCells (
-    val cells: List<Cell>
+    val content: List<Cell>
 ) : CellCollection {
     override fun findConflicts(): List<CellConflict> {
-        return cells
+        return content
             .groupBy { it.getValue() }
             .values
             .filter { it.size > 1 }

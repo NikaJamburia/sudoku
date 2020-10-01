@@ -3,13 +3,13 @@ package table
 import table.cells.Cell
 
 class CellConflict (
-    private val conflictedCells: MutableList<Cell>
+    val conflictedCells: MutableList<Cell>
 ) {
     fun isResolved(): Boolean {
         return conflictedCells.isEmpty()
     }
 
-    fun tryToResolve() {
+    fun reEvaluate() {
         conflictedCells
             .groupBy { it.getValue() }
             .values

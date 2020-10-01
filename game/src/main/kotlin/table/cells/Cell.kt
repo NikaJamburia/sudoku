@@ -7,7 +7,7 @@ data class Cell (
     private var value: Int,
     private var coordinates: Coordinates
 ) {
-    fun writeValue(newValue: Int) {
+    fun fillValue(newValue: Int) {
         value = newValue
     }
 
