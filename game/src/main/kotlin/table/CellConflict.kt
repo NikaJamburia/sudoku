@@ -16,4 +16,12 @@ class CellConflict (
             .filter { it.size == 1 }
             .forEach { conflictedCells.removeAll(it) }
     }
+
+    fun sameAs(other: CellConflict): Boolean =
+        conflictedCells.all {
+            other.conflictedCells.any { otherCell ->
+                it.findLocation().sameAs(otherCell.findLocation())
+            }
+        }
+
 }

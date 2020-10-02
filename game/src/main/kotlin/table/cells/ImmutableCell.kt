@@ -1,8 +1,9 @@
-package table.cells.collection
+package table.cells
 
 import table.Coordinates
 import table.cells.Cell
 import table.cells.NO_VALUE
+import java.lang.IllegalArgumentException
 import java.lang.IllegalStateException
 
 class ImmutableCell (
@@ -23,7 +24,7 @@ class ImmutableCell (
 
     init {
         if (value == NO_VALUE) {
-            throw IllegalStateException("Immutable cell can not bi initialized without a value")
+            throw IllegalArgumentException("Immutable cell can not bi initialized without a value")
         }
     }
 

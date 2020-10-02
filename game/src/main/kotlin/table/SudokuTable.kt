@@ -30,19 +30,24 @@ class SudokuTable(
 
     private fun allCells(): List<Cell> = bigCells.flatMap { it.content }
 
+    private fun resolveConflicts() {
+        conflicts.forEach { it.reEvaluate() }
+        conflicts.removeAll (findResolvedConflicts())
+    }
+
     private fun findNewConflicts() {
         val rowConflicts = Rows(allCells()).findConflicts()
         val columnConflicts = Columns(allCells()).findConflicts()
         val bigCellConflicts = bigCells.map { it.findConflicts() }.flatten()
 
-        rowConflicts.forEach { conflicts.add(it) }
-        columnConflicts.forEach { conflicts.add(it) }
-        bigCellConflicts.forEach { conflicts.add(it) }
+        rowConflicts.filter { !exists(it) }.forEach { conflicts.add(it) }
+        columnConflicts.filter { !exists(it) }.forEach { conflicts.add(it) }
+        bigCellConflicts.filter { !exists(it) }.forEach { conflicts.add(it) }
     }
 
-    private fun resolveConflicts() {
-        conflicts.forEach { it.reEvaluate() }
-        conflicts.removeAll (findResolvedConflicts())
-    }
+    private fun exists(conflict: CellConflict): Boolean =
+        conflicts.any {
+            it.sameAs(conflict)
+        }
 
 }
