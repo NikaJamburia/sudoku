@@ -6,10 +6,10 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
-class CellTest {
+class MutableCellTest {
     @Test
     fun valueGetsCorrectlyFilledAndEmptied() {
-        val cell = Cell(NO_VALUE, Coordinates(1, 2))
+        val cell = MutableCell(NO_VALUE, Coordinates(1, 2))
 
         cell.fillValue(1)
         assertEquals(1, cell.getValue())

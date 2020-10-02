@@ -8,7 +8,7 @@ import java.lang.IllegalStateException
 
 class SudokuTable(
     private val bigCells: List<SelectionOfCells>,
-    private val conflicts: MutableList<CellConflict>
+    val conflicts: MutableList<CellConflict>
 ) {
     fun fillCell(value: Int, coordinates: Coordinates) {
         allCells()
