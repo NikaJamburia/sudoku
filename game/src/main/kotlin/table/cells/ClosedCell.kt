@@ -1,21 +1,24 @@
 package table.cells
 
 import table.Coordinates
+import table.HasInternalState
 import table.cells.Cell
 import table.cells.NO_VALUE
+import table.interaction.result.CellState
 import java.lang.IllegalArgumentException
 import java.lang.IllegalStateException
 
-class ImmutableCell (
+class ClosedCell (
     private var value: Int,
     private var coordinates: Coordinates
 ): Cell {
+
     override fun fillValue(newValue: Int) {
-        throw IllegalStateException("Value of immutable cell can not be changed")
+        throw IllegalStateException("Value of closed cell can not be changed")
     }
 
     override fun empty() {
-        throw IllegalStateException("Value of immutable cell can not be changed")
+        throw IllegalStateException("Value of closed cell can not be changed")
     }
 
     override fun isEmpty(): Boolean = false
@@ -24,8 +27,7 @@ class ImmutableCell (
 
     init {
         if (value == NO_VALUE) {
-            throw IllegalArgumentException("Immutable cell can not bi initialized without a value")
+            throw IllegalArgumentException("Closed cell can not be initialized without a value")
         }
     }
-
 }

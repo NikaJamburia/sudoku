@@ -2,7 +2,6 @@ package table.cells.collection
 
 import table.CellConflict
 import table.cells.Cell
-import table.cells.MutableCell
 import table.cells.NO_VALUE
 
 open class SelectionOfCells (

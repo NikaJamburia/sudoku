@@ -2,20 +2,20 @@ package table.cells.collection
 
 import org.junit.jupiter.api.Test
 import table.Coordinates
-import table.cells.MutableCell
+import table.cells.OpenCell
 import org.junit.Assert.*
 
 
 class SelectionOfCellsTest {
     @Test
     fun correctlyIdentifiesConflicts()   {
-        val cells = listOf<MutableCell>(
-            MutableCell(1, Coordinates(1, 1)),
-            MutableCell(2, Coordinates(1, 2)),
-            MutableCell(1, Coordinates(1, 3)),
-            MutableCell(2, Coordinates(2, 1)),
-            MutableCell(1, Coordinates(2, 2)),
-            MutableCell(8, Coordinates(2, 3))
+        val cells = listOf<OpenCell>(
+            OpenCell(1, Coordinates(1, 1)),
+            OpenCell(2, Coordinates(1, 2)),
+            OpenCell(1, Coordinates(1, 3)),
+            OpenCell(2, Coordinates(2, 1)),
+            OpenCell(1, Coordinates(2, 2)),
+            OpenCell(8, Coordinates(2, 3))
         )
 
         val conflicts = SelectionOfCells(cells).findConflicts()

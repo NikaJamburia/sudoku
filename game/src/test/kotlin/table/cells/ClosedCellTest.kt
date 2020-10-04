@@ -6,16 +6,16 @@ import table.Coordinates
 import java.lang.IllegalArgumentException
 import java.lang.IllegalStateException
 
-class ImmutableCellTest {
+class ClosedCellTest {
     @Test
     fun changingValueIsNotPossible() {
-        val immutableCell = ImmutableCell(1, Coordinates(1, 1))
+        val immutableCell = ClosedCell(1, Coordinates(1, 1))
         assertThrows(IllegalStateException::class.java) { immutableCell.fillValue(1) }
         assertThrows(IllegalStateException::class.java) { immutableCell.empty() }
     }
 
     @Test
     fun canNotBeInitializedWithoutValue() {
-        assertThrows(IllegalArgumentException::class.java) { ImmutableCell(NO_VALUE, Coordinates(1, 1)) }
+        assertThrows(IllegalArgumentException::class.java) { ClosedCell(NO_VALUE, Coordinates(1, 1)) }
     }
 }

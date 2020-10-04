@@ -1,10 +1,11 @@
 package table
 
 import org.junit.jupiter.api.Test
-import table.cells.MutableCell
+import table.cells.OpenCell
 import table.cells.NO_VALUE
-import table.cells.ImmutableCell
+import table.cells.ClosedCell
 import table.cells.collection.SelectionOfCells
+import table.interaction.result.TableState
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
@@ -13,103 +14,174 @@ class SudokuTableTest /*: BaseSudokuTableTest()*/ {
 
     @Test
     fun behavesCorrectlyOnFillingACell() {
-        val table6X3 = initialize6X3Table();
+        val table6X3 = generate6X3Table();
 
         // fill a cell with value that wont conflict with anything
-        table6X3.fillCell(6, Coordinates(1, 1))
-        assertEquals(0, table6X3.conflicts.size)
+        var tableState = table6X3.fillCell(6, Coordinates(1, 1))
+        assertEquals(0, tableState.conflicts.size)
 
         // fill a cell with value that will cause conflict in big cell
-        table6X3.fillCell(6, Coordinates(3, 3))
-        assertEquals(1, table6X3.conflicts.size)
-        assertTrue(twoCellsAreConflicting(Coordinates(1, 1), Coordinates(3, 3), table6X3))
+        tableState = table6X3.fillCell(6, Coordinates(3, 3))
+        assertEquals(1, tableState.conflicts.size)
+        assertTrue(twoCellsAreConflicting(Coordinates(1, 1), Coordinates(3, 3), tableState))
 
         // change same cells value to another conflicting one
-        table6X3.fillCell(3, Coordinates(3, 3))
-        assertEquals(1, table6X3.conflicts.size)
+        tableState = table6X3.fillCell(3, Coordinates(3, 3))
+        assertEquals(1, tableState.conflicts.size)
 
         // (3, 3) should no longer conflict with (1, 1) and is should with (5, 3)
-        assertFalse(twoCellsAreConflicting(Coordinates(1, 1), Coordinates(3, 3), table6X3))
-        assertTrue(twoCellsAreConflicting(Coordinates(3, 3), Coordinates(5, 3), table6X3))
+        assertFalse(twoCellsAreConflicting(Coordinates(1, 1), Coordinates(3, 3), tableState))
+        assertTrue(twoCellsAreConflicting(Coordinates(3, 3), Coordinates(5, 3), tableState))
 
         // change same cells value so it wont conflict with anything
-        table6X3.fillCell(4, Coordinates(3, 3))
-        assertEquals(0, table6X3.conflicts.size)
+        tableState = table6X3.fillCell(4, Coordinates(3, 3))
+        assertEquals(0, tableState.conflicts.size)
     }
 
     @Test
     fun correctlyIdentifiesAndResolvesConflictsInRows() {
-        val table = initialize6X3Table()
+        val table = generate6X3Table()
 
         // fill cell (1, 1) with value that exists on the same row (6, 1)
-        table.fillCell(7, Coordinates(1, 1))
-        assertEquals(1, table.conflicts.size)
-        assertTrue(twoCellsAreConflicting(Coordinates(1, 1), Coordinates(6, 1), table))
+        var tableState = table.fillCell(7, Coordinates(1, 1))
+        assertEquals(1, tableState.conflicts.size)
+        assertTrue(twoCellsAreConflicting(Coordinates(1, 1), Coordinates(6, 1), tableState))
 
         // fill cell (4, 2) with value that exists on the same row (2, 2)
-        table.fillCell(5, Coordinates(4, 2))
-        assertEquals(2, table.conflicts.size)
-        assertTrue(twoCellsAreConflicting(Coordinates(1, 1), Coordinates(6, 1), table))
-        assertTrue(twoCellsAreConflicting(Coordinates(2, 2), Coordinates(4, 2), table))
+        tableState = table.fillCell(5, Coordinates(4, 2))
+        assertEquals(2, tableState.conflicts.size)
+        assertTrue(twoCellsAreConflicting(Coordinates(1, 1), Coordinates(6, 1), tableState))
+        assertTrue(twoCellsAreConflicting(Coordinates(2, 2), Coordinates(4, 2), tableState))
 
         // fill cells (3, 3) and (6, 3) with values that exists on the same row in (6, 3) and (5, 3)
-        table.fillCell(3, Coordinates(3, 3))
-        table.fillCell(2, Coordinates(6, 3))
-        assertEquals(4, table.conflicts.size)
-        assertTrue(twoCellsAreConflicting(Coordinates(1, 1), Coordinates(6, 1), table))
-        assertTrue(twoCellsAreConflicting(Coordinates(2, 2), Coordinates(4, 2), table))
-        assertTrue(twoCellsAreConflicting(Coordinates(1, 3), Coordinates(6, 3), table))
-        assertTrue(twoCellsAreConflicting(Coordinates(3, 3), Coordinates(5, 3), table))
+        tableState = table.fillCell(3, Coordinates(3, 3))
+        tableState = table.fillCell(2, Coordinates(6, 3))
+        assertEquals(4, tableState.conflicts.size)
+        assertTrue(twoCellsAreConflicting(Coordinates(1, 1), Coordinates(6, 1), tableState))
+        assertTrue(twoCellsAreConflicting(Coordinates(2, 2), Coordinates(4, 2), tableState))
+        assertTrue(twoCellsAreConflicting(Coordinates(1, 3), Coordinates(6, 3), tableState))
+        assertTrue(twoCellsAreConflicting(Coordinates(3, 3), Coordinates(5, 3), tableState))
 
         // fill all the previous cells in a way to eliminate conflicts
         table.fillCell(8, Coordinates(1, 1))
         table.fillCell(6, Coordinates(4, 2))
         table.fillCell(4, Coordinates(6, 3))
-        table.fillCell(6, Coordinates(3, 3))
-        assertEquals(0, table.conflicts.size)
+        tableState = table.fillCell(6, Coordinates(3, 3))
+        assertEquals(0, tableState.conflicts.size)
 
         // fill 2 cells on the same row with same values
         table.fillCell(9, Coordinates(2, 1))
-        table.fillCell(9, Coordinates(4, 1))
-        assertEquals(1, table.conflicts.size)
-        assertTrue(twoCellsAreConflicting(Coordinates(2, 1), Coordinates(4, 1), table))
+        tableState = table.fillCell(9, Coordinates(4, 1))
+        assertEquals(1, tableState.conflicts.size)
+        assertTrue(twoCellsAreConflicting(Coordinates(2, 1), Coordinates(4, 1), tableState))
 
     }
 
     @Test
     fun correctlyIdentifiesAndResolvesConflictsInColumns() {
+        val table = generate3X6Table()
+
+        var tableState = table.fillCell(2, Coordinates(1, 6))
+        assertEquals(1, tableState.conflicts.size)
+        assertTrue (twoCellsAreConflicting(Coordinates(1, 3), Coordinates(1, 6), tableState))
+
+        tableState = table.fillCell(3, Coordinates(1, 1))
+        assertEquals(2, tableState.conflicts.size)
+        assertTrue (twoCellsAreConflicting(Coordinates(1, 1), Coordinates(1, 5), tableState))
+
+        tableState = table.fillCell(5, Coordinates(2, 4))
+        assertEquals(3, tableState.conflicts.size)
+        assertTrue (twoCellsAreConflicting(Coordinates(2,4), Coordinates(2, 2), tableState))
+
+        tableState = table.fillCell(7, Coordinates(3, 1))
+        assertEquals(4, tableState.conflicts.size)
+        assertTrue (twoCellsAreConflicting(Coordinates(3,1), Coordinates(3, 4), tableState))
+
+        table.fillCell(6, Coordinates(1, 6))
+        table.fillCell(4, Coordinates(1, 1))
+        table.fillCell(9, Coordinates(2, 4))
+        tableState = table.fillCell(9, Coordinates(3, 1))
+        assertEquals(0, tableState.conflicts.size)
+
+        table.fillCell(8, Coordinates(3, 3))
+        table.fillCell(8, Coordinates(3, 5))
+        table.fillCell(1, Coordinates(3, 6))
+        tableState = table.fillCell(1, Coordinates(3, 2))
+        assertEquals(2, tableState.conflicts.size)
 
     }
 
-    fun twoCellsAreConflicting(coordinate1: Coordinates, coordinate2: Coordinates, table: SudokuTable): Boolean =
+    @Test
+    fun testImmutability() {
+        val table = generate3X6Table()
+        var state = table.fillCell(5, Coordinates(2, 4))
+        assertEquals(1, state.conflicts.size)
+
+        state.cells.first { it.findLocation().sameAs(Coordinates(1, 2)) }.fillValue(3)
+        state = table.fillCell(9, Coordinates(2, 1))
+
+        assertEquals(1, state.conflicts.size)
+        assertTrue(state.cells.first { it.findLocation().sameAs(Coordinates(1, 2)) }.isEmpty())
+
+    }
+
+    private fun twoCellsAreConflicting(coordinate1: Coordinates, coordinate2: Coordinates, table: TableState): Boolean =
         table.conflicts.any {
             it.conflictedCells.any { cell -> cell.findLocation().sameAs(coordinate1) }
                     && it.conflictedCells.any { cell -> cell.findLocation().sameAs(coordinate2) }
         }
 
-    fun initialize6X3Table(): SudokuTable {
+    private fun generate6X3Table(): SudokuTable {
         val bigCell1 = SelectionOfCells(listOf(
-            MutableCell(NO_VALUE, Coordinates(1, 1)),
-            MutableCell(NO_VALUE, Coordinates(2, 1)),
-            MutableCell(NO_VALUE, Coordinates(3, 1)),
-            MutableCell(NO_VALUE, Coordinates(1, 2)),
-            ImmutableCell(5, Coordinates(2, 2)),
-            MutableCell(NO_VALUE, Coordinates(3, 2)),
-            ImmutableCell(2, Coordinates(1, 3)),
-            MutableCell(NO_VALUE, Coordinates(2, 3)),
-            MutableCell(NO_VALUE, Coordinates(3, 3))
+            OpenCell(NO_VALUE, Coordinates(1, 1)),
+            OpenCell(NO_VALUE, Coordinates(2, 1)),
+            OpenCell(NO_VALUE, Coordinates(3, 1)),
+            OpenCell(NO_VALUE, Coordinates(1, 2)),
+            ClosedCell(5, Coordinates(2, 2)),
+            OpenCell(NO_VALUE, Coordinates(3, 2)),
+            ClosedCell(2, Coordinates(1, 3)),
+            OpenCell(NO_VALUE, Coordinates(2, 3)),
+            OpenCell(NO_VALUE, Coordinates(3, 3))
         ))
 
         val bigCell2 = SelectionOfCells(listOf(
-            MutableCell(NO_VALUE, Coordinates(4, 1)),
-            MutableCell(NO_VALUE, Coordinates(5, 1)),
-            ImmutableCell(7, Coordinates(6, 1)),
-            MutableCell(NO_VALUE, Coordinates(4, 2)),
-            MutableCell(NO_VALUE, Coordinates(5, 2)),
-            MutableCell(NO_VALUE, Coordinates(6, 2)),
-            MutableCell(NO_VALUE, Coordinates(4, 3)),
-            ImmutableCell(3, Coordinates(5, 3)),
-            MutableCell(NO_VALUE, Coordinates(6, 3))
+            OpenCell(NO_VALUE, Coordinates(4, 1)),
+            OpenCell(NO_VALUE, Coordinates(5, 1)),
+            ClosedCell(7, Coordinates(6, 1)),
+            OpenCell(NO_VALUE, Coordinates(4, 2)),
+            OpenCell(NO_VALUE, Coordinates(5, 2)),
+            OpenCell(NO_VALUE, Coordinates(6, 2)),
+            OpenCell(NO_VALUE, Coordinates(4, 3)),
+            ClosedCell(3, Coordinates(5, 3)),
+            OpenCell(NO_VALUE, Coordinates(6, 3))
+        ))
+
+        return SudokuTable(listOf(bigCell1, bigCell2), mutableListOf())
+    }
+
+    private fun generate3X6Table(): SudokuTable {
+        val bigCell1 = SelectionOfCells(listOf(
+            OpenCell(NO_VALUE, Coordinates(1, 1)),
+            OpenCell(NO_VALUE, Coordinates(2, 1)),
+            OpenCell(NO_VALUE, Coordinates(3, 1)),
+            OpenCell(NO_VALUE, Coordinates(1, 2)),
+            ClosedCell(5, Coordinates(2, 2)),
+            OpenCell(NO_VALUE, Coordinates(3, 2)),
+            ClosedCell(2, Coordinates(1, 3)),
+            OpenCell(NO_VALUE, Coordinates(2, 3)),
+            OpenCell(NO_VALUE, Coordinates(3, 3))
+        ))
+
+        val bigCell2 = SelectionOfCells(listOf(
+            OpenCell(NO_VALUE, Coordinates(1, 4)),
+            OpenCell(NO_VALUE, Coordinates(2, 4)),
+            ClosedCell(7, Coordinates(3, 4)),
+            ClosedCell(3, Coordinates(1, 5)),
+            OpenCell(NO_VALUE, Coordinates(2, 5)),
+            OpenCell(NO_VALUE, Coordinates(3, 5)),
+            OpenCell(NO_VALUE, Coordinates(1, 6)),
+            OpenCell(NO_VALUE, Coordinates(2, 6)),
+            OpenCell(NO_VALUE, Coordinates(3, 6))
         ))
 
         return SudokuTable(listOf(bigCell1, bigCell2), mutableListOf())
