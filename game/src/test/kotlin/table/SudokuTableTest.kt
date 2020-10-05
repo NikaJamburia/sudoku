@@ -108,8 +108,50 @@ class SudokuTableTest /*: BaseSudokuTableTest()*/ {
         table.fillCell(1, Coordinates(3, 6))
         tableState = table.fillCell(1, Coordinates(3, 2))
         assertEquals(2, tableState.conflicts.size)
-
     }
+
+    @Test
+    fun correctlyIdentifiesAndResolvesConflictsInsideBigCells() {
+        val table = generate6X3Table()
+
+        var tableState = table.fillCell(5, Coordinates(1, 1))
+        assertEquals(1, tableState.conflicts.size)
+        assertTrue (twoCellsAreConflicting(Coordinates(1, 1), Coordinates(2, 2), tableState))
+
+        tableState = table.fillCell(2, Coordinates(3, 1))
+        assertEquals(2, tableState.conflicts.size)
+        assertTrue (twoCellsAreConflicting(Coordinates(3, 1), Coordinates(1, 3), tableState))
+
+        tableState = table.fillCell(7, Coordinates(5, 2))
+        assertEquals(3, tableState.conflicts.size)
+        assertTrue (twoCellsAreConflicting(Coordinates(5, 2), Coordinates(6, 1), tableState))
+        assertEquals(2, findConflictByValueOfCells(7, tableState).conflictedCells.size)
+
+        tableState = table.fillCell(7, Coordinates(4, 3))
+        assertEquals(3, tableState.conflicts.size)
+        assertEquals(3, findConflictByValueOfCells(7, tableState).conflictedCells.size)
+        assertTrue (twoCellsAreConflicting(Coordinates(4, 3), Coordinates(6, 1), tableState))
+        assertTrue (twoCellsAreConflicting(Coordinates(4, 3), Coordinates(5, 2), tableState))
+
+        tableState = table.fillCell(3, Coordinates(4, 2))
+        assertEquals(4, tableState.conflicts.size)
+        assertTrue (twoCellsAreConflicting(Coordinates(4, 2), Coordinates(5, 3), tableState))
+
+        table.fillCell(3, Coordinates(1, 1))
+        table.fillCell(8, Coordinates(3, 1))
+        table.fillCell(4, Coordinates(5, 2))
+        table.fillCell(5, Coordinates(4, 3))
+        tableState = table.fillCell(9, Coordinates(4, 2))
+        assertEquals(0, tableState.conflicts.size)
+    }
+
+    @Test
+    fun correctlyResolvesConflictsInAllCellSelections() {
+        
+    }
+
+    private fun findConflictByValueOfCells(value: Int, tableState: TableState) =
+        tableState.conflicts.first { it.conflictedCells.all { cell -> cell.getValue() == value } }
 
     @Test
     fun testImmutability() {
