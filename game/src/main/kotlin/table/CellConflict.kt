@@ -1,10 +1,11 @@
 package table
 
 import table.cells.Cell
+import table.interaction.result.ConflictState
 
 class CellConflict (
     val conflictedCells: MutableList<Cell>
-) {
+): HasInternalState<ConflictState> {
     fun isResolved(): Boolean {
         return conflictedCells.isEmpty()
     }
@@ -16,5 +17,8 @@ class CellConflict (
             .filter { it.size == 1 }
             .forEach { conflictedCells.removeAll(it) }
     }
+
+    override fun internalState(): ConflictState =
+        ConflictState(conflictedCells.map { it.internalState() })
 
 }

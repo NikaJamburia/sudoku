@@ -5,7 +5,7 @@ import table.HasInternalState
 import table.interaction.result.CellState
 import java.lang.IllegalArgumentException
 
-const val NO_VALUE = -1
+const val NO_VALUE = 0
 data class OpenCell (
     private var value: Int,
     private var coordinates: Coordinates
@@ -26,4 +26,7 @@ data class OpenCell (
     override fun isEmpty(): Boolean = value == NO_VALUE
     override fun findLocation(): Coordinates = coordinates
     override fun getValue(): Int = value
+
+    override fun internalState(): CellState =
+        CellState(value, coordinates, true)
 }

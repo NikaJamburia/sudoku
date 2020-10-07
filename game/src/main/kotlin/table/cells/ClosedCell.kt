@@ -9,8 +9,8 @@ import java.lang.IllegalArgumentException
 import java.lang.IllegalStateException
 
 class ClosedCell (
-    private var value: Int,
-    private var coordinates: Coordinates
+    private val value: Int,
+    private val coordinates: Coordinates
 ): Cell {
 
     override fun fillValue(newValue: Int) {
@@ -30,4 +30,7 @@ class ClosedCell (
             throw IllegalArgumentException("Closed cell can not be initialized without a value")
         }
     }
+
+    override fun internalState(): CellState =
+        CellState(value, coordinates, false)
 }

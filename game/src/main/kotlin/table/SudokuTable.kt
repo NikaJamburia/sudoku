@@ -4,20 +4,21 @@ import table.cells.Cell
 import table.cells.collection.Columns
 import table.cells.collection.Rows
 import table.cells.collection.SelectionOfCells
+import table.interaction.result.CellState
 import table.interaction.result.TableState
 import java.lang.IllegalStateException
 
 class SudokuTable(
     private val bigCells: List<SelectionOfCells>,
     private var conflicts: List<CellConflict>
-) {
+): HasInternalState<TableState> {
     fun fillCell(value: Int, coordinates: Coordinates): TableState {
         allCells()
             .find { it.findLocation().sameAs(coordinates) }
             ?.let {
                 it.fillValue(value)
                 findConflicts()
-                return TableState(allCells(), conflicts, isFilled())
+                return internalState()
             }
             ?: let { throw IllegalStateException("Cell not found") }
     }
@@ -34,5 +35,12 @@ class SudokuTable(
 
         conflicts = listOf(rowConflicts, columnConflicts, bigCellConflicts).flatten()
     }
+
+    override fun internalState(): TableState =
+        TableState(
+            allCells().map { it.internalState() },
+            conflicts.map { it.internalState() },
+            isFilled()
+        )
 
 }

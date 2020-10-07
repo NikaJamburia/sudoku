@@ -147,30 +147,35 @@ class SudokuTableTest /*: BaseSudokuTableTest()*/ {
 
     @Test
     fun correctlyResolvesConflictsInAllCellSelections() {
-        
+        val table = generate6X6Table()
+        var tableState: TableState
+
+        tableState = table.fillCell(5, Coordinates(1, 1))
+        assertEquals(2, tableState.conflicts.size)
+        assertTrue (twoCellsAreConflicting(Coordinates(1, 1), Coordinates(2, 3), tableState))
+        assertTrue (twoCellsAreConflicting(Coordinates(1, 1), Coordinates(1, 5), tableState))
+
+        tableState = table.fillCell(5, Coordinates(6, 1))
+        assertTrue (twoCellsAreConflicting(Coordinates(1, 1), Coordinates(6, 1), tableState))
+        assertEquals(3, tableState.conflicts.size)
+
+        table.fillCell(6, Coordinates(5, 2))
+        tableState = table.fillCell(6, Coordinates(5, 3))
+        assertEquals(6, tableState.conflicts.size)
+        assertEquals(2, findConflictByValueOfCells(6, tableState).conflictedCells.size)
+
+        tableState = table.fillCell(6, Coordinates(4, 2))
+        assertEquals(6, tableState.conflicts.size)
+        assertEquals(3, findConflictByValueOfCells(6, tableState).conflictedCells.size)
     }
 
     private fun findConflictByValueOfCells(value: Int, tableState: TableState) =
-        tableState.conflicts.first { it.conflictedCells.all { cell -> cell.getValue() == value } }
-
-    @Test
-    fun testImmutability() {
-        val table = generate3X6Table()
-        var state = table.fillCell(5, Coordinates(2, 4))
-        assertEquals(1, state.conflicts.size)
-
-        state.cells.first { it.findLocation().sameAs(Coordinates(1, 2)) }.fillValue(3)
-        state = table.fillCell(9, Coordinates(2, 1))
-
-        assertEquals(1, state.conflicts.size)
-        assertTrue(state.cells.first { it.findLocation().sameAs(Coordinates(1, 2)) }.isEmpty())
-
-    }
+        tableState.conflicts.first { it.conflictedCells.all { cell -> cell.value == value } }
 
     private fun twoCellsAreConflicting(coordinate1: Coordinates, coordinate2: Coordinates, table: TableState): Boolean =
         table.conflicts.any {
-            it.conflictedCells.any { cell -> cell.findLocation().sameAs(coordinate1) }
-                    && it.conflictedCells.any { cell -> cell.findLocation().sameAs(coordinate2) }
+            it.conflictedCells.any { cell -> cell.coordinates.sameAs(coordinate1) }
+                    && it.conflictedCells.any { cell -> cell.coordinates.sameAs(coordinate2) }
         }
 
     private fun generate6X3Table(): SudokuTable {
@@ -227,6 +232,58 @@ class SudokuTableTest /*: BaseSudokuTableTest()*/ {
         ))
 
         return SudokuTable(listOf(bigCell1, bigCell2), mutableListOf())
+    }
+
+    private fun generate6X6Table(): SudokuTable {
+        val bigCell1 = SelectionOfCells(listOf(
+            OpenCell(NO_VALUE, Coordinates(1, 1)),
+            OpenCell(NO_VALUE, Coordinates(2, 1)),
+            OpenCell(NO_VALUE, Coordinates(3, 1)),
+            OpenCell(NO_VALUE, Coordinates(1, 2)),
+            OpenCell(NO_VALUE, Coordinates(2, 2)),
+            ClosedCell(6, Coordinates(3, 2)),
+            OpenCell(NO_VALUE, Coordinates(1, 3)),
+            ClosedCell(5, Coordinates(2, 3)),
+            OpenCell(NO_VALUE, Coordinates(3, 3))
+        ))
+
+        val bigCell2 = SelectionOfCells(listOf(
+            OpenCell(NO_VALUE, Coordinates(1, 4)),
+            OpenCell(NO_VALUE, Coordinates(2, 4)),
+            OpenCell(NO_VALUE, Coordinates(3, 4)),
+            ClosedCell(5, Coordinates(1, 5)),
+            OpenCell(NO_VALUE, Coordinates(2, 5)),
+            OpenCell(NO_VALUE, Coordinates(3, 5)),
+            OpenCell(NO_VALUE, Coordinates(1, 6)),
+            OpenCell(NO_VALUE, Coordinates(2, 6)),
+            ClosedCell(4, Coordinates(3, 6))
+        ))
+
+        val bigCell3 = SelectionOfCells(listOf(
+            OpenCell(NO_VALUE, Coordinates(4, 1)),
+            ClosedCell(9, Coordinates(5, 1)),
+            OpenCell(NO_VALUE, Coordinates(6, 1)),
+            OpenCell(NO_VALUE, Coordinates(4, 2)),
+            OpenCell(NO_VALUE, Coordinates(5, 2)),
+            OpenCell(NO_VALUE, Coordinates(6, 2)),
+            OpenCell(NO_VALUE, Coordinates(4, 3)),
+            OpenCell(NO_VALUE, Coordinates(5, 3)),
+            ClosedCell(1, Coordinates(6, 3))
+        ))
+
+        val bigCell4 = SelectionOfCells(listOf(
+            OpenCell(NO_VALUE, Coordinates(4, 4)),
+            OpenCell(NO_VALUE, Coordinates(5, 4)),
+            OpenCell(NO_VALUE, Coordinates(6, 4)),
+            ClosedCell(3, Coordinates(4, 5)),
+            OpenCell(NO_VALUE, Coordinates(5, 5)),
+            OpenCell(NO_VALUE, Coordinates(6, 5)),
+            OpenCell(NO_VALUE, Coordinates(4, 6)),
+            ClosedCell(8, Coordinates(5, 6)),
+            OpenCell(NO_VALUE, Coordinates(6, 6))
+        ))
+
+        return SudokuTable(listOf(bigCell1, bigCell2, bigCell3, bigCell4), mutableListOf())
     }
 
 }
