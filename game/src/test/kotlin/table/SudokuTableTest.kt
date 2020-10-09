@@ -5,7 +5,7 @@ import table.cells.OpenCell
 import table.cells.NO_VALUE
 import table.cells.ClosedCell
 import table.cells.collection.SelectionOfCells
-import table.interaction.result.TableState
+import table.state.TableState
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
@@ -167,6 +167,24 @@ class SudokuTableTest /*: BaseSudokuTableTest()*/ {
         tableState = table.fillCell(6, Coordinates(4, 2))
         assertEquals(6, tableState.conflicts.size)
         assertEquals(3, findConflictByValueOfCells(6, tableState).conflictedCells.size)
+    }
+
+    @Test
+    fun shouldBeCorrectlyEmptied() {
+        val table = generate6X6Table()
+
+        table.fillCell(5, Coordinates(1, 1))
+        table.fillCell(5, Coordinates(6, 1))
+        table.fillCell(6, Coordinates(5, 2))
+        table.fillCell(6, Coordinates(5, 3))
+        var tableState: TableState = table.fillCell(6, Coordinates(4, 2))
+
+        assertFalse(tableState.isEmpty)
+        assertFalse(tableState.conflicts.isEmpty())
+
+        table.empty()
+        assertTrue(table.internalState().isEmpty)
+        assertTrue(table.internalState().conflicts.isEmpty())
     }
 
     private fun findConflictByValueOfCells(value: Int, tableState: TableState) =

@@ -2,7 +2,7 @@ package table.cells
 
 import table.Coordinates
 import table.HasInternalState
-import table.interaction.result.CellState
+import table.state.CellState
 
 interface Cell : HasInternalState<CellState> {
     fun fillValue(newValue: Int)

@@ -1,9 +1,9 @@
 package gameplay.interaction.request
 
-import gameplay.saveload.SerializedSudokuGame
+import gameplay.saveload.save.SavedSudokuGame
 
 class LoadGameRequest  (
-    val serializedSudokuGame: SerializedSudokuGame,
+    val savedSudokuGame: SavedSudokuGame,
     gameId: String,
     timePlayed: String
 ) : SudokuInteractionRequest(gameId, timePlayed)

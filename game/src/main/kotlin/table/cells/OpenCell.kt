@@ -1,8 +1,7 @@
 package table.cells
 
 import table.Coordinates
-import table.HasInternalState
-import table.interaction.result.CellState
+import table.state.CellState
 import java.lang.IllegalArgumentException
 
 const val NO_VALUE = 0

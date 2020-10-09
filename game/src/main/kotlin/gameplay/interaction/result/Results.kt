@@ -1,7 +1,7 @@
 package gameplay.interaction.result
 
-import gameplay.saveload.SerializedSudokuGame
-import table.interaction.result.TableState
+import gameplay.saveload.save.SavedSudokuGame
+import table.state.TableState
 
 data class CellFilled (
     val tableState: TableState
@@ -16,7 +16,7 @@ data class Error (
     val tableState: TableState
 ): SudokuInteractionResult(false, errorMsg, tableState)
 
-data class NewGame (
+data class GameRestarted (
     val tableState: TableState
 ): SudokuInteractionResult(true, "New game started", tableState)
 
@@ -26,5 +26,5 @@ data class GameLoaded (
 
 data class GameSaved (
     val savedSuccessfully: Boolean,
-    val serializedGame: SerializedSudokuGame
+    val savedGame: SavedSudokuGame
 )

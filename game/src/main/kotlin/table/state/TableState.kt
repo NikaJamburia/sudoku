@@ -1,11 +1,12 @@
-package table.interaction.result
+package table.state
 
 import table.Coordinates
 
 data class TableState(
     val cells: List<CellState>,
     val conflicts: List<ConflictState>,
-    val isFilled: Boolean
+    val isFilled: Boolean,
+    val isEmpty: Boolean
 )
 
 data class CellState (

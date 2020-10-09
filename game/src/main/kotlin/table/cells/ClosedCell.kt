@@ -1,10 +1,7 @@
 package table.cells
 
 import table.Coordinates
-import table.HasInternalState
-import table.cells.Cell
-import table.cells.NO_VALUE
-import table.interaction.result.CellState
+import table.state.CellState
 import java.lang.IllegalArgumentException
 import java.lang.IllegalStateException
 

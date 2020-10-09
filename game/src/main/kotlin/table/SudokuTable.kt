@@ -1,11 +1,11 @@
 package table
 
 import table.cells.Cell
+import table.cells.OpenCell
 import table.cells.collection.Columns
 import table.cells.collection.Rows
 import table.cells.collection.SelectionOfCells
-import table.interaction.result.CellState
-import table.interaction.result.TableState
+import table.state.TableState
 import java.lang.IllegalStateException
 
 class SudokuTable(
@@ -23,8 +23,20 @@ class SudokuTable(
             ?: let { throw IllegalStateException("Cell not found") }
     }
 
+    fun empty(): TableState {
+        allCells().forEach {
+            try {
+                it.empty()
+            } catch (e: IllegalStateException) { }
+        }
+        findConflicts()
+        return internalState()
+    }
+
     private fun isFilled(): Boolean =
         !allCells().any { it.isEmpty() }
+    private fun isEmpty(): Boolean =
+        allCells().filterIsInstance<OpenCell>().all { it.isEmpty() }
 
     private fun allCells(): List<Cell> = bigCells.flatMap { it.content }
 
@@ -40,7 +52,8 @@ class SudokuTable(
         TableState(
             allCells().map { it.internalState() },
             conflicts.map { it.internalState() },
-            isFilled()
+            isFilled(),
+            isEmpty()
         )
 
 }

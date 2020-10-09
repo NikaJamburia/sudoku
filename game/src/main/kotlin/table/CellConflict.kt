@@ -1,7 +1,7 @@
 package table
 
 import table.cells.Cell
-import table.interaction.result.ConflictState
+import table.state.ConflictState
 
 class CellConflict (
     val conflictedCells: MutableList<Cell>

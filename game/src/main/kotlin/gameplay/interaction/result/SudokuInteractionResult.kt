@@ -1,6 +1,6 @@
 package gameplay.interaction.result
 
-import table.interaction.result.TableState
+import table.state.TableState
 
 abstract class SudokuInteractionResult (
     val isSuccessful: Boolean,
