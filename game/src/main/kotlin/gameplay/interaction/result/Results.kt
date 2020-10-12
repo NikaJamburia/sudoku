@@ -1,6 +1,6 @@
 package gameplay.interaction.result
 
-import gameplay.saveload.save.SavedSudokuGame
+import gameplay.saveload.serialization.JacksonSerializedSudokuGame
 import table.state.TableState
 
 data class CellFilled (
@@ -26,5 +26,5 @@ data class GameLoaded (
 
 data class GameSaved (
     val savedSuccessfully: Boolean,
-    val savedGame: SavedSudokuGame
+    val savedGame: JacksonSerializedSudokuGame
 )

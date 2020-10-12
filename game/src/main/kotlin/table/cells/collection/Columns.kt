@@ -5,7 +5,7 @@ import table.cells.Cell
 class Columns(
     private val source: List<Cell>
 ) : GroupedSelections() {
-    override fun groupCells(): List<SelectionOfCells> =
+    override fun groupedCells(): List<SelectionOfCells> =
         source
             .groupBy { it.findLocation().x }
             .values

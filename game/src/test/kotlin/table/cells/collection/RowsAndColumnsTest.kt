@@ -22,7 +22,7 @@ class RowsAndColumnsTest {
     @Test
     fun shouldCorrectlyDivideCellsIntoRows() {
         val rows = Rows(source);
-        val listOfRows = rows.groupCells()
+        val listOfRows = rows.groupedCells()
 
         assertEquals(3, listOfRows.size)
         assertTrue(listOfRows[0].content.all { it.findLocation().y == 1 })
@@ -35,7 +35,7 @@ class RowsAndColumnsTest {
     @Test
     fun shouldCorrectlyDivideCellsIntoColumns() {
         val columns = Columns(source);
-        val listOfCols = columns.groupCells()
+        val listOfCols = columns.groupedCells()
 
         assertEquals(3, listOfCols.size)
         assertTrue(listOfCols[0].content.all { it.findLocation().x == 1 })

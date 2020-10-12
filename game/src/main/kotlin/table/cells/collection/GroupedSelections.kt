@@ -3,8 +3,8 @@ package table.cells.collection
 import table.CellConflict
 
 abstract class GroupedSelections: CellCollection {
-    abstract fun groupCells(): List<SelectionOfCells>
+    abstract fun groupedCells(): List<SelectionOfCells>
 
     override fun findConflicts(): List<CellConflict> =
-        groupCells().flatMap { it.findConflicts() }
+        groupedCells().flatMap { it.findConflicts() }
 }
