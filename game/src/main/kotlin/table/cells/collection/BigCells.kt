@@ -1,13 +1,14 @@
 package table.cells.collection
 
 import table.cells.Cell
+import kotlin.math.max
 
 class BigCells(
     private val cells: List<Cell>
 ) : GroupedSelections() {
     override fun groupedCells(): List<SelectionOfCells> { // TODO: Requires heavy testing
-        val maxX = cells.map { it.findLocation().x }.max()!!
-        val maxY = cells.map { it.findLocation().y }.max()!!
+        val maxX = max(3, cells.map { it.findLocation().x }.max()!!)
+        val maxY = max(3, cells.map { it.findLocation().y }.max()!!)
 
         val bigCellXUpperBorders = (1..maxX).filter { it.canBeDividedBy(3) }
         val bigCellYUpperBorders = (1..maxY).filter { it.canBeDividedBy(3) }

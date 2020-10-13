@@ -10,11 +10,16 @@ import kotlin.test.assertTrue
 
 class BigCellsTest {
     @Test
+    fun groupsTableWithOneBigCellCellCorrectly() {
+        val listOfGroupedCells = BigCells(cells2X2()).groupedCells()
+        assertEquals(1, listOfGroupedCells.size)
+    }
+
+    @Test
     fun groupsSmallSquareTableCellsCorrectly() {
         val listOfGroupedCells = BigCells(cells6X6()).groupedCells()
         assertEquals(4, listOfGroupedCells.size)
         assertTrue(listOfGroupedCells.all { it.content.size == 9 })
-
     }
 
     @Test
@@ -99,5 +104,12 @@ class BigCellsTest {
             OpenCell(NO_VALUE, Coordinates(2, 3)),
             OpenCell(NO_VALUE, Coordinates(3, 3))
         )
+
+    private fun cells2X2(): List<Cell> = listOf(
+        OpenCell(NO_VALUE, Coordinates(1, 1)),
+        OpenCell(NO_VALUE, Coordinates(1, 2)),
+        OpenCell(NO_VALUE, Coordinates(2, 1)),
+        OpenCell(NO_VALUE, Coordinates(2, 2))
+    )
 
 }

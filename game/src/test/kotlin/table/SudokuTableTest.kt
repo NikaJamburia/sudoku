@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test
 import table.cells.OpenCell
 import table.cells.NO_VALUE
 import table.cells.ClosedCell
-import table.cells.collection.SelectionOfCells
+import table.cells.collection.BigCells
 import table.state.TableState
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -83,19 +83,19 @@ class SudokuTableTest /*: BaseSudokuTableTest()*/ {
 
         var tableState = table.fillCell(2, Coordinates(1, 6))
         assertEquals(1, tableState.conflicts.size)
-        assertTrue (twoCellsAreConflicting(Coordinates(1, 3), Coordinates(1, 6), tableState))
+        assertTrue(twoCellsAreConflicting(Coordinates(1, 3), Coordinates(1, 6), tableState))
 
         tableState = table.fillCell(3, Coordinates(1, 1))
         assertEquals(2, tableState.conflicts.size)
-        assertTrue (twoCellsAreConflicting(Coordinates(1, 1), Coordinates(1, 5), tableState))
+        assertTrue(twoCellsAreConflicting(Coordinates(1, 1), Coordinates(1, 5), tableState))
 
         tableState = table.fillCell(5, Coordinates(2, 4))
         assertEquals(3, tableState.conflicts.size)
-        assertTrue (twoCellsAreConflicting(Coordinates(2,4), Coordinates(2, 2), tableState))
+        assertTrue(twoCellsAreConflicting(Coordinates(2, 4), Coordinates(2, 2), tableState))
 
         tableState = table.fillCell(7, Coordinates(3, 1))
         assertEquals(4, tableState.conflicts.size)
-        assertTrue (twoCellsAreConflicting(Coordinates(3,1), Coordinates(3, 4), tableState))
+        assertTrue(twoCellsAreConflicting(Coordinates(3, 1), Coordinates(3, 4), tableState))
 
         table.fillCell(6, Coordinates(1, 6))
         table.fillCell(4, Coordinates(1, 1))
@@ -116,26 +116,26 @@ class SudokuTableTest /*: BaseSudokuTableTest()*/ {
 
         var tableState = table.fillCell(5, Coordinates(1, 1))
         assertEquals(1, tableState.conflicts.size)
-        assertTrue (twoCellsAreConflicting(Coordinates(1, 1), Coordinates(2, 2), tableState))
+        assertTrue(twoCellsAreConflicting(Coordinates(1, 1), Coordinates(2, 2), tableState))
 
         tableState = table.fillCell(2, Coordinates(3, 1))
         assertEquals(2, tableState.conflicts.size)
-        assertTrue (twoCellsAreConflicting(Coordinates(3, 1), Coordinates(1, 3), tableState))
+        assertTrue(twoCellsAreConflicting(Coordinates(3, 1), Coordinates(1, 3), tableState))
 
         tableState = table.fillCell(7, Coordinates(5, 2))
         assertEquals(3, tableState.conflicts.size)
-        assertTrue (twoCellsAreConflicting(Coordinates(5, 2), Coordinates(6, 1), tableState))
+        assertTrue(twoCellsAreConflicting(Coordinates(5, 2), Coordinates(6, 1), tableState))
         assertEquals(2, findConflictByValueOfCells(7, tableState).conflictedCells.size)
 
         tableState = table.fillCell(7, Coordinates(4, 3))
         assertEquals(3, tableState.conflicts.size)
         assertEquals(3, findConflictByValueOfCells(7, tableState).conflictedCells.size)
-        assertTrue (twoCellsAreConflicting(Coordinates(4, 3), Coordinates(6, 1), tableState))
-        assertTrue (twoCellsAreConflicting(Coordinates(4, 3), Coordinates(5, 2), tableState))
+        assertTrue(twoCellsAreConflicting(Coordinates(4, 3), Coordinates(6, 1), tableState))
+        assertTrue(twoCellsAreConflicting(Coordinates(4, 3), Coordinates(5, 2), tableState))
 
         tableState = table.fillCell(3, Coordinates(4, 2))
         assertEquals(4, tableState.conflicts.size)
-        assertTrue (twoCellsAreConflicting(Coordinates(4, 2), Coordinates(5, 3), tableState))
+        assertTrue(twoCellsAreConflicting(Coordinates(4, 2), Coordinates(5, 3), tableState))
 
         table.fillCell(3, Coordinates(1, 1))
         table.fillCell(8, Coordinates(3, 1))
@@ -152,11 +152,11 @@ class SudokuTableTest /*: BaseSudokuTableTest()*/ {
 
         tableState = table.fillCell(5, Coordinates(1, 1))
         assertEquals(2, tableState.conflicts.size)
-        assertTrue (twoCellsAreConflicting(Coordinates(1, 1), Coordinates(2, 3), tableState))
-        assertTrue (twoCellsAreConflicting(Coordinates(1, 1), Coordinates(1, 5), tableState))
+        assertTrue(twoCellsAreConflicting(Coordinates(1, 1), Coordinates(2, 3), tableState))
+        assertTrue(twoCellsAreConflicting(Coordinates(1, 1), Coordinates(1, 5), tableState))
 
         tableState = table.fillCell(5, Coordinates(6, 1))
-        assertTrue (twoCellsAreConflicting(Coordinates(1, 1), Coordinates(6, 1), tableState))
+        assertTrue(twoCellsAreConflicting(Coordinates(1, 1), Coordinates(6, 1), tableState))
         assertEquals(3, tableState.conflicts.size)
 
         table.fillCell(6, Coordinates(5, 2))
@@ -179,11 +179,11 @@ class SudokuTableTest /*: BaseSudokuTableTest()*/ {
         table.fillCell(6, Coordinates(5, 3))
         var tableState: TableState = table.fillCell(6, Coordinates(4, 2))
 
-        assertFalse(tableState.isEmpty)
+        assertFalse(tableState.tableIsEmpty)
         assertFalse(tableState.conflicts.isEmpty())
 
         table.empty()
-        assertTrue(table.internalState().isEmpty)
+        assertTrue(table.internalState().tableIsEmpty)
         assertTrue(table.internalState().conflicts.isEmpty())
     }
 
@@ -197,7 +197,7 @@ class SudokuTableTest /*: BaseSudokuTableTest()*/ {
         }
 
     private fun generate6X3Table(): SudokuTable {
-        val bigCell1 = SelectionOfCells(listOf(
+        val cells = listOf(
             OpenCell(NO_VALUE, Coordinates(1, 1)),
             OpenCell(NO_VALUE, Coordinates(2, 1)),
             OpenCell(NO_VALUE, Coordinates(3, 1)),
@@ -206,10 +206,7 @@ class SudokuTableTest /*: BaseSudokuTableTest()*/ {
             OpenCell(NO_VALUE, Coordinates(3, 2)),
             ClosedCell(2, Coordinates(1, 3)),
             OpenCell(NO_VALUE, Coordinates(2, 3)),
-            OpenCell(NO_VALUE, Coordinates(3, 3))
-        ))
-
-        val bigCell2 = SelectionOfCells(listOf(
+            OpenCell(NO_VALUE, Coordinates(3, 3)),
             OpenCell(NO_VALUE, Coordinates(4, 1)),
             OpenCell(NO_VALUE, Coordinates(5, 1)),
             ClosedCell(7, Coordinates(6, 1)),
@@ -219,13 +216,14 @@ class SudokuTableTest /*: BaseSudokuTableTest()*/ {
             OpenCell(NO_VALUE, Coordinates(4, 3)),
             ClosedCell(3, Coordinates(5, 3)),
             OpenCell(NO_VALUE, Coordinates(6, 3))
-        ))
+        )
 
-        return SudokuTable(listOf(bigCell1, bigCell2), mutableListOf())
+
+        return SudokuTable(BigCells(cells), mutableListOf())
     }
 
     private fun generate3X6Table(): SudokuTable {
-        val bigCell1 = SelectionOfCells(listOf(
+        val cells = listOf(
             OpenCell(NO_VALUE, Coordinates(1, 1)),
             OpenCell(NO_VALUE, Coordinates(2, 1)),
             OpenCell(NO_VALUE, Coordinates(3, 1)),
@@ -234,10 +232,7 @@ class SudokuTableTest /*: BaseSudokuTableTest()*/ {
             OpenCell(NO_VALUE, Coordinates(3, 2)),
             ClosedCell(2, Coordinates(1, 3)),
             OpenCell(NO_VALUE, Coordinates(2, 3)),
-            OpenCell(NO_VALUE, Coordinates(3, 3))
-        ))
-
-        val bigCell2 = SelectionOfCells(listOf(
+            OpenCell(NO_VALUE, Coordinates(3, 3)),
             OpenCell(NO_VALUE, Coordinates(1, 4)),
             OpenCell(NO_VALUE, Coordinates(2, 4)),
             ClosedCell(7, Coordinates(3, 4)),
@@ -247,13 +242,13 @@ class SudokuTableTest /*: BaseSudokuTableTest()*/ {
             OpenCell(NO_VALUE, Coordinates(1, 6)),
             OpenCell(NO_VALUE, Coordinates(2, 6)),
             OpenCell(NO_VALUE, Coordinates(3, 6))
-        ))
+        )
 
-        return SudokuTable(listOf(bigCell1, bigCell2), mutableListOf())
+        return SudokuTable(BigCells(cells), mutableListOf())
     }
 
     private fun generate6X6Table(): SudokuTable {
-        val bigCell1 = SelectionOfCells(listOf(
+        val cells = listOf(
             OpenCell(NO_VALUE, Coordinates(1, 1)),
             OpenCell(NO_VALUE, Coordinates(2, 1)),
             OpenCell(NO_VALUE, Coordinates(3, 1)),
@@ -262,10 +257,7 @@ class SudokuTableTest /*: BaseSudokuTableTest()*/ {
             ClosedCell(6, Coordinates(3, 2)),
             OpenCell(NO_VALUE, Coordinates(1, 3)),
             ClosedCell(5, Coordinates(2, 3)),
-            OpenCell(NO_VALUE, Coordinates(3, 3))
-        ))
-
-        val bigCell2 = SelectionOfCells(listOf(
+            OpenCell(NO_VALUE, Coordinates(3, 3)),
             OpenCell(NO_VALUE, Coordinates(1, 4)),
             OpenCell(NO_VALUE, Coordinates(2, 4)),
             OpenCell(NO_VALUE, Coordinates(3, 4)),
@@ -274,10 +266,7 @@ class SudokuTableTest /*: BaseSudokuTableTest()*/ {
             OpenCell(NO_VALUE, Coordinates(3, 5)),
             OpenCell(NO_VALUE, Coordinates(1, 6)),
             OpenCell(NO_VALUE, Coordinates(2, 6)),
-            ClosedCell(4, Coordinates(3, 6))
-        ))
-
-        val bigCell3 = SelectionOfCells(listOf(
+            ClosedCell(4, Coordinates(3, 6)),
             OpenCell(NO_VALUE, Coordinates(4, 1)),
             ClosedCell(9, Coordinates(5, 1)),
             OpenCell(NO_VALUE, Coordinates(6, 1)),
@@ -286,10 +275,7 @@ class SudokuTableTest /*: BaseSudokuTableTest()*/ {
             OpenCell(NO_VALUE, Coordinates(6, 2)),
             OpenCell(NO_VALUE, Coordinates(4, 3)),
             OpenCell(NO_VALUE, Coordinates(5, 3)),
-            ClosedCell(1, Coordinates(6, 3))
-        ))
-
-        val bigCell4 = SelectionOfCells(listOf(
+            ClosedCell(1, Coordinates(6, 3)),
             OpenCell(NO_VALUE, Coordinates(4, 4)),
             OpenCell(NO_VALUE, Coordinates(5, 4)),
             OpenCell(NO_VALUE, Coordinates(6, 4)),
@@ -299,9 +285,9 @@ class SudokuTableTest /*: BaseSudokuTableTest()*/ {
             OpenCell(NO_VALUE, Coordinates(4, 6)),
             ClosedCell(8, Coordinates(5, 6)),
             OpenCell(NO_VALUE, Coordinates(6, 6))
-        ))
+        )
 
-        return SudokuTable(listOf(bigCell1, bigCell2, bigCell3, bigCell4), mutableListOf())
+        return SudokuTable(BigCells(cells), mutableListOf())
     }
 
 }

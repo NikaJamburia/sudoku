@@ -30,7 +30,7 @@ class SudokuGame(
         GameState(gameId, gameStats.playedTime.toString(), gameStats.numberOfTurns, isGameWon(), sudokuTable.internalState())
 
     private fun isGameWon(): Boolean =
-        sudokuTable.internalState().isFilled
+        sudokuTable.internalState().tableIsFull
                 && sudokuTable.internalState().conflicts.isEmpty()
 
 

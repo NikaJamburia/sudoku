@@ -6,21 +6,16 @@ import table.cells.Cell
 import table.cells.ClosedCell
 import table.cells.OpenCell
 import table.cells.collection.BigCells
-import table.cells.collection.SelectionOfCells
 import table.state.CellState
 import table.state.TableState
 
 class SudokuTableFromState (
     private val state: TableState
-) {
-    fun generate(): SudokuTable {
+): GeneratedSudokuTable {
+    override fun table(): SudokuTable {
         val cells = state.cells.map { createCellFrom(it) }
         val conflicts = createConflicts(cells)
-
-        return SudokuTable(
-            BigCells(cells).groupedCells(),
-            conflicts
-        )
+        return SudokuTable(BigCells(cells), conflicts)
     }
 
     private fun createConflicts(cells: List<Cell>): List<CellConflict> =
@@ -31,7 +26,7 @@ class SudokuTableFromState (
 
 
     private fun createCellFrom(it: CellState): Cell {
-        return if (it.isOpen) {
+        return if (it.cellIsOpen) {
             OpenCell(it.value, it.coordinates)
         } else {
             ClosedCell(it.value, it.coordinates)

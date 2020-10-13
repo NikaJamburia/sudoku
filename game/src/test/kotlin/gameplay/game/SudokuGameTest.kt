@@ -1,7 +1,6 @@
 package gameplay.game
 
 import gameplay.saveload.save.GameSaver
-import gameplay.saveload.serialization.JacksonSerializedSudokuGame
 import gameplay.saveload.serialization.SerializedSudokuGame
 import io.mockk.every
 import io.mockk.mockk
@@ -10,7 +9,7 @@ import table.Coordinates
 import table.SudokuTable
 import table.cells.NO_VALUE
 import table.cells.OpenCell
-import table.cells.collection.SelectionOfCells
+import table.cells.collection.BigCells
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
@@ -19,10 +18,10 @@ class SudokuGameTest {
     @Test
     fun stateOfAGameShouldReactCorrectlyToFillingACell() {
         val game = newGame(generate2X2Table())
-        assertTrue(game.internalState().tableState.isEmpty)
+        assertTrue(game.internalState().tableState.tableIsEmpty)
 
         var gameState = game.fillCell(1, Coordinates(1, 1), "00:00:30")
-        assertFalse(gameState.tableState.isEmpty)
+        assertFalse(gameState.tableState.tableIsEmpty)
         assertEquals("00:00:30", gameState.playedTime)
         assertEquals(1, gameState.numberOfTurns)
         assertFalse(gameState.gameIsWon)
@@ -44,18 +43,18 @@ class SudokuGameTest {
     @Test
     fun restartingAGameResetsState() {
         val game = newGame(generate2X2Table())
-        assertTrue(game.internalState().tableState.isEmpty)
+        assertTrue(game.internalState().tableState.tableIsEmpty)
 
         game.fillCell(1, Coordinates(1, 1), "00:00:30")
         var gameState = game.fillCell(2, Coordinates(1, 2), "00:00:45")
         assertEquals("00:00:45", gameState.playedTime)
         assertEquals(2, gameState.numberOfTurns)
-        assertFalse(gameState.tableState.isEmpty)
+        assertFalse(gameState.tableState.tableIsEmpty)
 
         gameState = game.restart()
         assertEquals("00:00:00", gameState.playedTime)
         assertEquals(0, gameState.numberOfTurns)
-        assertTrue(gameState.tableState.isEmpty)
+        assertTrue(gameState.tableState.tableIsEmpty)
     }
 
     @Test
@@ -74,14 +73,14 @@ class SudokuGameTest {
     }
 
     fun generate2X2Table(): SudokuTable {
-        val bigCell= SelectionOfCells(listOf(
+        val cells= listOf(
             OpenCell(NO_VALUE, Coordinates(1, 1)),
             OpenCell(NO_VALUE, Coordinates(1, 2)),
             OpenCell(NO_VALUE, Coordinates(2, 1)),
             OpenCell(NO_VALUE, Coordinates(2, 2))
-        ))
+        )
         return SudokuTable(
-            listOf(bigCell),
+            BigCells(cells),
             listOf()
         )
     }
