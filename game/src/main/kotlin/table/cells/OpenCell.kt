@@ -23,7 +23,7 @@ data class OpenCell (
     }
 
     override fun isEmpty(): Boolean = value == NO_VALUE
-    override fun findLocation(): Coordinates = coordinates
+    override fun location(): Coordinates = coordinates
     override fun getValue(): Int = value
 
     override fun internalState(): CellState =

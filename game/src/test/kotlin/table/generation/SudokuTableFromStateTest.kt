@@ -16,7 +16,7 @@ class SudokuTableFromStateTest {
     fun correctlyGeneratesTableCellsFromGivenState() {
         val state = TableState(cells2X2(), listOf(), true, false)
 
-        val generatedTable = SudokuTableFromState(state).table()
+        val generatedTable = SudokuTableFromState(state).generate()
         assertThrows(IllegalStateException::class.java) { generatedTable.fillCell(5, Coordinates(1, 2)) }
 
         val stateOfGeneratedTable = generatedTable.internalState()
@@ -31,7 +31,7 @@ class SudokuTableFromStateTest {
     @Test
     fun correctlyGeneratesCellConflictsFromGivenState() {
         val state = TableState(cells2X2(), conflicts2X2(), true, false)
-        val generatedTable = SudokuTableFromState(state).table()
+        val generatedTable = SudokuTableFromState(state).generate()
         var stateOfGeneratedTable = generatedTable.internalState()
 
         assertEquals(1, stateOfGeneratedTable.conflicts.size)
@@ -43,7 +43,7 @@ class SudokuTableFromStateTest {
         stateOfGeneratedTable = generatedTable.fillCell(2, Coordinates(1, 1))
         assertEquals(2, stateOfGeneratedTable.conflicts.size)
 
-        val newTable = SudokuTableFromState(stateOfGeneratedTable).table()
+        val newTable = SudokuTableFromState(stateOfGeneratedTable).generate()
         assertEquals(2, newTable.internalState().conflicts.size)
     }
 

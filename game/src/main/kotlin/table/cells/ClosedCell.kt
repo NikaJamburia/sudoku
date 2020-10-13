@@ -19,7 +19,7 @@ class ClosedCell (
     }
 
     override fun isEmpty(): Boolean = false
-    override fun findLocation(): Coordinates = coordinates
+    override fun location(): Coordinates = coordinates
     override fun getValue(): Int = value
 
     init {

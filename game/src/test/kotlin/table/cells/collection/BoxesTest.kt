@@ -8,30 +8,47 @@ import table.cells.OpenCell
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-class BigCellsTest {
+class BoxesTest {
+
+    @Test
+    fun farApartCellsAreGroupedInSeparateBoxes() {
+        val cells = listOf(
+            OpenCell(1, Coordinates(1, 1)),
+            OpenCell(2, Coordinates(1, 4)),
+            OpenCell(3, Coordinates(4, 1)),
+            OpenCell(4, Coordinates(4, 4))
+        )
+        val listOfGroupedCells = Boxes(cells).groupedCells()
+        assertEquals(4, listOfGroupedCells.size)
+        assertEquals(4, listOfGroupedCells.flatMap { it.content }.size)
+    }
+
     @Test
     fun groupsTableWithOneBigCellCellCorrectly() {
-        val listOfGroupedCells = BigCells(cells2X2()).groupedCells()
+        val listOfGroupedCells = Boxes(cells2X2()).groupedCells()
+        assertEquals(4, listOfGroupedCells.flatMap { it.content }.size)
         assertEquals(1, listOfGroupedCells.size)
     }
 
     @Test
     fun groupsSmallSquareTableCellsCorrectly() {
-        val listOfGroupedCells = BigCells(cells6X6()).groupedCells()
+        val listOfGroupedCells = Boxes(cells6X6()).groupedCells()
         assertEquals(4, listOfGroupedCells.size)
+        assertEquals(36, listOfGroupedCells.flatMap { it.content }.size)
         assertTrue(listOfGroupedCells.all { it.content.size == 9 })
     }
 
     @Test
     fun groupsSmallRectangleTableCellsCorrectly() {
-        val listOfGroupedCells = BigCells(cells6X3()).groupedCells()
+        val listOfGroupedCells = Boxes(cells6X3()).groupedCells()
         assertEquals(2, listOfGroupedCells.size)
+        assertEquals(18, listOfGroupedCells.flatMap { it.content }.size)
         assertTrue(listOfGroupedCells.all { it.content.size == 9 })
     }
 
     @Test
     fun correctlyIdentifiesConflicts() {
-        val bigCells = BigCells(cells6X6())
+        val bigCells = Boxes(cells6X6())
         assertEquals(6, bigCells.findConflicts().size)
         fillCellIn(bigCells, 5, Coordinates(3, 4))
         fillCellIn(bigCells, 5, Coordinates(2, 5))
@@ -39,8 +56,8 @@ class BigCellsTest {
 
     }
 
-    private fun fillCellIn(bigCells: BigCells, value: Int, coordinates: Coordinates) {
-        bigCells.groupedCells().flatMap { it.content }.first { it.findLocation().sameAs(coordinates) }.fillValue(value)
+    private fun fillCellIn(boxes: Boxes, value: Int, coordinates: Coordinates) {
+        boxes.groupedCells().flatMap { it.content }.first { it.location().sameAs(coordinates) }.fillValue(value)
     }
 
     private fun cells6X6(): List<Cell> =

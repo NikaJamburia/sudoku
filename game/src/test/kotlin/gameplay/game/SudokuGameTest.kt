@@ -9,7 +9,7 @@ import table.Coordinates
 import table.SudokuTable
 import table.cells.NO_VALUE
 import table.cells.OpenCell
-import table.cells.collection.BigCells
+import table.cells.collection.Boxes
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
@@ -80,7 +80,7 @@ class SudokuGameTest {
             OpenCell(NO_VALUE, Coordinates(2, 2))
         )
         return SudokuTable(
-            BigCells(cells),
+            Boxes(cells),
             listOf()
         )
     }

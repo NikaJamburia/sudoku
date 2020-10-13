@@ -7,7 +7,7 @@ class Columns(
 ) : GroupedSelections() {
     override fun groupedCells(): List<SelectionOfCells> =
         source
-            .groupBy { it.findLocation().x }
+            .groupBy { it.location().x }
             .values
             .map { SelectionOfCells(it) }
 

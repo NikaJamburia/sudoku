@@ -8,6 +8,6 @@ interface Cell : HasInternalState<CellState> {
     fun fillValue(newValue: Int)
     fun empty()
     fun isEmpty(): Boolean
-    fun findLocation(): Coordinates
+    fun location(): Coordinates
     fun getValue(): Int
 }

@@ -2,20 +2,19 @@ package table
 
 import table.cells.Cell
 import table.cells.OpenCell
-import table.cells.collection.BigCells
+import table.cells.collection.Boxes
 import table.cells.collection.Columns
 import table.cells.collection.Rows
-import table.cells.collection.SelectionOfCells
 import table.state.TableState
 import java.lang.IllegalStateException
 
 class SudokuTable(
-    private val bigCells: BigCells,
+    private val boxes: Boxes,
     private var conflicts: List<CellConflict>
 ): HasInternalState<TableState> {
     fun fillCell(value: Int, coordinates: Coordinates): TableState {
         allCells()
-            .find { it.findLocation().sameAs(coordinates) }
+            .find { it.location().sameAs(coordinates) }
             ?.let {
                 it.fillValue(value)
                 findConflicts()
@@ -39,12 +38,12 @@ class SudokuTable(
     private fun isEmpty(): Boolean =
         allCells().filterIsInstance<OpenCell>().all { it.isEmpty() }
 
-    private fun allCells(): List<Cell> = bigCells.groupedCells().flatMap { it.content }
+    private fun allCells(): List<Cell> = boxes.groupedCells().flatMap { it.content }
 
     private fun findConflicts() {
         val rowConflicts = Rows(allCells()).findConflicts()
         val columnConflicts = Columns(allCells()).findConflicts()
-        val bigCellConflicts = bigCells.findConflicts()
+        val bigCellConflicts = boxes.findConflicts()
 
         conflicts = listOf(rowConflicts, columnConflicts, bigCellConflicts).flatten()
     }

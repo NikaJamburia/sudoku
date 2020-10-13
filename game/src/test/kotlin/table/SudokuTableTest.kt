@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test
 import table.cells.OpenCell
 import table.cells.NO_VALUE
 import table.cells.ClosedCell
-import table.cells.collection.BigCells
+import table.cells.collection.Boxes
 import table.state.TableState
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -219,7 +219,7 @@ class SudokuTableTest /*: BaseSudokuTableTest()*/ {
         )
 
 
-        return SudokuTable(BigCells(cells), mutableListOf())
+        return SudokuTable(Boxes(cells), mutableListOf())
     }
 
     private fun generate3X6Table(): SudokuTable {
@@ -244,7 +244,7 @@ class SudokuTableTest /*: BaseSudokuTableTest()*/ {
             OpenCell(NO_VALUE, Coordinates(3, 6))
         )
 
-        return SudokuTable(BigCells(cells), mutableListOf())
+        return SudokuTable(Boxes(cells), mutableListOf())
     }
 
     private fun generate6X6Table(): SudokuTable {
@@ -287,7 +287,7 @@ class SudokuTableTest /*: BaseSudokuTableTest()*/ {
             OpenCell(NO_VALUE, Coordinates(6, 6))
         )
 
-        return SudokuTable(BigCells(cells), mutableListOf())
+        return SudokuTable(Boxes(cells), mutableListOf())
     }
 
 }

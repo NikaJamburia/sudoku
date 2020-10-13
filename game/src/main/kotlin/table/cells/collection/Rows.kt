@@ -7,7 +7,7 @@ class Rows(
 ) : GroupedSelections() {
     override fun groupedCells(): List<SelectionOfCells> =
         source
-            .groupBy { it.findLocation().y }
+            .groupBy { it.location().y }
             .values
             .map { SelectionOfCells(it) }
 

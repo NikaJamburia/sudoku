@@ -25,9 +25,9 @@ class RowsAndColumnsTest {
         val listOfRows = rows.groupedCells()
 
         assertEquals(3, listOfRows.size)
-        assertTrue(listOfRows[0].content.all { it.findLocation().y == 1 })
-        assertTrue(listOfRows[1].content.all { it.findLocation().y == 2 })
-        assertTrue(listOfRows[2].content.all { it.findLocation().y == 3 })
+        assertTrue(listOfRows[0].content.all { it.location().y == 1 })
+        assertTrue(listOfRows[1].content.all { it.location().y == 2 })
+        assertTrue(listOfRows[2].content.all { it.location().y == 3 })
 
         assertEquals(2, rows.findConflicts().size)
     }
@@ -38,9 +38,9 @@ class RowsAndColumnsTest {
         val listOfCols = columns.groupedCells()
 
         assertEquals(3, listOfCols.size)
-        assertTrue(listOfCols[0].content.all { it.findLocation().x == 1 })
-        assertTrue(listOfCols[1].content.all { it.findLocation().x == 2 })
-        assertTrue(listOfCols[2].content.all { it.findLocation().x == 3 })
+        assertTrue(listOfCols[0].content.all { it.location().x == 1 })
+        assertTrue(listOfCols[1].content.all { it.location().x == 2 })
+        assertTrue(listOfCols[2].content.all { it.location().x == 3 })
 
         assertEquals(1, columns.findConflicts().size)
     }
