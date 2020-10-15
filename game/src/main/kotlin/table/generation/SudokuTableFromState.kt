@@ -14,14 +14,13 @@ class SudokuTableFromState (
 ): GeneratedSudokuTable {
     override fun generate(): SudokuTable {
         val cells = state.cells.map { createCellFrom(it) }
-        val conflicts = createConflicts(cells)
-        return SudokuTable(Boxes(cells), conflicts)
+        return SudokuTable(Boxes(cells))
     }
 
     private fun createConflicts(cells: List<Cell>): List<CellConflict> =
         state.conflicts
             .map { it.conflictedCells.map { cellState -> cellState.coordinates } }
-            .map { it.map { cells.first {cell -> cell.location().sameAs(it) } } }
+            .map { it.map { cells.first {cell -> cell.location().equals(it) } } }
             .map { CellConflict(it.toMutableList()) }
 
 

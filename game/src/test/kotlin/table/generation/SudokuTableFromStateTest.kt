@@ -24,7 +24,7 @@ class SudokuTableFromStateTest {
         assertTrue(stateOfGeneratedTable.tableIsFull)
 
         assertEquals(4, stateOfGeneratedTable.cells.size)
-        assertFalse(stateOfGeneratedTable.cells.first { it.coordinates.sameAs(Coordinates(1, 2)) }.cellIsOpen)
+        assertFalse(stateOfGeneratedTable.cells.first { it.coordinates.equals(Coordinates(1, 2)) }.cellIsOpen)
         assertEquals(3, stateOfGeneratedTable.cells.filter { it.cellIsOpen }.size)
     }
 

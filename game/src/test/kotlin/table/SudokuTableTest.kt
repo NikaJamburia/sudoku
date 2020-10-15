@@ -192,8 +192,8 @@ class SudokuTableTest /*: BaseSudokuTableTest()*/ {
 
     private fun twoCellsAreConflicting(coordinate1: Coordinates, coordinate2: Coordinates, table: TableState): Boolean =
         table.conflicts.any {
-            it.conflictedCells.any { cell -> cell.coordinates.sameAs(coordinate1) }
-                    && it.conflictedCells.any { cell -> cell.coordinates.sameAs(coordinate2) }
+            it.conflictedCells.any { cell -> cell.coordinates.equals(coordinate1) }
+                    && it.conflictedCells.any { cell -> cell.coordinates.equals(coordinate2) }
         }
 
     private fun generate6X3Table(): SudokuTable {
@@ -219,7 +219,7 @@ class SudokuTableTest /*: BaseSudokuTableTest()*/ {
         )
 
 
-        return SudokuTable(Boxes(cells), mutableListOf())
+        return SudokuTable(Boxes(cells))
     }
 
     private fun generate3X6Table(): SudokuTable {
@@ -244,7 +244,7 @@ class SudokuTableTest /*: BaseSudokuTableTest()*/ {
             OpenCell(NO_VALUE, Coordinates(3, 6))
         )
 
-        return SudokuTable(Boxes(cells), mutableListOf())
+        return SudokuTable(Boxes(cells))
     }
 
     private fun generate6X6Table(): SudokuTable {
@@ -287,7 +287,7 @@ class SudokuTableTest /*: BaseSudokuTableTest()*/ {
             OpenCell(NO_VALUE, Coordinates(6, 6))
         )
 
-        return SudokuTable(Boxes(cells), mutableListOf())
+        return SudokuTable(Boxes(cells))
     }
 
 }

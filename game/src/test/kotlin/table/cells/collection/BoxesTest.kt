@@ -57,7 +57,7 @@ class BoxesTest {
     }
 
     private fun fillCellIn(boxes: Boxes, value: Int, coordinates: Coordinates) {
-        boxes.groupedCells().flatMap { it.content }.first { it.location().sameAs(coordinates) }.fillValue(value)
+        boxes.groupedCells().flatMap { it.content }.first { it.location().equals(coordinates) }.fillValue(value)
     }
 
     private fun cells6X6(): List<Cell> =

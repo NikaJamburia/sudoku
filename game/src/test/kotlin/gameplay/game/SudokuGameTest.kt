@@ -80,8 +80,7 @@ class SudokuGameTest {
             OpenCell(NO_VALUE, Coordinates(2, 2))
         )
         return SudokuTable(
-            Boxes(cells),
-            listOf()
+            Boxes(cells)
         )
     }
 
