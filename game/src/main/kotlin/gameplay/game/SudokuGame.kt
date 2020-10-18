@@ -1,5 +1,7 @@
 package gameplay.game
 
+import gameplay.game.time.GameTime
+import gameplay.game.time.GameTimeFromString
 import gameplay.saveload.save.GameSaver
 import gameplay.saveload.serialization.SerializedSudokuGame
 import table.Coordinates
@@ -13,8 +15,8 @@ class SudokuGame(
 ): HasInternalState<GameState> {
 
     fun fillCell(value: Int, coordinates: Coordinates, timePlayed: String): GameState {
-        val tableState = sudokuTable.fillCell(value, coordinates)
-        gameStats = GameStats(GameTime.fromString(timePlayed), gameStats.numberOfTurns+1)
+        sudokuTable.fillCell(value, coordinates)
+        gameStats = GameStats(GameTimeFromString(timePlayed), gameStats.numberOfTurns+1)
         return internalState()
     }
 
@@ -27,7 +29,7 @@ class SudokuGame(
     fun save(saver: GameSaver): SerializedSudokuGame = saver.save(internalState())
 
     override fun internalState(): GameState =
-        GameState(gameId, gameStats.playedTime.toString(), gameStats.numberOfTurns, isGameWon(), sudokuTable.internalState())
+        GameState(gameId, gameStats.playedTime.asString(), gameStats.numberOfTurns, isGameWon(), sudokuTable.internalState())
 
     private fun isGameWon(): Boolean =
         sudokuTable.internalState().tableIsFull

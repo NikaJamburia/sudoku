@@ -12,12 +12,14 @@ import table.cells.collection.GroupedSelections
 import table.cells.collection.Rows
 import util.random.RandomCollectionOfUniqueCoordinates
 import util.random.RandomSequenceOfUniqueInts
+import java.lang.IllegalStateException
 
-class NewSudokuTable(
+class RandomBasedNewSudokuTable(
     private val cellsOnXAxis: Int,
     private val cellsOnYAxis: Int,
     private val numberOfClosedCells: Int
 ) : GeneratedSudokuTable {
+    private val allowedValues = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9)
     private val closedCells = createClosedCells()
 
     override fun generate(): SudokuTable {
@@ -40,17 +42,19 @@ class NewSudokuTable(
             .map { OpenCell(NO_VALUE, it) }
 
         randomOpenCells.forEach {
-            if (it.isEmpty()) {
-                val potentiallyConflictingCells = findPotentialConflicts(it, randomOpenCells)
-                val alreadyFilled = potentiallyConflictingCells.filter { cell -> !cell.isEmpty() }
-                val cellsToFill = potentiallyConflictingCells.filter { cell -> cell.isEmpty() }
-                //TODO fix errors using alreadyFilled and cellsToFill
-                val uniqueValues = RandomSequenceOfUniqueInts(potentiallyConflictingCells.size, 1, 9)
-                cellsToFill
-                    .forEach { cell -> cell.fillValue(uniqueValues.next()) }
+            val potentiallyConflictingCells = findPotentialConflicts(it, randomOpenCells)
+            val alreadyFilledValues = potentiallyConflictingCells.filter { cell -> !cell.isEmpty() }.map { cell-> cell.getValue() }
+            val suitableValuesForIt = allowedValues.filter { value -> !alreadyFilledValues.contains(value) }
+            if (suitableValuesForIt.isNotEmpty()) {
+                it.fillValue(suitableValuesForIt.random())
             }
         }
-        return randomOpenCells.map { ClosedCell(it.getValue(), it.location()) }
+
+        return if (randomOpenCells.any {it.isEmpty()}) {
+            createClosedCells()
+        } else {
+            randomOpenCells.map { ClosedCell(it.getValue(), it.location()) }
+        }
     }
 
     private fun findPotentialConflicts(forCell: Cell, inCellsList: List<OpenCell>): Set<Cell> =

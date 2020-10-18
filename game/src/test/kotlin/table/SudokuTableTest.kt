@@ -14,7 +14,7 @@ class SudokuTableTest /*: BaseSudokuTableTest()*/ {
 
     @Test
     fun behavesCorrectlyOnFillingACell() {
-        val table6X3 = generate6X3Table();
+        val table6X3 = generate6X3Table()
 
         // fill a cell with value that wont conflict with anything
         var tableState = table6X3.fillCell(6, Coordinates(1, 1))
@@ -54,7 +54,7 @@ class SudokuTableTest /*: BaseSudokuTableTest()*/ {
         assertTrue(twoCellsAreConflicting(Coordinates(2, 2), Coordinates(4, 2), tableState))
 
         // fill cells (3, 3) and (6, 3) with values that exists on the same row in (6, 3) and (5, 3)
-        tableState = table.fillCell(3, Coordinates(3, 3))
+        table.fillCell(3, Coordinates(3, 3))
         tableState = table.fillCell(2, Coordinates(6, 3))
         assertEquals(4, tableState.conflicts.size)
         assertTrue(twoCellsAreConflicting(Coordinates(1, 1), Coordinates(6, 1), tableState))
@@ -177,7 +177,7 @@ class SudokuTableTest /*: BaseSudokuTableTest()*/ {
         table.fillCell(5, Coordinates(6, 1))
         table.fillCell(6, Coordinates(5, 2))
         table.fillCell(6, Coordinates(5, 3))
-        var tableState: TableState = table.fillCell(6, Coordinates(4, 2))
+        val tableState: TableState = table.fillCell(6, Coordinates(4, 2))
 
         assertFalse(tableState.tableIsEmpty)
         assertFalse(tableState.conflicts.isEmpty())

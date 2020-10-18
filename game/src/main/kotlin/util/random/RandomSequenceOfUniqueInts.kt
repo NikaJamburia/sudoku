@@ -5,7 +5,7 @@ import java.lang.IllegalStateException
 open class RandomSequenceOfUniqueInts(
     private val sequenceSize: Int,
     private val from: Int,
-    private val until: Int,
+    private val until: Int
 ) {
     private var sequenceContent: Set<Int> = generateSequence()
     private var currentIndex = -1

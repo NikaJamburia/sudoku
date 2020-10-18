@@ -1,6 +1,7 @@
 package gameplay.interaction.request
 
+import gameplay.game.GameState
+
 abstract class SudokuInteractionRequest (
-    val gameId: String,
-    val timePlayed: String
+    val gameState: GameState
 )
