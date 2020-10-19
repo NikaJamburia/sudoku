@@ -12,7 +12,6 @@ class SudokuGameFromStateTest {
     @Test
     fun correctlyGeneratesGameFromState() {
         val initialState = GameState(
-            "1",
             "00:01:40",
             5,
             false,
@@ -21,7 +20,6 @@ class SudokuGameFromStateTest {
 
         val generatedState = SudokuGameFromState(initialState).generate().internalState()
 
-        assertEquals(initialState.gameId, generatedState.gameId)
         assertEquals(initialState.gameIsWon, generatedState.gameIsWon)
         assertEquals(initialState.playedTime, generatedState.playedTime)
         assertEquals(initialState.numberOfTurns, generatedState.numberOfTurns)

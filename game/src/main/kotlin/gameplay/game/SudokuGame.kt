@@ -9,7 +9,6 @@ import table.HasInternalState
 import table.SudokuTable
 
 class SudokuGame(
-    private val gameId: String,
     private var gameStats: GameStats,
     private var sudokuTable: SudokuTable
 ): HasInternalState<GameState> {
@@ -29,7 +28,7 @@ class SudokuGame(
     fun save(saver: GameSaver): SerializedSudokuGame = saver.save(internalState())
 
     override fun internalState(): GameState =
-        GameState(gameId, gameStats.playedTime.asString(), gameStats.numberOfTurns, isGameWon(), sudokuTable.internalState())
+        GameState(gameStats.playedTime.asString(), gameStats.numberOfTurns, isGameWon(), sudokuTable.internalState())
 
     private fun isGameWon(): Boolean =
         sudokuTable.internalState().tableIsFull

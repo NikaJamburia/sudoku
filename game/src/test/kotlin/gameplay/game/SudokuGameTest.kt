@@ -73,7 +73,7 @@ class SudokuGameTest {
         assertEquals("serialized game", savedGame.asString())
     }
 
-    fun generate2X2Table(): SudokuTable {
+    private fun generate2X2Table(): SudokuTable {
         val cells= listOf(
             OpenCell(NO_VALUE, Coordinates(1, 1)),
             OpenCell(NO_VALUE, Coordinates(1, 2)),
@@ -85,9 +85,8 @@ class SudokuGameTest {
         )
     }
 
-    fun newGame(sudokuTable: SudokuTable): SudokuGame =
+    private fun newGame(sudokuTable: SudokuTable): SudokuGame =
         SudokuGame(
-            "1",
             GameStats(GameTime(0, 0, 0), 0),
             sudokuTable)
 }
