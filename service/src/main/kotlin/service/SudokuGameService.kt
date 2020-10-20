@@ -10,7 +10,7 @@ import table.Coordinates
 import java.lang.Exception
 
 @Component
-class SudokuGameService() : SudokuGameProcess {
+class SudokuGameService : SudokuGameProcess {
     override fun fillCell(request: FillCellRequest): SudokuInteractionResult {
         try {
             val game = SudokuGameFromState(request.gameState).generate()

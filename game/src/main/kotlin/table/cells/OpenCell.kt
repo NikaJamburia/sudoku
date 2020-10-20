@@ -11,8 +11,8 @@ data class OpenCell (
 ) : Cell {
 
     override fun fillValue(newValue: Int) {
-        if (newValue < 0) {
-            throw IllegalArgumentException("Value of cell can not be negative number!")
+        if (newValue < 0 || newValue > 9) {
+            throw IllegalArgumentException("Value of cell must be between 0 and 9!")
         } else {
             value = newValue
         }

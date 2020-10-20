@@ -22,6 +22,7 @@ class OpenCellTest {
         assertTrue(cell.isEmpty())
 
         Assert.assertThrows(IllegalArgumentException::class.java) { cell.fillValue(-1)}
+        Assert.assertThrows(IllegalArgumentException::class.java) { cell.fillValue(10)}
     }
 
 }
