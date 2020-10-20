@@ -1,0 +1,12 @@
+project(":service") {
+    description = "service module"
+
+    dependencies {
+        implementation project(":game")
+
+        implementation 'org.springframework:spring-core:5.2.8.RELEASE'
+        implementation 'org.springframework:spring-context:5.2.8.RELEASE'
+
+        testImplementation 'org.springframework:spring-test:5.2.8.RELEASE'
+    }
+}

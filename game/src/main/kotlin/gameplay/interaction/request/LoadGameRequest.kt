@@ -1,5 +1,5 @@
 package gameplay.interaction.request
 
-import gameplay.saveload.deserialization.DeserializedSudokuGame
+import gameplay.saveload.SavedSudokuGame
 
-data class LoadGameRequest (val savedSudokuGame: DeserializedSudokuGame)
+data class LoadGameRequest (val savedSudokuGame: SavedSudokuGame)

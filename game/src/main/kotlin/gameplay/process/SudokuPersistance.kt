@@ -5,7 +5,7 @@ import gameplay.interaction.request.SaveGameRequest
 import gameplay.interaction.result.GameSaved
 import gameplay.interaction.result.SudokuInteractionResult
 
-interface PersistenceProcess {
+interface SudokuPersistance {
     fun saveGame(request: SaveGameRequest): GameSaved
     fun loadGame(request: LoadGameRequest): SudokuInteractionResult
     fun startNewGame(): SudokuInteractionResult

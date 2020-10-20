@@ -5,5 +5,6 @@ import gameplay.saveload.serialization.SerializationFormat
 
 class SaveGameRequest (
     val format: SerializationFormat,
-    gameState: GameState
-) : SudokuInteractionRequest(gameState)
+    gameState: GameState,
+    timerValue: String
+) : SudokuInteractionRequest(gameState, timerValue)

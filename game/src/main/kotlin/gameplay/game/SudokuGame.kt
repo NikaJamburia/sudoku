@@ -2,8 +2,6 @@ package gameplay.game
 
 import gameplay.game.time.GameTime
 import gameplay.game.time.GameTimeFromString
-import gameplay.saveload.save.GameSaver
-import gameplay.saveload.serialization.SerializedSudokuGame
 import table.Coordinates
 import table.HasInternalState
 import table.SudokuTable
@@ -24,8 +22,6 @@ class SudokuGame(
         sudokuTable.empty()
         return internalState()
     }
-
-    fun save(saver: GameSaver): SerializedSudokuGame = saver.save(internalState())
 
     override fun internalState(): GameState =
         GameState(gameStats.playedTime.asString(), gameStats.numberOfTurns, isGameWon(), sudokuTable.internalState())

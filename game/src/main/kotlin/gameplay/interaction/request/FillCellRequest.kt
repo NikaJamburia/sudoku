@@ -6,5 +6,6 @@ class FillCellRequest (
     val value: Int,
     val coordinateX: Int,
     val coordinateY: Int,
-    gameState: GameState
-) : SudokuInteractionRequest(gameState)
+    gameState: GameState,
+    timerValue: String
+) : SudokuInteractionRequest(gameState, timerValue)

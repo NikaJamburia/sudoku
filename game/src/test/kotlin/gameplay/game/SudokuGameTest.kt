@@ -1,10 +1,6 @@
 package gameplay.game
 
 import gameplay.game.time.GameTime
-import gameplay.saveload.save.GameSaver
-import gameplay.saveload.serialization.SerializedSudokuGame
-import io.mockk.every
-import io.mockk.mockk
 import org.junit.jupiter.api.Test
 import table.Coordinates
 import table.SudokuTable
@@ -56,21 +52,6 @@ class SudokuGameTest {
         assertEquals("00:00:00", gameState.playedTime)
         assertEquals(0, gameState.numberOfTurns)
         assertTrue(gameState.tableState.tableIsEmpty)
-    }
-
-    @Test
-    fun savingWorksCorrectly() {
-        val game = newGame(generate2X2Table())
-        game.fillCell(1, Coordinates(1, 1), "00:00:30")
-
-        val gameSaverMock = mockk<GameSaver>() {
-            every { save(game.internalState()) } returns mockk<SerializedSudokuGame>() {
-                every { asString() } returns "serialized game"
-            }
-        }
-
-        val savedGame = game.save(gameSaverMock)
-        assertEquals("serialized game", savedGame.asString())
     }
 
     private fun generate2X2Table(): SudokuTable {

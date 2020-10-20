@@ -2,6 +2,7 @@ package gameplay.interaction.request
 
 import gameplay.game.GameState
 
-abstract class SudokuInteractionRequest (
-    val gameState: GameState
+open class SudokuInteractionRequest (
+    val gameState: GameState,
+    val timerValue: String
 )
