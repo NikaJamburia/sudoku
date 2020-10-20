@@ -2,6 +2,7 @@ package service
 
 import gameplay.game.GameState
 import gameplay.interaction.request.FillCellRequest
+import gameplay.interaction.request.SudokuInteractionRequest
 import gameplay.interaction.result.Error
 import gameplay.interaction.result.GameWon
 import org.junit.jupiter.api.Test
@@ -13,9 +14,9 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
-class JsonGameServiceTest {
-    @Test
+class SudokuGameServiceTest {
 
+    @Test
     fun correctlyFillsCells() {
         val gameState = game4X4With1Empty("00:00:30", 1)
         val request = FillCellRequest(5, 1, 1, gameState, "00:00:45")
@@ -69,7 +70,19 @@ class JsonGameServiceTest {
         assertEquals("Value of cell must be between 0 and 9!", result3.message)
     }
 
-    fun game4X4With1Empty(playedTime: String, turns: Int): GameState {
+    @Test
+    fun correctlyRestartsTheGame() {
+        val game = game4X4With1Empty("00:31:15", 21)
+        val result = SudokuGameService().restart(SudokuInteractionRequest(game, "00:32:16"))
+
+        assertTrue(result.isSuccessful)
+        assertEquals("New game started", result.message)
+        assertEquals("00:00:00", result.content.playedTime)
+        assertEquals(0, result.content.numberOfTurns)
+        assertTrue(result.content.tableState.tableIsEmpty)
+    }
+
+    private fun game4X4With1Empty(playedTime: String, turns: Int): GameState {
         val tableState = TableState(
             listOf(
                 CellState(1, Coordinates(1, 1), true),
