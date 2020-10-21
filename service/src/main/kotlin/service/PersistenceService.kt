@@ -3,6 +3,7 @@ package service
 import gameplay.game.GameState
 import gameplay.game.GameStats
 import gameplay.game.SudokuGame
+import gameplay.game.generation.SudokuGameFromState
 import gameplay.game.time.GameTime
 import gameplay.interaction.request.LoadGameRequest
 import gameplay.interaction.request.SaveGameRequest
@@ -20,11 +21,14 @@ class PersistenceService(
     private val gameSavers: List<GameSaver>,
     private val gameLoaders: List<GameLoader>
 ) : SudokuPersistance {
-    override fun saveGame(request: SaveGameRequest): GameSaved =
-        GameSaved(true,
+    override fun saveGame(request: SaveGameRequest): GameSaved {
+        val stateWithNewTimerValue = GameState(request.timerValue, request.gameState.numberOfTurns, request.gameState.gameIsWon, request.gameState.tableState)
+        return GameSaved(true,
             gameSavers
                 .first { it.supportedFormat() == request.format }
-                .save(request.gameState))
+                .save(stateWithNewTimerValue))
+    }
+
 
 
     override fun loadGame(request: LoadGameRequest): SudokuInteractionResult =
