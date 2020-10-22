@@ -3,7 +3,6 @@ package service
 import gameplay.game.GameState
 import gameplay.game.GameStats
 import gameplay.game.SudokuGame
-import gameplay.game.generation.SudokuGameFromState
 import gameplay.game.time.GameTime
 import gameplay.interaction.request.LoadGameRequest
 import gameplay.interaction.request.SaveGameRequest
@@ -11,6 +10,7 @@ import gameplay.interaction.result.*
 import gameplay.process.SudokuPersistance
 import gameplay.saveload.GameLoader
 import gameplay.saveload.GameSaver
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import table.generation.MockGeneratedSudokuTable
 import table.state.TableState
@@ -18,8 +18,8 @@ import java.lang.Exception
 
 @Component
 class PersistenceService(
-    private val gameSavers: List<GameSaver>,
-    private val gameLoaders: List<GameLoader>
+    @Autowired private val gameSavers: List<GameSaver>,
+    @Autowired private val gameLoaders: List<GameLoader>
 ) : SudokuPersistance {
     override fun saveGame(request: SaveGameRequest): GameSaved {
         val stateWithNewTimerValue = GameState(request.timerValue, request.gameState.numberOfTurns, request.gameState.gameIsWon, request.gameState.tableState)

@@ -3,6 +3,7 @@ package service
 import gameplay.game.GameState
 import gameplay.interaction.request.LoadGameRequest
 import gameplay.interaction.request.SaveGameRequest
+import gameplay.interaction.result.GameStarted
 import gameplay.saveload.GameLoader
 import gameplay.saveload.GameSaver
 import gameplay.saveload.SavedSudokuGame
@@ -69,6 +70,16 @@ class PersistenceServiceTest {
         assertTrue(resultXml.isSuccessful)
         assertEquals("XML", resultXml.content.playedTime)
         assertEquals("Game loaded", resultXml.message)
+    }
+
+    @Test
+    fun startsNewGame() {
+        val service = PersistenceService(listOf(), listOf())
+        val result = service.startNewGame()
+
+        assertTrue(result is GameStarted)
+        assertEquals("00:00:00", result.content.playedTime)
+        assertEquals(0, result.content.numberOfTurns)
     }
 
     private fun game4X4With1Empty(playedTime: String, turns: Int): GameState {
