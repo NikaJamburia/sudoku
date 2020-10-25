@@ -1,5 +1,5 @@
 project(":service") {
-    description = "service module"
+    description = "org.nika.sudoku.service module"
 
     dependencies {
         implementation project(":game")
@@ -8,9 +8,8 @@ project(":service") {
         implementation 'org.springframework:spring-context:5.2.8.RELEASE'
         implementation 'org.springframework.boot:spring-boot-starter:2.3.4.RELEASE'
 
-
         testImplementation 'org.springframework:spring-test:5.2.8.RELEASE'
-        testImplementation "org.springframework.boot:spring-boot-starter-test:2.3.4.RELEASE"
+        testImplementation 'org.springframework.boot:spring-boot-starter-test:2.3.4.RELEASE'
 
     }
 }

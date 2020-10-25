@@ -1,4 +1,5 @@
 rootProject.name = 'sudoku'
 include 'game'
 include 'service'
+include 'web'
 
