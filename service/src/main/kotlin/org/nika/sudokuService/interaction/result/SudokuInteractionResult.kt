@@ -1,4 +1,4 @@
-package org.nika.sudokuGame.gameplay.interaction.result
+package org.nika.sudokuService.interaction.result
 
 import org.nika.sudokuGame.gameplay.game.GameState
 

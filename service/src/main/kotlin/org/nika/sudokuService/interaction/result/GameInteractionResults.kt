@@ -1,7 +1,8 @@
-package org.nika.sudokuGame.gameplay.interaction.result
+package org.nika.sudokuService.interaction.result
 
 import org.nika.sudokuGame.gameplay.game.GameState
 import org.nika.sudokuGame.gameplay.saveload.SavedSudokuGameState
+import org.nika.sudokuGame.table.state.TableState
 
 data class CellFilled (
     val tableState: GameState
@@ -16,6 +17,10 @@ data class Error (
     val gameState: GameState
 ): SudokuInteractionResult(false, errorMsg, gameState)
 
+data class NoGameError (
+    val errorMsg: String
+): SudokuInteractionResult(false, errorMsg, GameState("", 0, false, TableState(listOf(), listOf(), false, false)))
+
 data class GameStarted (
     val gameState: GameState
 ): SudokuInteractionResult(true, "New game started", gameState)
@@ -23,8 +28,3 @@ data class GameStarted (
 data class GameLoaded (
     val gameState: GameState
 ): SudokuInteractionResult(true, "Game loaded", gameState)
-
-data class GameSaved (
-    val savedSuccessfully: Boolean,
-    val savedGameState: SavedSudokuGameState
-)

@@ -1,16 +1,13 @@
 package org.nika.sudokuService.service
 
-import org.nika.sudokuGame.gameplay.game.GameState
-import org.nika.sudokuGame.gameplay.interaction.request.FillCellRequest
-import org.nika.sudokuGame.gameplay.interaction.request.SudokuInteractionRequest
-import org.nika.sudokuGame.gameplay.interaction.result.Error
-import org.nika.sudokuGame.gameplay.interaction.result.GameWon
+import org.nika.sudokuService.interaction.request.FillCellRequest
+import org.nika.sudokuService.interaction.request.SudokuInteractionRequest
+import org.nika.sudokuService.interaction.result.Error
+import org.nika.sudokuService.interaction.result.GameWon
 import org.junit.jupiter.api.Test
 import org.nika.sudokuGame.table.Coordinates
-import org.nika.sudokuGame.table.cells.NO_VALUE
-import org.nika.sudokuGame.table.state.CellState
-import org.nika.sudokuGame.table.state.TableState
 import org.nika.sudokuService.game4X4With1Empty
+import org.nika.sudokuService.interaction.result.GameStarted
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
@@ -81,6 +78,16 @@ class SudokuGameServiceTest {
         assertEquals("00:00:00", result.content.playedTime)
         assertEquals(0, result.content.numberOfTurns)
         assertTrue(result.content.tableState.tableIsEmpty)
+    }
+
+    @Test
+    fun startsNewGame() {
+        val service = SudokuGameService()
+        val result = service.startNewGame()
+
+        assertTrue(result is GameStarted)
+        assertEquals("00:00:00", result.content.playedTime)
+        assertEquals(0, result.content.numberOfTurns)
     }
 
 }

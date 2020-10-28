@@ -1,4 +1,4 @@
-package org.nika.sudokuGame.gameplay.interaction.request
+package org.nika.sudokuService.interaction.request
 
 import org.nika.sudokuGame.gameplay.game.GameState
 import org.nika.sudokuGame.gameplay.saveload.serialization.SerializationFormat
