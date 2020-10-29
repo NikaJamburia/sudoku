@@ -16,7 +16,7 @@ class NewSudokuGameTest {
 
     @Test
     fun startsNewGameWithMockedTable() {
-        val params = NewTableGenerationParameters(TableGenerationAlgorithm.MOCKED, 0, 0, 0)
+        val params = SudokuTableGenerationParameters(TableGenerationAlgorithm.MOCKED, 0, 0, 0)
         val newGameState = NewSudokuGame(params).start().internalState()
 
         assertEquals(0, newGameState.numberOfTurns)
@@ -28,7 +28,7 @@ class NewSudokuGameTest {
 
     @Test
     fun startsNewGameWithRandomTable() {
-        val params = NewTableGenerationParameters(TableGenerationAlgorithm.RANDOM, 9, 9, 20)
+        val params = SudokuTableGenerationParameters(TableGenerationAlgorithm.RANDOM, 9, 9, 20)
         val newGameState = NewSudokuGame(params).start().internalState()
 
         assertTrue(newGameState.tableState.tableIsEmpty)

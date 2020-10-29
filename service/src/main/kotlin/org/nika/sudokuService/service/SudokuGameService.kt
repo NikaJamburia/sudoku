@@ -2,7 +2,7 @@ package org.nika.sudokuService.service
 
 import org.nika.sudokuGame.gameplay.game.generation.SudokuGameFromState
 import org.nika.sudokuGame.gameplay.game.neww.NewSudokuGame
-import org.nika.sudokuGame.gameplay.game.neww.NewTableGenerationParameters
+import org.nika.sudokuGame.gameplay.game.neww.SudokuTableGenerationParameters
 import org.nika.sudokuGame.gameplay.game.neww.TableGenerationAlgorithm.MOCKED
 import org.nika.sudokuService.interaction.request.FillCellRequest
 import org.nika.sudokuService.interaction.request.SudokuInteractionRequest
@@ -10,10 +10,18 @@ import org.nika.sudokuService.interaction.result.*
 import org.nika.sudokuService.process.SudokuGameProcess
 import org.springframework.stereotype.Component
 import org.nika.sudokuGame.table.Coordinates
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.context.annotation.PropertySource
 import java.lang.Exception
 
 @Component
-class SudokuGameService : SudokuGameProcess {
+@PropertySource("classpath:sudoku-service.properties")
+class SudokuGameService (
+    @Autowired
+    @Qualifier("sudokuTableGenerationParameters")
+    private val sudokuTableGenerationParameters: SudokuTableGenerationParameters
+) : SudokuGameProcess {
     override fun fillCell(request: FillCellRequest): SudokuInteractionResult {
         try {
             val game = SudokuGameFromState(request.gameState).generate()
@@ -37,7 +45,7 @@ class SudokuGameService : SudokuGameProcess {
 
     override fun startNewGame(): SudokuInteractionResult =
         try {
-            val game = NewSudokuGame(NewTableGenerationParameters(MOCKED, 0, 0, 0)).start()
+            val game = NewSudokuGame(sudokuTableGenerationParameters).start()
             GameStarted(game.internalState())
         } catch (e: Exception) {
             NoGameError(e.message ?: let { "Unknown error" })

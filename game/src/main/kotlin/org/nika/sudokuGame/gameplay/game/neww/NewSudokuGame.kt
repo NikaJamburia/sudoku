@@ -8,7 +8,7 @@ import org.nika.sudokuGame.table.generation.MockGeneratedSudokuTable
 import org.nika.sudokuGame.table.generation.RandomBasedNewSudokuTable
 
 class NewSudokuGame (
-    private val parameters: NewTableGenerationParameters
+    private val parameters: SudokuTableGenerationParameters
 ) {
     fun start(): SudokuGame {
         val table = when(parameters.tableGenerationAlgorithm) {

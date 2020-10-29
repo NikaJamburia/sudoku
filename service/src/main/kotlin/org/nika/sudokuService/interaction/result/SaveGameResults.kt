@@ -9,10 +9,10 @@ abstract class GameSavingResult(
     val savedGameState: SavedSudokuGameState
 )
 
-data class GameSaved (
-    val savedGame: SavedSudokuGameState
+class GameSaved (
+    savedGame: SavedSudokuGameState
 ): GameSavingResult(true, "Saved successfully", savedGame)
 
-data class SavingError (
-    val msg: String
+class SavingError (
+    msg: String
 ): GameSavingResult(false, msg, SavedSudokuGameState(SerializationFormat.JSON, ""))

@@ -4,7 +4,7 @@ enum class TableGenerationAlgorithm {
     MOCKED, RANDOM
 }
 
-data class NewTableGenerationParameters (
+data class SudokuTableGenerationParameters (
     val tableGenerationAlgorithm: TableGenerationAlgorithm,
     val xCells: Int,
     val yCells: Int,

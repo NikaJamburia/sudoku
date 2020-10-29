@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service
 import org.springframework.context.annotation.PropertySource
 
 @Service
-@PropertySource("classpath:sudoku-service.properties")
 class SaveLoadService(
     @Autowired private val gameSavers: List<GameSaver>,
     @Autowired private val gameLoaders: List<GameLoader>
