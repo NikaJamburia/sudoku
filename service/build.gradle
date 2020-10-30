@@ -1,5 +1,7 @@
 project(":service") {
-    description = "org.nika.sudoku.service module"
+    description = "service module"
+
+    apply plugin: "kotlin-spring"
 
     dependencies {
         implementation project(":game")

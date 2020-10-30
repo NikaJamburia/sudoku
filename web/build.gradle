@@ -2,8 +2,6 @@ project(":web") {
     description = "web module"
 
     apply plugin: "kotlin-spring"
-    apply plugin: 'org.springframework.boot'
-    apply plugin: 'io.spring.dependency-management'
 
     dependencies {
         implementation project(":service")

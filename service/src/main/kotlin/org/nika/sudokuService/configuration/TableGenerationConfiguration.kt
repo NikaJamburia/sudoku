@@ -9,10 +9,10 @@ import org.springframework.context.annotation.PropertySource
 
 @Configuration
 @PropertySource("classpath:sudoku-service.properties")
-open class TableGenerationConfiguration {
+class TableGenerationConfiguration {
 
     @Bean
-    open fun sudokuTableGenerationParameters(
+    fun sudokuTableGenerationParameters(
         @Value("\${table.generation.algorithm:MOCKED}") generationAlgorithm: TableGenerationAlgorithm,
         @Value("\${table.generation.column-size:9}") columnSize: Int,
         @Value("\${table.generation.row-size:9}") rowSize: Int,
