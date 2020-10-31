@@ -6,6 +6,9 @@ project(":web") {
     dependencies {
         implementation project(":service")
 
+        implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.1'
+        implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.11.1"
+
         implementation 'org.springframework:spring-core:5.2.8.RELEASE'
         implementation 'org.springframework:spring-context:5.2.8.RELEASE'
         implementation 'org.springframework.boot:spring-boot-starter:2.3.4.RELEASE'
