@@ -1,7 +1,7 @@
 package org.nika.sudokuGame.gameplay.saveload.serialization
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import org.nika.sudokuGame.gameplay.game.GameState
+import org.nika.sudokuInteraction.state.GameState
 
 class JacksonSerializedSudokuGameState(
     private val gameState: GameState

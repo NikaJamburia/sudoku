@@ -1,6 +1,6 @@
-package org.nika.sudokuService.interaction.result
+package org.nika.sudokuInteraction.result
 
-import org.nika.sudokuGame.gameplay.game.GameState
+import org.nika.sudokuInteraction.state.GameState
 
 abstract class SudokuInteractionResult (
     val isSuccessful: Boolean,

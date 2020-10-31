@@ -1,13 +1,15 @@
 package org.nika.sudokuGame.gameplay.game.neww
 
 import org.junit.jupiter.api.Test
+import org.nika.sudokuGame.coordinates
+import org.nika.sudokuGame.table.Coordinates
 import org.nika.sudokuGame.table.cells.Cell
 import org.nika.sudokuGame.table.cells.ClosedCell
 import org.nika.sudokuGame.table.cells.OpenCell
 import org.nika.sudokuGame.table.cells.collection.Columns
 import org.nika.sudokuGame.table.cells.collection.Rows
 import org.nika.sudokuGame.table.generation.MockGeneratedSudokuTable
-import org.nika.sudokuGame.table.state.CellState
+import org.nika.sudokuInteraction.state.CellState
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
@@ -39,9 +41,9 @@ class NewSudokuGameTest {
 
     private fun stateToCell(cellState: CellState): Cell =
         if (cellState.cellIsOpen) {
-            OpenCell(cellState.value, cellState.coordinates)
+            OpenCell(cellState.value,  cellState.coordinates())
         } else {
-            ClosedCell(cellState.value, cellState.coordinates)
+            ClosedCell(cellState.value,  cellState.coordinates())
         }
 
 }

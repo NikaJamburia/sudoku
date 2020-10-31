@@ -1,6 +1,4 @@
-package org.nika.sudokuGame.table.state
-
-import org.nika.sudokuGame.table.Coordinates
+package org.nika.sudokuInteraction.state
 
 data class TableState(
     val cells: List<CellState>,
@@ -11,7 +9,8 @@ data class TableState(
 
 data class CellState (
     val value: Int,
-    val coordinates: Coordinates,
+    val coordinateX: Int,
+    val coordinateY: Int,
     val cellIsOpen: Boolean
 )
 

@@ -1,6 +1,6 @@
-package org.nika.sudokuService.interaction.request
+package org.nika.sudokuInteraction.request
 
-import org.nika.sudokuGame.gameplay.game.GameState
+import org.nika.sudokuInteraction.state.GameState
 
 class FillCellRequest (
     val value: Int,

@@ -1,7 +1,7 @@
-package org.nika.sudokuService.interaction.result
+package org.nika.sudokuInteraction.result
 
-import org.nika.sudokuGame.gameplay.saveload.SavedSudokuGameState
-import org.nika.sudokuGame.gameplay.saveload.serialization.SerializationFormat
+import org.nika.sudokuInteraction.enums.SerializationFormat
+import org.nika.sudokuInteraction.state.SavedSudokuGameState
 
 abstract class GameSavingResult(
     val savedSuccessfully: Boolean,

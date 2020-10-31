@@ -5,7 +5,7 @@ import org.nika.sudokuGame.table.cells.OpenCell
 import org.nika.sudokuGame.table.cells.collection.Boxes
 import org.nika.sudokuGame.table.cells.collection.Columns
 import org.nika.sudokuGame.table.cells.collection.Rows
-import org.nika.sudokuGame.table.state.TableState
+import org.nika.sudokuInteraction.state.TableState
 import java.lang.IllegalStateException
 
 class SudokuTable(

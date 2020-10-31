@@ -4,6 +4,7 @@ project(":service") {
     apply plugin: "kotlin-spring"
 
     dependencies {
+        implementation project(":interaction")
         implementation project(":game")
 
         implementation 'org.springframework:spring-core:5.2.8.RELEASE'

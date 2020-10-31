@@ -1,6 +1,6 @@
 package org.nika.sudokuWeb.http.response
 
-import org.nika.sudokuService.interaction.result.GameSavingResult
+import org.nika.sudokuInteraction.result.GameSavingResult
 import org.springframework.http.ResponseEntity
 
 class HttpResponseFromGameSavingResult (

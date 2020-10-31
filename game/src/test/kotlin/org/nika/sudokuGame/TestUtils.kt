@@ -6,6 +6,8 @@ import org.nika.sudokuGame.table.cells.ClosedCell
 import org.nika.sudokuGame.table.cells.NO_VALUE
 import org.nika.sudokuGame.table.cells.OpenCell
 import org.nika.sudokuGame.table.cells.collection.Boxes
+import org.nika.sudokuInteraction.state.CellState
+import org.nika.sudokuInteraction.state.TableState
 
 fun generate2X2Table(): SudokuTable {
     val cells= listOf(
@@ -112,3 +114,11 @@ fun generate6X6Table(): SudokuTable {
 
     return SudokuTable(Boxes(cells))
 }
+
+fun twoCellsAreConflicting(coordinate1: Coordinates, coordinate2: Coordinates, table: TableState): Boolean =
+    table.conflicts.any {
+        it.conflictedCells.any { cell -> cell.coordinates() == coordinate1 }
+                && it.conflictedCells.any { cell -> cell.coordinates() == coordinate2 }
+    }
+
+fun CellState.coordinates(): Coordinates = Coordinates(this.coordinateX, this.coordinateY)

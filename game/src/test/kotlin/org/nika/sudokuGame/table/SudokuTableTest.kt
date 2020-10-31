@@ -4,11 +4,8 @@ import org.junit.jupiter.api.Test
 import org.nika.sudokuGame.generate3X6Table
 import org.nika.sudokuGame.generate6X3Table
 import org.nika.sudokuGame.generate6X6Table
-import org.nika.sudokuGame.table.cells.OpenCell
-import org.nika.sudokuGame.table.cells.NO_VALUE
-import org.nika.sudokuGame.table.cells.ClosedCell
-import org.nika.sudokuGame.table.cells.collection.Boxes
-import org.nika.sudokuGame.table.state.TableState
+import org.nika.sudokuGame.twoCellsAreConflicting
+import org.nika.sudokuInteraction.state.TableState
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
@@ -192,12 +189,5 @@ class SudokuTableTest /*: BaseSudokuTableTest()*/ {
 
     private fun findConflictByValueOfCells(value: Int, tableState: TableState) =
         tableState.conflicts.first { it.conflictedCells.all { cell -> cell.value == value } }
-
-    private fun twoCellsAreConflicting(coordinate1: Coordinates, coordinate2: Coordinates, table: TableState): Boolean =
-        table.conflicts.any {
-            it.conflictedCells.any { cell -> cell.coordinates.equals(coordinate1) }
-                    && it.conflictedCells.any { cell -> cell.coordinates.equals(coordinate2) }
-        }
-
 
 }

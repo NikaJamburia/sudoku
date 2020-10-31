@@ -1,7 +1,8 @@
 package org.nika.sudokuGame.table.cells
 
 import org.nika.sudokuGame.table.Coordinates
-import org.nika.sudokuGame.table.state.CellState
+import org.nika.sudokuInteraction.state.CellState
+
 import java.lang.IllegalArgumentException
 import java.lang.IllegalStateException
 
@@ -29,5 +30,5 @@ class ClosedCell (
     }
 
     override fun internalState(): CellState =
-        CellState(value, coordinates, false)
+        CellState(value, coordinates.x, coordinates.y, false)
 }

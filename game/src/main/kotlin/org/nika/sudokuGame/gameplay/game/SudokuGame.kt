@@ -5,6 +5,7 @@ import org.nika.sudokuGame.gameplay.game.time.GameTimeFromString
 import org.nika.sudokuGame.table.Coordinates
 import org.nika.sudokuGame.table.HasInternalState
 import org.nika.sudokuGame.table.SudokuTable
+import org.nika.sudokuInteraction.state.GameState
 
 class SudokuGame(
     private var gameStats: GameStats,

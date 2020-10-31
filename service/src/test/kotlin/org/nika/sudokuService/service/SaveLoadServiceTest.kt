@@ -1,17 +1,19 @@
 package org.nika.sudokuService.service
 
-import org.nika.sudokuService.interaction.request.LoadGameRequest
-import org.nika.sudokuService.interaction.request.SaveGameRequest
 import org.nika.sudokuGame.gameplay.saveload.GameLoader
 import org.nika.sudokuGame.gameplay.saveload.GameSaver
-import org.nika.sudokuGame.gameplay.saveload.SavedSudokuGameState
-import org.nika.sudokuGame.gameplay.saveload.serialization.SerializationFormat.*
 import io.mockk.every
 import io.mockk.mockk
 import org.junit.jupiter.api.Test
+import org.nika.sudokuInteraction.enums.SerializationFormat
+import org.nika.sudokuInteraction.enums.SerializationFormat.JSON
+import org.nika.sudokuInteraction.enums.SerializationFormat.XML
+import org.nika.sudokuInteraction.request.LoadGameRequest
+import org.nika.sudokuInteraction.request.SaveGameRequest
+import org.nika.sudokuInteraction.result.NoGameError
+import org.nika.sudokuInteraction.result.SavingError
+import org.nika.sudokuInteraction.state.SavedSudokuGameState
 import org.nika.sudokuService.game4X4With1Empty
-import org.nika.sudokuService.interaction.result.NoGameError
-import org.nika.sudokuService.interaction.result.SavingError
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 

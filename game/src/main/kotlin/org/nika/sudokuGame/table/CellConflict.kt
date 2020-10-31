@@ -1,7 +1,7 @@
 package org.nika.sudokuGame.table
 
 import org.nika.sudokuGame.table.cells.Cell
-import org.nika.sudokuGame.table.state.ConflictState
+import org.nika.sudokuInteraction.state.ConflictState
 
 class CellConflict (
     val conflictedCells: MutableList<Cell>

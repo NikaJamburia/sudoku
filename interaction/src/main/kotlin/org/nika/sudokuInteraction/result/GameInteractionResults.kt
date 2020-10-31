@@ -1,8 +1,7 @@
-package org.nika.sudokuService.interaction.result
+package org.nika.sudokuInteraction.result
 
-import org.nika.sudokuGame.gameplay.game.GameState
-import org.nika.sudokuGame.gameplay.saveload.SavedSudokuGameState
-import org.nika.sudokuGame.table.state.TableState
+import org.nika.sudokuInteraction.state.GameState
+import org.nika.sudokuInteraction.state.TableState
 
 class CellFilled (
     tableState: GameState

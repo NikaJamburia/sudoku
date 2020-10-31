@@ -4,6 +4,7 @@ project(":web") {
     apply plugin: "kotlin-spring"
 
     dependencies {
+        implementation project(":interaction")
         implementation project(":service")
 
         implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.1'

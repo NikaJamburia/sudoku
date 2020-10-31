@@ -1,7 +1,7 @@
 package org.nika.sudokuGame.table.cells
 
 import org.nika.sudokuGame.table.Coordinates
-import org.nika.sudokuGame.table.state.CellState
+import org.nika.sudokuInteraction.state.CellState
 import java.lang.IllegalArgumentException
 
 const val NO_VALUE = 0
@@ -27,5 +27,5 @@ data class OpenCell (
     override fun getValue(): Int = value
 
     override fun internalState(): CellState =
-        CellState(value, coordinates, true)
+        CellState(value, coordinates.x, coordinates.y, true)
 }

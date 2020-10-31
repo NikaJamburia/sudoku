@@ -1,10 +1,10 @@
 package org.nika.sudokuGame.gameplay.game.generation
 
-import org.nika.sudokuGame.gameplay.game.GameState
 import org.nika.sudokuGame.gameplay.game.GameStats
 import org.nika.sudokuGame.gameplay.game.SudokuGame
 import org.nika.sudokuGame.gameplay.game.time.GameTimeFromString
 import org.nika.sudokuGame.table.generation.SudokuTableFromState
+import org.nika.sudokuInteraction.state.GameState
 
 class SudokuGameFromState(
     private val state: GameState

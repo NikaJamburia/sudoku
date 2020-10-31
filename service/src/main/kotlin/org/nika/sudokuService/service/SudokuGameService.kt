@@ -3,17 +3,17 @@ package org.nika.sudokuService.service
 import org.nika.sudokuGame.gameplay.game.generation.SudokuGameFromState
 import org.nika.sudokuGame.gameplay.game.neww.NewSudokuGame
 import org.nika.sudokuGame.gameplay.game.neww.SudokuTableGenerationParameters
-import org.nika.sudokuGame.gameplay.game.neww.TableGenerationAlgorithm.MOCKED
-import org.nika.sudokuService.interaction.request.FillCellRequest
-import org.nika.sudokuService.interaction.request.SudokuInteractionRequest
-import org.nika.sudokuService.interaction.result.*
 import org.nika.sudokuService.process.SudokuGameProcess
 import org.springframework.stereotype.Component
 import org.nika.sudokuGame.table.Coordinates
+import org.nika.sudokuInteraction.request.FillCellRequest
+import org.nika.sudokuInteraction.request.SudokuInteractionRequest
+import org.nika.sudokuInteraction.result.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.context.annotation.PropertySource
 import java.lang.Exception
+
 
 @Component
 @PropertySource("classpath:sudoku-service.properties")

@@ -2,19 +2,20 @@ package org.nika.sudokuService.integration
 
 import org.nika.sudokuService.SudokuServiceApplication
 import org.junit.jupiter.api.Test
-import org.nika.sudokuService.interaction.request.LoadGameRequest
-import org.nika.sudokuService.interaction.request.SaveGameRequest
-import org.nika.sudokuService.interaction.result.GameStarted
-import org.nika.sudokuGame.gameplay.saveload.SavedSudokuGameState
+
 import org.nika.sudokuGame.gameplay.saveload.deserialization.JacksonDeserializedSudokuGameState
-import org.nika.sudokuGame.gameplay.saveload.serialization.SerializationFormat.*
+import org.nika.sudokuInteraction.enums.SerializationFormat
+import org.nika.sudokuInteraction.request.LoadGameRequest
+import org.nika.sudokuInteraction.request.SaveGameRequest
+import org.nika.sudokuInteraction.result.GameSaved
+import org.nika.sudokuInteraction.state.SavedSudokuGameState
+
 import org.nika.sudokuService.game4X4With1Empty
 import org.nika.sudokuService.service.SaveLoadService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
-import kotlin.test.assertTrue
 
 @SpringBootTest(classes = [SudokuServiceApplication::class])
 class SaveLoadServiceIntegrationTest (
@@ -23,7 +24,7 @@ class SaveLoadServiceIntegrationTest (
     @Test
     fun loadsGame() {
         val savedJson = this::class.java.classLoader.getResource("game4X4With1Empty_JSON_pretty.json").readText()
-        val result = saveLoadService.loadGame(LoadGameRequest(SavedSudokuGameState(JSON, savedJson)))
+        val result = saveLoadService.loadGame(LoadGameRequest(SavedSudokuGameState(SerializationFormat.JSON, savedJson)))
 
         assertEquals( "00:02:01", result.content.playedTime)
         assertEquals(5, result.content.numberOfTurns)
@@ -36,9 +37,9 @@ class SaveLoadServiceIntegrationTest (
     @Test
     fun savesGame() {
         val expectedJson = this::class.java.classLoader.getResource("game4X4With1Empty_JSON_raw.json").readText()
-        val result = saveLoadService.saveGame(SaveGameRequest(JSON, game4X4With1Empty("00:02:31", 5), "00:03:05"))
+        val result = saveLoadService.saveGame(SaveGameRequest(SerializationFormat.JSON, game4X4With1Empty("00:02:31", 5), "00:03:05"))
 
-        assertEquals(JSON, result.savedGameState.serializationFormat)
+        assertEquals(SerializationFormat.JSON, result.savedGameState.serializationFormat)
         assertEquals(expectedJson, result.savedGameState.content)
         assertEquals("00:03:05", JacksonDeserializedSudokuGameState(result.savedGameState.content).state().playedTime)
     }

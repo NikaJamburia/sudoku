@@ -1,0 +1,3 @@
+project(":interaction") {
+    description = "module for interaction data structures"
+}

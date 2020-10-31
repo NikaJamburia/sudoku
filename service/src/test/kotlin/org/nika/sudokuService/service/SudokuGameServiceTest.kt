@@ -1,18 +1,18 @@
 package org.nika.sudokuService.service
 
-import org.nika.sudokuService.interaction.request.FillCellRequest
-import org.nika.sudokuService.interaction.request.SudokuInteractionRequest
-import org.nika.sudokuService.interaction.result.Error
-import org.nika.sudokuService.interaction.result.GameWon
 import org.junit.jupiter.api.Test
 import org.nika.sudokuGame.gameplay.game.neww.SudokuTableGenerationParameters
 import org.nika.sudokuGame.gameplay.game.neww.TableGenerationAlgorithm
 import org.nika.sudokuGame.table.Coordinates
+import org.nika.sudokuInteraction.request.FillCellRequest
+import org.nika.sudokuInteraction.request.SudokuInteractionRequest
+import org.nika.sudokuInteraction.result.GameStarted
+import org.nika.sudokuInteraction.result.GameWon
 import org.nika.sudokuService.game4X4With1Empty
-import org.nika.sudokuService.interaction.result.GameStarted
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
+import org.nika.sudokuInteraction.result.Error
 
 class SudokuGameServiceTest {
 
@@ -27,7 +27,7 @@ class SudokuGameServiceTest {
         assertEquals("Successfully filled cell" , result.message)
         assertEquals("00:00:45" , result.content.playedTime)
         assertEquals(2 , result.content.numberOfTurns)
-        assertEquals(5 , result.content.tableState.cells.first { it.coordinates == Coordinates(1, 1) }.value)
+        assertEquals(5 , result.content.tableState.cells.first { Coordinates(it.coordinateX, it.coordinateY) == Coordinates(1, 1) }.value)
     }
 
     @Test

@@ -1,6 +1,4 @@
-package org.nika.sudokuGame.gameplay.game
-
-import org.nika.sudokuGame.table.state.TableState
+package org.nika.sudokuInteraction.state
 
 data class GameState (
     val playedTime: String,

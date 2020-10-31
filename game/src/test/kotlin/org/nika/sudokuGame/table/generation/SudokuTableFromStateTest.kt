@@ -2,10 +2,11 @@ package org.nika.sudokuGame.table.generation
 
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
+import org.nika.sudokuGame.coordinates
 import org.nika.sudokuGame.table.Coordinates
-import org.nika.sudokuGame.table.state.CellState
-import org.nika.sudokuGame.table.state.ConflictState
-import org.nika.sudokuGame.table.state.TableState
+import org.nika.sudokuInteraction.state.CellState
+import org.nika.sudokuInteraction.state.ConflictState
+import org.nika.sudokuInteraction.state.TableState
 import java.lang.IllegalStateException
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -24,7 +25,7 @@ class SudokuTableFromStateTest {
         assertTrue(stateOfGeneratedTable.tableIsFull)
 
         assertEquals(4, stateOfGeneratedTable.cells.size)
-        assertFalse(stateOfGeneratedTable.cells.first { it.coordinates.equals(Coordinates(1, 2)) }.cellIsOpen)
+        assertFalse(stateOfGeneratedTable.cells.first { it.coordinates() == Coordinates(1, 2) }.cellIsOpen)
         assertEquals(3, stateOfGeneratedTable.cells.filter { it.cellIsOpen }.size)
     }
 
@@ -49,18 +50,18 @@ class SudokuTableFromStateTest {
 
     private fun cells2X2(): List<CellState> =
         listOf(
-            CellState(1, Coordinates(1, 1), true),
-            CellState(2, Coordinates(1, 2), false),
-            CellState(3, Coordinates(2, 1), true),
-            CellState(1, Coordinates(2, 2), true)
+            CellState(1, 1, 1, true),
+            CellState(2, 1, 2, false),
+            CellState(3, 2, 1, true),
+            CellState(1, 2, 2, true)
         )
 
     private fun conflicts2X2(): List<ConflictState> =
         listOf(
             ConflictState(
                 listOf(
-                    CellState(1, Coordinates(2, 2), true),
-                    CellState(1, Coordinates(1, 1), true)
+                    CellState(1, 2, 2, true),
+                    CellState(1, 1, 1, true)
                 )
             )
         )

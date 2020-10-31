@@ -1,11 +1,12 @@
 package org.nika.sudokuGame.gameplay.game.generation
 
-import org.nika.sudokuGame.gameplay.game.GameState
 import org.junit.jupiter.api.Test
 import org.nika.sudokuGame.table.Coordinates
 import org.nika.sudokuGame.table.cells.NO_VALUE
-import org.nika.sudokuGame.table.state.CellState
-import org.nika.sudokuGame.table.state.TableState
+import org.nika.sudokuInteraction.state.CellState
+import org.nika.sudokuInteraction.state.GameState
+import org.nika.sudokuInteraction.state.TableState
+
 import kotlin.test.assertEquals
 
 class SudokuGameFromStateTest {
@@ -15,7 +16,7 @@ class SudokuGameFromStateTest {
             "00:01:40",
             5,
             false,
-            TableState(listOf(CellState(NO_VALUE, Coordinates(1, 1), true)), listOf(), false, false)
+            TableState(listOf(CellState(NO_VALUE,1, 1, true)), listOf(), false, false)
         )
 
         val generatedState = SudokuGameFromState(initialState).generate().internalState()

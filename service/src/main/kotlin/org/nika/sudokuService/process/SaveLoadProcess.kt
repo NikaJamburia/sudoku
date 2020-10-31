@@ -1,10 +1,9 @@
 package org.nika.sudokuService.process
 
-import org.nika.sudokuService.interaction.request.LoadGameRequest
-import org.nika.sudokuService.interaction.request.SaveGameRequest
-import org.nika.sudokuService.interaction.result.GameSaved
-import org.nika.sudokuService.interaction.result.GameSavingResult
-import org.nika.sudokuService.interaction.result.SudokuInteractionResult
+import org.nika.sudokuInteraction.request.LoadGameRequest
+import org.nika.sudokuInteraction.request.SaveGameRequest
+import org.nika.sudokuInteraction.result.GameSavingResult
+import org.nika.sudokuInteraction.result.SudokuInteractionResult
 
 interface SaveLoadProcess {
     fun saveGame(request: SaveGameRequest): GameSavingResult

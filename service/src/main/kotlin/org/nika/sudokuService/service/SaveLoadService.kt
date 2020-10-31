@@ -1,15 +1,16 @@
 package org.nika.sudokuService.service
 
-import org.nika.sudokuGame.gameplay.game.GameState
-import org.nika.sudokuService.interaction.request.LoadGameRequest
-import org.nika.sudokuService.interaction.request.SaveGameRequest
-import org.nika.sudokuService.interaction.result.*
+
 import org.nika.sudokuService.process.SaveLoadProcess
 import org.nika.sudokuGame.gameplay.saveload.GameLoader
 import org.nika.sudokuGame.gameplay.saveload.GameSaver
+import org.nika.sudokuInteraction.request.LoadGameRequest
+import org.nika.sudokuInteraction.request.SaveGameRequest
+import org.nika.sudokuInteraction.result.*
+import org.nika.sudokuInteraction.state.GameState
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import org.springframework.context.annotation.PropertySource
+
 
 @Service
 class SaveLoadService(

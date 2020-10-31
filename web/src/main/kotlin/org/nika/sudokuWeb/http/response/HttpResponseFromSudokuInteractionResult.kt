@@ -1,6 +1,6 @@
 package org.nika.sudokuWeb.http.response
 
-import org.nika.sudokuService.interaction.result.SudokuInteractionResult
+import org.nika.sudokuInteraction.result.SudokuInteractionResult
 import org.springframework.http.ResponseEntity
 
 class HttpResponseFromSudokuInteractionResult (

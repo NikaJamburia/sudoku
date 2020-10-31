@@ -2,7 +2,7 @@ package org.nika.sudokuGame.gameplay.saveload.deserialization
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.KotlinModule
-import org.nika.sudokuGame.gameplay.game.GameState
+import org.nika.sudokuInteraction.state.GameState
 
 class JacksonDeserializedSudokuGameState(
     private val stringGame: String
