@@ -35,13 +35,9 @@ class BasicSudokuController (
     fun fillCell(@RequestBody request: FillCellRequest): ResponseEntity<SudokuInteractionResult> =
         HttpResponseFromSudokuInteractionResult(game.fillCell(request)).response()
 
-
-
-
     @PostMapping("save")
     fun saveGame(@RequestBody request: SaveGameRequest): ResponseEntity<GameSavingResult> =
         HttpResponseFromGameSavingResult(saveLoad.saveGame(request)).response()
-
 
     @PostMapping("load")
     fun loadGame(@RequestBody request: LoadGameRequest): ResponseEntity<SudokuInteractionResult> =

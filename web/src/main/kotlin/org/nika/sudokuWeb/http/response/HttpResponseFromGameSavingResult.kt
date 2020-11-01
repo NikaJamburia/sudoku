@@ -7,7 +7,7 @@ class HttpResponseFromGameSavingResult (
     private val gameSavingResult: GameSavingResult
 ) {
     fun response(): ResponseEntity<GameSavingResult> {
-        return if (gameSavingResult.savedSuccessfully) {
+        return if (gameSavingResult.isSuccessful) {
             ResponseEntity.ok(gameSavingResult)
         } else {
             ResponseEntity.badRequest().body(gameSavingResult)
