@@ -3,7 +3,7 @@ package org.nika.sudokuWeb.http.response
 import org.nika.sudokuInteraction.result.GameSavingResult
 import org.springframework.http.ResponseEntity
 
-class HttpResponseFromGameSavingResult (
+class GameSavingResponseEntity (
     private val gameSavingResult: GameSavingResult
 ) {
     fun response(): ResponseEntity<GameSavingResult> {

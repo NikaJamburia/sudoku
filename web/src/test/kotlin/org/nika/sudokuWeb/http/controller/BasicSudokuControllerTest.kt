@@ -3,7 +3,6 @@ package org.nika.sudokuWeb.http.controller
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import org.junit.jupiter.api.Test
-import org.nika.sudokuInteraction.enums.SerializationFormat
 import org.nika.sudokuInteraction.enums.SerializationFormat.JSON
 import org.nika.sudokuInteraction.enums.SerializationFormat.XML
 import org.nika.sudokuInteraction.request.FillCellRequest
@@ -13,13 +12,10 @@ import org.nika.sudokuInteraction.request.SudokuInteractionRequest
 import org.nika.sudokuInteraction.state.GameState
 import org.nika.sudokuInteraction.state.SavedSudokuGameState
 import org.nika.sudokuWeb.SudokuWebApiApplication
-import org.omg.CORBA.Any
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
 
@@ -111,6 +107,20 @@ class BasicSudokuControllerTest(
             .andExpect(jsonPath("$.isSuccessful").value(true))
             .andExpect(jsonPath("$.message").value("Game loaded"))
             .andExpect(jsonPath("$.content").isNotEmpty)
+    }
+
+    @Test
+    fun correctlyHandlesErrorsOnLoadGame() {
+        mockMvc.perform(
+            postWithJson(controllerPath + "load", asJsonString(LoadGameRequest(SavedSudokuGameState(JSON, "aaaaa")))))
+            .andExpect(status().isBadRequest)
+            .andExpect(jsonPath("$.isSuccessful").value(false))
+
+        mockMvc.perform(
+            postWithJson(controllerPath + "load", asJsonString(LoadGameRequest(SavedSudokuGameState(XML, mockedGameJson)))))
+            .andExpect(status().isBadRequest)
+            .andExpect(jsonPath("$.isSuccessful").value(false))
+            .andExpect(jsonPath("$.message").value("XML format not supported"))
     }
 
 

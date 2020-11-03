@@ -3,7 +3,7 @@ package org.nika.sudokuWeb.http.response
 import org.nika.sudokuInteraction.result.SudokuInteractionResult
 import org.springframework.http.ResponseEntity
 
-class HttpResponseFromSudokuInteractionResult (
+class SudokuInteractionResponseEntity (
     private val sudokuInteractionResult: SudokuInteractionResult
 ) {
     fun response(): ResponseEntity<SudokuInteractionResult> {
