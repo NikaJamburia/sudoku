@@ -1,0 +1,35 @@
+body{
+    margin:0;
+    padding:0;
+}
+.container{
+    height:100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+td{
+    padding:0px;
+}
+input{
+    width:22px !important;
+    height:40px !important;
+    border: 0px;
+    padding-left:18px;
+}
+.boldBorderCol{
+    border-right: 2px solid black !important;
+}
+.boldBorderRow{
+    border-bottom: 2px solid black !important;
+}
+.givenNumber{
+    background-color:rgb(219, 219, 219);
+}
+.error{
+    color:red;
+}
+.noerror{
+    color:black;
+}
