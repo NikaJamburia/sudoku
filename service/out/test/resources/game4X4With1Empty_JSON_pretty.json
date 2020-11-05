@@ -6,34 +6,26 @@
         "cells": [
             {
                 "value": 1,
-                "coordinates": {
-                    "x": 1,
-                    "y": 1
-                },
+                "coordinateX": 1,
+                "coordinateY": 1,
                 "cellIsOpen": true
             },
             {
                 "value": 2,
-                "coordinates": {
-                    "x": 1,
-                    "y": 2
-                },
+                "coordinateX": 1,
+                "coordinateY": 2,
                 "cellIsOpen": false
             },
             {
                 "value": 3,
-                "coordinates": {
-                    "x": 2,
-                    "y": 1
-                },
+                "coordinateX": 2,
+                "coordinateY": 1,
                 "cellIsOpen": true
             },
             {
                 "value": 0,
-                "coordinates": {
-                    "x": 2,
-                    "y": 2
-                },
+                "coordinateX": 2,
+                "coordinateY": 2,
                 "cellIsOpen": true
             }
         ],

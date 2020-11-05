@@ -122,3 +122,5 @@ fun twoCellsAreConflicting(coordinate1: Coordinates, coordinate2: Coordinates, t
     }
 
 fun CellState.coordinates(): Coordinates = Coordinates(this.coordinateX, this.coordinateY)
+
+fun TableState.findCell(x: Int, y: Int): CellState = this.cells.first { it.coordinateX == x && it.coordinateY == y }

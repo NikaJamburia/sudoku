@@ -27,3 +27,7 @@ class GameStarted (
 class GameLoaded (
     gameState: GameState
 ): SudokuInteractionResult(true, "Game loaded", gameState)
+
+class CellEmptied (
+    gameState: GameState
+): SudokuInteractionResult(true, "Cell emptied", gameState)

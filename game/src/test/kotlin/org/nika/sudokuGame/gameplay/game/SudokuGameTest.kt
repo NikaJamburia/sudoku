@@ -2,6 +2,7 @@ package org.nika.sudokuGame.gameplay.game
 
 import org.nika.sudokuGame.gameplay.game.time.GameTime
 import org.junit.jupiter.api.Test
+import org.nika.sudokuGame.findCell
 import org.nika.sudokuGame.generate2X2Table
 import org.nika.sudokuGame.table.Coordinates
 import org.nika.sudokuGame.table.SudokuTable
@@ -53,6 +54,19 @@ class SudokuGameTest {
         assertEquals("00:00:00", gameState.playedTime)
         assertEquals(0, gameState.numberOfTurns)
         assertTrue(gameState.tableState.tableIsEmpty)
+    }
+
+    @Test
+    fun correctlyEmptiesACell() {
+        val game = newGame(generate2X2Table())
+
+        var gameState = game.fillCell(1, Coordinates(1, 1), "00:00:01")
+        assertEquals(1, gameState.tableState.findCell(1, 1).value)
+
+        gameState = game.emptyCell(1, 1, "00:00:02")
+        assertEquals("00:00:02", gameState.playedTime)
+        assertEquals(2, gameState.numberOfTurns)
+        assertEquals(NO_VALUE, gameState.tableState.findCell(1, 1).value)
     }
 
     private fun newGame(sudokuTable: SudokuTable): SudokuGame =

@@ -4,8 +4,10 @@ import org.junit.jupiter.api.Test
 import org.nika.sudokuGame.gameplay.game.neww.SudokuTableGenerationParameters
 import org.nika.sudokuGame.gameplay.game.neww.TableGenerationAlgorithm
 import org.nika.sudokuGame.table.Coordinates
+import org.nika.sudokuInteraction.request.EmptyCellRequest
 import org.nika.sudokuInteraction.request.FillCellRequest
 import org.nika.sudokuInteraction.request.SudokuInteractionRequest
+import org.nika.sudokuInteraction.result.CellEmptied
 import org.nika.sudokuInteraction.result.GameStarted
 import org.nika.sudokuInteraction.result.GameWon
 import org.nika.sudokuService.game4X4With1Empty
@@ -13,6 +15,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 import org.nika.sudokuInteraction.result.Error
+import org.nika.sudokuService.findCell
 
 class SudokuGameServiceTest {
 
@@ -92,6 +95,44 @@ class SudokuGameServiceTest {
         assertEquals(0, result.content.numberOfTurns)
     }
 
-    val defaultTableGeneration = SudokuTableGenerationParameters(TableGenerationAlgorithm.MOCKED, 0, 0, 0)
+    @Test
+    fun emptiesCell() {
+        val service = SudokuGameService(defaultTableGeneration)
+        val gameState = game4X4With1Empty("00:00:30", 0)
+
+        val fillCellRequest = FillCellRequest(5, 1, 1, gameState, "00:00:15")
+        val filCellResult = service.fillCell(fillCellRequest)
+
+        assertEquals(5, filCellResult.content.tableState.findCell(1, 1).value)
+
+        val emptyCellRequest = EmptyCellRequest(1, 1, filCellResult.content, "00:00:45")
+        val emptyCellResult = service.emptyCell(emptyCellRequest)
+
+        assertTrue(emptyCellResult is CellEmptied)
+        assertEquals("Cell emptied", emptyCellResult.message)
+        assertEquals("00:00:45", emptyCellResult.content.playedTime)
+        assertEquals(2, emptyCellResult.content.numberOfTurns)
+        assertEquals(0, emptyCellResult.content.tableState.findCell(1, 1).value)
+    }
+
+    @Test
+    fun correctlyHandlesErrorsOnEmptyCell() {
+        val service = SudokuGameService(defaultTableGeneration)
+        val gameState = game4X4With1Empty("00:00:30", 0)
+
+        val badCoordinatesRequest = EmptyCellRequest(5, 5, gameState, "00:00:45")
+        val badCoordinatesResult = service.emptyCell(badCoordinatesRequest)
+
+        assertTrue(badCoordinatesResult is Error)
+        assertEquals("Cell not found", badCoordinatesResult.message)
+
+        val closedCellRequest = EmptyCellRequest(1, 2, gameState, "00:00:45")
+        val closedCellResult = service.emptyCell(closedCellRequest)
+
+        assertTrue(closedCellResult is Error)
+        assertEquals("Value of closed cell can not be changed", closedCellResult.message)
+    }
+
+    private val defaultTableGeneration = SudokuTableGenerationParameters(TableGenerationAlgorithm.MOCKED, 0, 0, 0)
 
 }

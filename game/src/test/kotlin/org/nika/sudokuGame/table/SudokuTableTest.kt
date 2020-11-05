@@ -1,16 +1,17 @@
 package org.nika.sudokuGame.table
 
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
-import org.nika.sudokuGame.generate3X6Table
-import org.nika.sudokuGame.generate6X3Table
-import org.nika.sudokuGame.generate6X6Table
-import org.nika.sudokuGame.twoCellsAreConflicting
+import org.nika.sudokuGame.*
+import org.nika.sudokuGame.table.cells.NO_VALUE
+import org.nika.sudokuInteraction.state.CellState
 import org.nika.sudokuInteraction.state.TableState
+import java.lang.IllegalStateException
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
-class SudokuTableTest /*: BaseSudokuTableTest()*/ {
+class SudokuTableTest {
 
     @Test
     fun behavesCorrectlyOnFillingACell() {
@@ -182,9 +183,35 @@ class SudokuTableTest /*: BaseSudokuTableTest()*/ {
         assertFalse(tableState.tableIsEmpty)
         assertFalse(tableState.conflicts.isEmpty())
 
-        table.empty()
+        table.emptyTable()
         assertTrue(table.internalState().tableIsEmpty)
         assertTrue(table.internalState().conflicts.isEmpty())
+    }
+
+    @Test
+    fun correctlyEmptiesACell() {
+        val table = generate6X6Table()
+        table.fillCell(5, Coordinates(1, 1))
+        var state = table.fillCell(6, Coordinates(2, 1))
+
+        assertEquals(5, state.findCell(1, 1).value)
+        assertEquals(6, state.findCell(2, 1).value)
+
+        state = table.emptyCell(Coordinates(1, 1))
+        assertEquals(NO_VALUE, state.findCell(1, 1).value)
+        assertEquals(6, state.findCell(2, 1).value)
+
+        state = table.emptyCell(Coordinates(2, 1))
+        assertEquals(NO_VALUE, state.findCell(2, 1).value)
+
+    }
+
+    @Test
+    fun throwsExceptionWhenTryingToEmptyClosedOrNonExistantCell() {
+        val table = generate6X6Table()
+
+        assertThrows(IllegalStateException::class.java) { table.emptyCell(Coordinates(7, 7)) }
+        assertThrows(IllegalStateException::class.java) { table.emptyCell(Coordinates(3, 2)) }
     }
 
     private fun findConflictByValueOfCells(value: Int, tableState: TableState) =

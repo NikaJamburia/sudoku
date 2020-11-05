@@ -7,7 +7,6 @@ import org.nika.sudokuGame.gameplay.saveload.deserialization.JacksonDeserialized
 import org.nika.sudokuInteraction.enums.SerializationFormat
 import org.nika.sudokuInteraction.request.LoadGameRequest
 import org.nika.sudokuInteraction.request.SaveGameRequest
-import org.nika.sudokuInteraction.result.GameSaved
 import org.nika.sudokuInteraction.state.SavedSudokuGameState
 
 import org.nika.sudokuService.game4X4With1Empty

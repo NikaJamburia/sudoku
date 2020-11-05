@@ -12,21 +12,21 @@ class SudokuTable(
     private val boxes: Boxes
 ): HasInternalState<TableState> {
     fun fillCell(value: Int, coordinates: Coordinates): TableState {
-        allCells()
-            .find { it.location() == coordinates }
-            ?.let {
-                it.fillValue(value)
-                return internalState()
-            }
-            ?: let { throw IllegalStateException("Cell not found") }
+        findCellBy(coordinates).fillValue(value)
+        return internalState()
     }
 
-    fun empty(): TableState {
+    fun emptyTable(): TableState {
         allCells().forEach {
             try {
                 it.empty()
             } catch (e: IllegalStateException) { }
         }
+        return internalState()
+    }
+
+    fun emptyCell(coordinates: Coordinates): TableState {
+        findCellBy(coordinates).empty()
         return internalState()
     }
 
@@ -41,6 +41,12 @@ class SudokuTable(
 
         return listOf(rowConflicts, columnConflicts, bigCellConflicts).flatten()
     }
+
+    private fun findCellBy(coordinates: Coordinates) =
+        allCells()
+            .find { it.location() == coordinates }
+            ?: let { throw IllegalStateException("Cell not found") }
+
 
     override fun internalState(): TableState =
         TableState(

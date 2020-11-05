@@ -45,3 +45,5 @@ fun columnSize(tableState: TableState): Int =
         .content.size
 
 fun countClosedCells(tableState: TableState): Int = tableState.cells.count { !it.cellIsOpen }
+
+fun TableState.findCell(x: Int, y: Int): CellState = this.cells.first { it.coordinateX == x && it.coordinateY == y }

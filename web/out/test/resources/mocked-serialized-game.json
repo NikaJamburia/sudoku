@@ -1,0 +1,498 @@
+{
+  "playedTime": "00:00:00",
+  "numberOfTurns": 0,
+  "gameIsWon": false,
+  "tableState": {
+    "cells": [
+      {
+        "value": 3,
+        "coordinateX": 1,
+        "coordinateY": 1,
+        "cellIsOpen": false
+      },
+      {
+        "value": 5,
+        "coordinateX": 1,
+        "coordinateY": 2,
+        "cellIsOpen": false
+      },
+      {
+        "value": 0,
+        "coordinateX": 1,
+        "coordinateY": 3,
+        "cellIsOpen": true
+      },
+      {
+        "value": 0,
+        "coordinateX": 2,
+        "coordinateY": 1,
+        "cellIsOpen": true
+      },
+      {
+        "value": 2,
+        "coordinateX": 2,
+        "coordinateY": 2,
+        "cellIsOpen": false
+      },
+      {
+        "value": 8,
+        "coordinateX": 2,
+        "coordinateY": 3,
+        "cellIsOpen": false
+      },
+      {
+        "value": 6,
+        "coordinateX": 3,
+        "coordinateY": 1,
+        "cellIsOpen": false
+      },
+      {
+        "value": 0,
+        "coordinateX": 3,
+        "coordinateY": 2,
+        "cellIsOpen": true
+      },
+      {
+        "value": 7,
+        "coordinateX": 3,
+        "coordinateY": 3,
+        "cellIsOpen": false
+      },
+      {
+        "value": 0,
+        "coordinateX": 1,
+        "coordinateY": 4,
+        "cellIsOpen": true
+      },
+      {
+        "value": 9,
+        "coordinateX": 1,
+        "coordinateY": 5,
+        "cellIsOpen": false
+      },
+      {
+        "value": 0,
+        "coordinateX": 1,
+        "coordinateY": 6,
+        "cellIsOpen": true
+      },
+      {
+        "value": 0,
+        "coordinateX": 2,
+        "coordinateY": 4,
+        "cellIsOpen": true
+      },
+      {
+        "value": 0,
+        "coordinateX": 2,
+        "coordinateY": 5,
+        "cellIsOpen": true
+      },
+      {
+        "value": 5,
+        "coordinateX": 2,
+        "coordinateY": 6,
+        "cellIsOpen": false
+      },
+      {
+        "value": 3,
+        "coordinateX": 3,
+        "coordinateY": 4,
+        "cellIsOpen": false
+      },
+      {
+        "value": 0,
+        "coordinateX": 3,
+        "coordinateY": 5,
+        "cellIsOpen": true
+      },
+      {
+        "value": 0,
+        "coordinateX": 3,
+        "coordinateY": 6,
+        "cellIsOpen": true
+      },
+      {
+        "value": 1,
+        "coordinateX": 1,
+        "coordinateY": 7,
+        "cellIsOpen": false
+      },
+      {
+        "value": 0,
+        "coordinateX": 1,
+        "coordinateY": 8,
+        "cellIsOpen": true
+      },
+      {
+        "value": 0,
+        "coordinateX": 1,
+        "coordinateY": 9,
+        "cellIsOpen": true
+      },
+      {
+        "value": 3,
+        "coordinateX": 2,
+        "coordinateY": 7,
+        "cellIsOpen": false
+      },
+      {
+        "value": 0,
+        "coordinateX": 2,
+        "coordinateY": 8,
+        "cellIsOpen": true
+      },
+      {
+        "value": 0,
+        "coordinateX": 2,
+        "coordinateY": 9,
+        "cellIsOpen": true
+      },
+      {
+        "value": 0,
+        "coordinateX": 3,
+        "coordinateY": 7,
+        "cellIsOpen": true
+      },
+      {
+        "value": 0,
+        "coordinateX": 3,
+        "coordinateY": 8,
+        "cellIsOpen": true
+      },
+      {
+        "value": 5,
+        "coordinateX": 3,
+        "coordinateY": 9,
+        "cellIsOpen": false
+      },
+      {
+        "value": 5,
+        "coordinateX": 4,
+        "coordinateY": 1,
+        "cellIsOpen": false
+      },
+      {
+        "value": 0,
+        "coordinateX": 4,
+        "coordinateY": 2,
+        "cellIsOpen": true
+      },
+      {
+        "value": 0,
+        "coordinateX": 4,
+        "coordinateY": 3,
+        "cellIsOpen": true
+      },
+      {
+        "value": 0,
+        "coordinateX": 5,
+        "coordinateY": 1,
+        "cellIsOpen": true
+      },
+      {
+        "value": 0,
+        "coordinateX": 5,
+        "coordinateY": 2,
+        "cellIsOpen": true
+      },
+      {
+        "value": 0,
+        "coordinateX": 5,
+        "coordinateY": 3,
+        "cellIsOpen": true
+      },
+      {
+        "value": 8,
+        "coordinateX": 6,
+        "coordinateY": 1,
+        "cellIsOpen": false
+      },
+      {
+        "value": 0,
+        "coordinateX": 6,
+        "coordinateY": 2,
+        "cellIsOpen": true
+      },
+      {
+        "value": 0,
+        "coordinateX": 6,
+        "coordinateY": 3,
+        "cellIsOpen": true
+      },
+      {
+        "value": 0,
+        "coordinateX": 4,
+        "coordinateY": 4,
+        "cellIsOpen": true
+      },
+      {
+        "value": 8,
+        "coordinateX": 4,
+        "coordinateY": 5,
+        "cellIsOpen": false
+      },
+      {
+        "value": 0,
+        "coordinateX": 4,
+        "coordinateY": 6,
+        "cellIsOpen": true
+      },
+      {
+        "value": 1,
+        "coordinateX": 5,
+        "coordinateY": 4,
+        "cellIsOpen": false
+      },
+      {
+        "value": 6,
+        "coordinateX": 5,
+        "coordinateY": 5,
+        "cellIsOpen": false
+      },
+      {
+        "value": 9,
+        "coordinateX": 5,
+        "coordinateY": 6,
+        "cellIsOpen": false
+      },
+      {
+        "value": 0,
+        "coordinateX": 6,
+        "coordinateY": 4,
+        "cellIsOpen": true
+      },
+      {
+        "value": 3,
+        "coordinateX": 6,
+        "coordinateY": 5,
+        "cellIsOpen": false
+      },
+      {
+        "value": 0,
+        "coordinateX": 6,
+        "coordinateY": 6,
+        "cellIsOpen": true
+      },
+      {
+        "value": 0,
+        "coordinateX": 4,
+        "coordinateY": 7,
+        "cellIsOpen": true
+      },
+      {
+        "value": 0,
+        "coordinateX": 4,
+        "coordinateY": 8,
+        "cellIsOpen": true
+      },
+      {
+        "value": 2,
+        "coordinateX": 4,
+        "coordinateY": 9,
+        "cellIsOpen": false
+      },
+      {
+        "value": 0,
+        "coordinateX": 5,
+        "coordinateY": 7,
+        "cellIsOpen": true
+      },
+      {
+        "value": 0,
+        "coordinateX": 5,
+        "coordinateY": 8,
+        "cellIsOpen": true
+      },
+      {
+        "value": 0,
+        "coordinateX": 5,
+        "coordinateY": 9,
+        "cellIsOpen": true
+      },
+      {
+        "value": 0,
+        "coordinateX": 6,
+        "coordinateY": 7,
+        "cellIsOpen": true
+      },
+      {
+        "value": 0,
+        "coordinateX": 6,
+        "coordinateY": 8,
+        "cellIsOpen": true
+      },
+      {
+        "value": 6,
+        "coordinateX": 6,
+        "coordinateY": 9,
+        "cellIsOpen": false
+      },
+      {
+        "value": 4,
+        "coordinateX": 7,
+        "coordinateY": 1,
+        "cellIsOpen": false
+      },
+      {
+        "value": 0,
+        "coordinateX": 7,
+        "coordinateY": 2,
+        "cellIsOpen": true
+      },
+      {
+        "value": 0,
+        "coordinateX": 7,
+        "coordinateY": 3,
+        "cellIsOpen": true
+      },
+      {
+        "value": 0,
+        "coordinateX": 8,
+        "coordinateY": 1,
+        "cellIsOpen": true
+      },
+      {
+        "value": 0,
+        "coordinateX": 8,
+        "coordinateY": 2,
+        "cellIsOpen": true
+      },
+      {
+        "value": 3,
+        "coordinateX": 8,
+        "coordinateY": 3,
+        "cellIsOpen": false
+      },
+      {
+        "value": 0,
+        "coordinateX": 9,
+        "coordinateY": 1,
+        "cellIsOpen": true
+      },
+      {
+        "value": 0,
+        "coordinateX": 9,
+        "coordinateY": 2,
+        "cellIsOpen": true
+      },
+      {
+        "value": 1,
+        "coordinateX": 9,
+        "coordinateY": 3,
+        "cellIsOpen": false
+      },
+      {
+        "value": 0,
+        "coordinateX": 7,
+        "coordinateY": 4,
+        "cellIsOpen": true
+      },
+      {
+        "value": 0,
+        "coordinateX": 7,
+        "coordinateY": 5,
+        "cellIsOpen": true
+      },
+      {
+        "value": 6,
+        "coordinateX": 7,
+        "coordinateY": 6,
+        "cellIsOpen": false
+      },
+      {
+        "value": 8,
+        "coordinateX": 8,
+        "coordinateY": 4,
+        "cellIsOpen": false
+      },
+      {
+        "value": 0,
+        "coordinateX": 8,
+        "coordinateY": 5,
+        "cellIsOpen": true
+      },
+      {
+        "value": 0,
+        "coordinateX": 8,
+        "coordinateY": 6,
+        "cellIsOpen": true
+      },
+      {
+        "value": 0,
+        "coordinateX": 9,
+        "coordinateY": 4,
+        "cellIsOpen": true
+      },
+      {
+        "value": 5,
+        "coordinateX": 9,
+        "coordinateY": 5,
+        "cellIsOpen": false
+      },
+      {
+        "value": 0,
+        "coordinateX": 9,
+        "coordinateY": 6,
+        "cellIsOpen": true
+      },
+      {
+        "value": 2,
+        "coordinateX": 7,
+        "coordinateY": 7,
+        "cellIsOpen": false
+      },
+      {
+        "value": 0,
+        "coordinateX": 7,
+        "coordinateY": 8,
+        "cellIsOpen": true
+      },
+      {
+        "value": 3,
+        "coordinateX": 7,
+        "coordinateY": 9,
+        "cellIsOpen": false
+      },
+      {
+        "value": 5,
+        "coordinateX": 8,
+        "coordinateY": 7,
+        "cellIsOpen": false
+      },
+      {
+        "value": 7,
+        "coordinateX": 8,
+        "coordinateY": 8,
+        "cellIsOpen": false
+      },
+      {
+        "value": 0,
+        "coordinateX": 8,
+        "coordinateY": 9,
+        "cellIsOpen": true
+      },
+      {
+        "value": 0,
+        "coordinateX": 9,
+        "coordinateY": 7,
+        "cellIsOpen": true
+      },
+      {
+        "value": 4,
+        "coordinateX": 9,
+        "coordinateY": 8,
+        "cellIsOpen": false
+      },
+      {
+        "value": 0,
+        "coordinateX": 9,
+        "coordinateY": 9,
+        "cellIsOpen": true
+      }
+    ],
+    "conflicts": [],
+    "tableIsFull": false,
+    "tableIsEmpty": true
+  }
+}

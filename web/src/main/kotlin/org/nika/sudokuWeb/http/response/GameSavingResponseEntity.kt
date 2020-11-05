@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity
 class GameSavingResponseEntity (
     private val gameSavingResult: GameSavingResult
 ) {
-    fun response(): ResponseEntity<GameSavingResult> {
+    fun respond(): ResponseEntity<GameSavingResult> {
         return if (gameSavingResult.isSuccessful) {
             ResponseEntity.ok(gameSavingResult)
         } else {

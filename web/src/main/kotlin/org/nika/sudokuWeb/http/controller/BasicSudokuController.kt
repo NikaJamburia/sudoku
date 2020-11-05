@@ -23,22 +23,22 @@ class BasicSudokuController (
 
     @GetMapping("start-new-game")
     fun startNewGame(): ResponseEntity<SudokuInteractionResult> =
-        SudokuInteractionResponseEntity(game.startNewGame()).response()
+        SudokuInteractionResponseEntity(game.startNewGame()).respond()
 
     @PostMapping("restart-game")
     fun restartGame(@RequestBody request: SudokuInteractionRequest): ResponseEntity<SudokuInteractionResult> =
-        SudokuInteractionResponseEntity(game.restart(request)).response()
+        SudokuInteractionResponseEntity(game.restart(request)).respond()
 
     @PostMapping("fill-cell")
     fun fillCell(@RequestBody request: FillCellRequest): ResponseEntity<SudokuInteractionResult> =
-        SudokuInteractionResponseEntity(game.fillCell(request)).response()
+        SudokuInteractionResponseEntity(game.fillCell(request)).respond()
 
     @PostMapping("save")
     fun saveGame(@RequestBody request: SaveGameRequest): ResponseEntity<GameSavingResult> =
-        GameSavingResponseEntity(saveLoad.saveGame(request)).response()
+        GameSavingResponseEntity(saveLoad.saveGame(request)).respond()
 
     @PostMapping("load")
     fun loadGame(@RequestBody request: LoadGameRequest): ResponseEntity<SudokuInteractionResult> =
-        SudokuInteractionResponseEntity(saveLoad.loadGame(request)).response()
+        SudokuInteractionResponseEntity(saveLoad.loadGame(request)).respond()
 
 }

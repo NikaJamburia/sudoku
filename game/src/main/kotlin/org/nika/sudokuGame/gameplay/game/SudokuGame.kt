@@ -14,13 +14,19 @@ class SudokuGame(
 
     fun fillCell(value: Int, coordinates: Coordinates, timePlayed: String): GameState {
         sudokuTable.fillCell(value, coordinates)
-        gameStats = GameStats(GameTimeFromString(timePlayed), gameStats.numberOfTurns+1)
+        gameStats = gameStats.update(GameTimeFromString(timePlayed))
         return internalState()
     }
 
     fun restart(): GameState {
         gameStats = GameStats(GameTime(0, 0, 0), 0)
-        sudokuTable.empty()
+        sudokuTable.emptyTable()
+        return internalState()
+    }
+
+    fun emptyCell(coordinateX: Int, coordinateY: Int, timePlayed: String): GameState {
+        gameStats = gameStats.update(GameTimeFromString(timePlayed))
+        sudokuTable.emptyCell(Coordinates(coordinateX, coordinateY))
         return internalState()
     }
 
@@ -30,6 +36,4 @@ class SudokuGame(
     private fun isGameWon(): Boolean =
         sudokuTable.internalState().tableIsFull
                 && sudokuTable.internalState().conflicts.isEmpty()
-
-
 }

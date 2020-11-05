@@ -6,9 +6,11 @@ import org.nika.sudokuGame.gameplay.game.neww.SudokuTableGenerationParameters
 import org.nika.sudokuService.process.SudokuGameProcess
 import org.springframework.stereotype.Component
 import org.nika.sudokuGame.table.Coordinates
+import org.nika.sudokuInteraction.request.EmptyCellRequest
 import org.nika.sudokuInteraction.request.FillCellRequest
 import org.nika.sudokuInteraction.request.SudokuInteractionRequest
 import org.nika.sudokuInteraction.result.*
+import org.nika.sudokuInteraction.state.GameState
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.context.annotation.PropertySource
@@ -31,7 +33,7 @@ class SudokuGameService (
             }
             return CellFilled(newGameState)
         } catch (e: Exception) {
-            return Error(e.message ?: let { "Unknown error" }, request.gameState)
+            return error(e.message , request.gameState)
         }
     }
 
@@ -40,7 +42,7 @@ class SudokuGameService (
             val game = SudokuGameFromState(request.gameState).generate()
             GameStarted(game.restart())
         } catch (e: Exception) {
-            Error(e.message ?: let { "Unknown error" }, request.gameState)
+            error(e.message , request.gameState)
         }
 
     override fun startNewGame(): SudokuInteractionResult =
@@ -50,4 +52,15 @@ class SudokuGameService (
         } catch (e: Exception) {
             NoGameError(e.message ?: let { "Unknown error" })
         }
+
+    override fun emptyCell(request: EmptyCellRequest): SudokuInteractionResult {
+       return try {
+           val game = SudokuGameFromState(request.gameState).generate()
+           CellEmptied(game.emptyCell(request.coordinateX, request.coordinateY, request.timerValue))
+        } catch (e: Exception) {
+           error(e.message , request.gameState)
+        }
+    }
+
+    private fun error(msg: String?, gameState: GameState): Error = Error(msg ?: let { "Unknown error" }, gameState)
 }
