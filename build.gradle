@@ -12,13 +12,16 @@ version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
+def projectEnvironment = project(project.properties["sudoku.project.enviroment"] as String)
+def projectUi = project(project.properties["sudoku.project.ui"] as String)
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation project(":web")
-    implementation project(":web-ui")
+    implementation projectEnvironment
+    implementation projectUi
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
