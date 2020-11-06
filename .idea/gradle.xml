@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/interaction" />
             <option value="$PROJECT_DIR$/service" />
             <option value="$PROJECT_DIR$/web" />
+            <option value="$PROJECT_DIR$/web-ui" />
           </set>
         </option>
         <option name="useQualifiedModuleNames" value="true" />

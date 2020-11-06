@@ -15,7 +15,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/web/api/sudoku/")
+@RequestMapping("/sudoku/web/api/")
 class BasicSudokuController (
     @Autowired private val game: SudokuGameProcess,
     @Autowired private val saveLoad: SaveLoadProcess

@@ -25,7 +25,7 @@ class BasicSudokuControllerTest(
     @Autowired private val mockMvc: MockMvc
 ) {
     private val mockedGameJson = this::class.java.classLoader.getResource("mocked-serialized-game.json").readText()
-    private val controllerPath = "/web/api/sudoku/"
+    private val controllerPath = "/sudoku/web/api/"
 
     @Test
     fun startsNewGameCorrectly() {
