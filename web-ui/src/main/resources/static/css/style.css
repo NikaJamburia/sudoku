@@ -2,19 +2,15 @@ body{
     margin:0;
     padding:0;
 }
-.container{
-    height:100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
 td{
-    padding:0px;
+    padding:0px !important;
+    width: 50px !important;
+    height: 50px !important;
 }
 input{
-    width:22px !important;
-    height:40px !important;
+    width:inherit;
+    height:inherit;
     border: 0px;
     padding-left:18px;
 }

@@ -12,16 +12,18 @@ version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
-def projectEnvironment = project(project.properties["sudoku.project.enviroment"] as String)
-def projectUi = project(project.properties["sudoku.project.ui"] as String)
 
 repositories {
     mavenCentral()
 }
 
+String[] environmentModules = project.properties["sudoku.project.run.environment"].split(',')
+
 dependencies {
-    implementation projectEnvironment
-    implementation projectUi
+
+    environmentModules.each {
+        implementation project(it)
+    }
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
@@ -70,3 +72,4 @@ allprojects {
     }
 
 }
+
