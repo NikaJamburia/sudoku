@@ -2,7 +2,6 @@ project(":service") {
     description = "service module"
 
     apply plugin: "kotlin-spring"
-    apply plugin: "org.springframework.boot"
 
     dependencies {
         implementation project(":interaction")

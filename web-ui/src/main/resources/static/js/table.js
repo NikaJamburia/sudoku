@@ -1,6 +1,6 @@
 let tableSize = 9;
 
-function generateTable(n) {
+function parseTableAsHtml(n) {
     let content = "";
     for(i=0;i<n;i++){
         if(i < 3){

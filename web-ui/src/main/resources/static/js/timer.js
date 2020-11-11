@@ -24,6 +24,6 @@ function startTimer(){
 }
 
 function timerValue(value) {
-    let valueString = value.toString()
+    let valueString = value.toString();
     return (valueString.length === 1 ? "0" + valueString :  valueString)
 }

@@ -11,7 +11,10 @@ window.addEventListener('load', (event) => {
 });
 
 function startGame() {
-    startTimer();
-    gameStarted = true;
-    generateTable(tableSize)
+    startNewGame(response => {
+        console.log(response);
+        startTimer();
+        gameStarted = true;
+        parseTableAsHtml(tableSize)
+    });
 }

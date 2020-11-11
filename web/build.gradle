@@ -2,11 +2,10 @@ project(":web") {
     description = "web module"
 
     apply plugin: "kotlin-spring"
-    apply plugin: "org.springframework.boot"
 
     dependencies {
-        implementation project(":interaction")
         implementation project(":service")
+        implementation project(":interaction")
 
         implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.1'
         implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.11.1"

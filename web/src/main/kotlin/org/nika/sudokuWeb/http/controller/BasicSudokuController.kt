@@ -1,9 +1,6 @@
 package org.nika.sudokuWeb.http.controller
 
-import org.nika.sudokuInteraction.request.FillCellRequest
-import org.nika.sudokuInteraction.request.LoadGameRequest
-import org.nika.sudokuInteraction.request.SaveGameRequest
-import org.nika.sudokuInteraction.request.SudokuInteractionRequest
+import org.nika.sudokuInteraction.request.*
 import org.nika.sudokuInteraction.result.GameSavingResult
 import org.nika.sudokuInteraction.result.SudokuInteractionResult
 import org.nika.sudokuService.process.SaveLoadProcess
@@ -15,6 +12,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
+@CrossOrigin(origins = ["http://localhost:8080"], maxAge = 3600)
 @RequestMapping("/sudoku/web/api/")
 class BasicSudokuController (
     @Autowired private val game: SudokuGameProcess,
@@ -32,6 +30,10 @@ class BasicSudokuController (
     @PostMapping("fill-cell")
     fun fillCell(@RequestBody request: FillCellRequest): ResponseEntity<SudokuInteractionResult> =
         SudokuInteractionResponseEntity(game.fillCell(request)).respond()
+
+    @PostMapping("empty-cell")
+    fun fillCell(@RequestBody request: EmptyCellRequest): ResponseEntity<SudokuInteractionResult> =
+        SudokuInteractionResponseEntity(game.emptyCell(request)).respond()
 
     @PostMapping("save")
     fun saveGame(@RequestBody request: SaveGameRequest): ResponseEntity<GameSavingResult> =

@@ -5,10 +5,7 @@ import com.fasterxml.jackson.module.kotlin.KotlinModule
 import org.junit.jupiter.api.Test
 import org.nika.sudokuInteraction.enums.SerializationFormat.JSON
 import org.nika.sudokuInteraction.enums.SerializationFormat.XML
-import org.nika.sudokuInteraction.request.FillCellRequest
-import org.nika.sudokuInteraction.request.LoadGameRequest
-import org.nika.sudokuInteraction.request.SaveGameRequest
-import org.nika.sudokuInteraction.request.SudokuInteractionRequest
+import org.nika.sudokuInteraction.request.*
 import org.nika.sudokuInteraction.state.GameState
 import org.nika.sudokuInteraction.state.SavedSudokuGameState
 import org.nika.sudokuWeb.SudokuWebApiApplication
@@ -64,6 +61,32 @@ class BasicSudokuControllerTest(
             .andExpect(status().isBadRequest)
             .andExpect(jsonPath("$.isSuccessful").value(false))
             .andExpect(jsonPath("$.message").value("Value of cell must be between 0 and 9!"))
+    }
+
+    @Test
+    fun correctlyEmptiesCell() {
+        mockMvc.perform(
+            postWithJson(controllerPath + "empty-cell", asJsonString(EmptyCellRequest(1, 3, mockedGameState(), "00:00:51"))))
+            .andExpect(status().isOk)
+            .andExpect(jsonPath("$.isSuccessful").value(true))
+            .andExpect(jsonPath("$.message").value("Cell emptied"))
+            .andExpect(jsonPath("$.content.playedTime").value("00:00:51"))
+            .andExpect(jsonPath("$.content.numberOfTurns").value(1))
+    }
+
+    @Test
+    fun correctlyHandlesErrorsOnEmptyCell() {
+        mockMvc.perform(
+            postWithJson(controllerPath + "empty-cell", asJsonString(EmptyCellRequest(100, 100, mockedGameState(), "00:00:51"))))
+            .andExpect(status().isBadRequest)
+            .andExpect(jsonPath("$.isSuccessful").value(false))
+            .andExpect(jsonPath("$.message").value("Cell not found"))
+
+        mockMvc.perform(
+            postWithJson(controllerPath + "empty-cell", asJsonString(EmptyCellRequest(1, 2, mockedGameState(), "00:00:51"))))
+            .andExpect(status().isBadRequest)
+            .andExpect(jsonPath("$.isSuccessful").value(false))
+            .andExpect(jsonPath("$.message").value("Value of closed cell can not be changed"))
     }
 
     @Test
