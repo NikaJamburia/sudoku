@@ -1,9 +1,9 @@
 let webService = "http://localhost:8080/sudoku/web/api/"
 let xhr = new XMLHttpRequest();
 
-function startNewGame(onLoad) {
+function startNewGame(onSuccess, onFail) {
     let url = webService + "start-new-game";
-    get(url, onLoad)
+    get(url, onSuccess, onFail)
 }
 
 function restartGame(gameState) {
@@ -73,12 +73,19 @@ function post(url, jsonBody) {
 
 }
 
-function get(url, onLoad) {
+function get(url, onSuccess, onFail) {
     xhr.open('GET', url, true);
     xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
     xhr.setRequestHeader('Content-type', 'application/json');
 
-    xhr.onload = onLoad(this.responseText) ;
+    xhr.onload = function() {
+        if (JSON.parse(this.responseText).isSuccessful) {
+            onSuccess(this.responseText);
+        } else {
+            onFail(this.responseText)
+        }
+
+    };
 
     xhr.send();
 }

@@ -1,48 +1,59 @@
-let tableSize = 9;
-
-function parseTableAsHtml(n) {
+function parseTableAsHtml(tableState) {
     let content = "";
-    for(i=0;i<n;i++){
-        if(i < 3){
-            cell = 1;
-        }
-        if( i>=3 && i < 6){
-            cell = 4;
-        }
-        if(i >= 6){
-            cell = 7;
-        }
 
-        for(j=0;j<n;j++){
-            id = i.toString() + j.toString();
-            column = "<td><input type='text' x='"+(i+1)+"' y='"+(j+1)+"' id='"+id+"' belongsTo='"+cell+"' class= '";
-            if(j==2 || j==5){
-                column += "boldBorderCol ";
-                cell++;
+    console.log(tableState);
+    console.log(groupByRows(tableState.cells));
 
-            }
-            if(i==2 || i==5){
-                column += "boldBorderRow";
-            }
+    let rows = groupByRows(tableState.cells);
 
-            column += "' onchange='check(event)'></td>";
-            content += column;
-        }
+    for (let row of rows.values()){
+        console.log(row);
+        content += "<tr>";
+        row.forEach(cell => {
+            const id = cell.coordinateX + "|" + cell.coordinateY;
+            const styles = cellStyles(cell);
+            const value = cell.cellIsOpen ? "" : cell.value
+            content += `<td>
+                            <input 
+                                type='text' 
+                                x='${ cell.coordinateX }' 
+                                y='${ cell.coordinateY} ' 
+                                value='${ value }'
+                                id='${id}' 
+                                ${ cell.cellIsOpen ? '' : 'disabled' }
+                                class='${ styles }'
+                            >
+                        </td>`
+        });
         content += "</tr>";
     }
-    document.getElementById('table').innerHTML = content;
-    generateClosedCellValues(n);
+
+    console.log(content);
+    return content
 }
 
-function generateClosedCellValues(n){
-    for(i=0;i<18;i++){
-        x = Math.floor(Math.random() * (n - 0) + 0);
-        y = Math.floor(Math.random() * (n - 0) + 0);
-        id = x.toString() + y.toString();
-        num = Math.floor(Math.random() * (10 - 1) + 1);
-
-        document.getElementById(id).classList.add('givenNumber');
-        document.getElementById(id).setAttribute('disabled', true);
-        document.getElementById(id).value = num;
+function cellStyles(cell) {
+    let style = "";
+    if(cell.coordinateX == 3 || cell.coordinateX == 6){
+        style += "boldBorderCol ";
     }
+    if(cell.coordinateY == 3 || cell.coordinateY == 6){
+        style += "boldBorderRow ";
+    }
+    if(!cell.cellIsOpen){
+        style += "closedCell ";
+    }
+    return style;
+}
+
+function groupByRows(cells) {
+    return  cells.reduce((rowsMap, cell) => {
+        const y = cell.coordinateY;
+        if (typeof rowsMap.get(y) != 'undefined') {
+            rowsMap.get(y).push(cell);
+        } else {
+            rowsMap.set(y, [cell]);
+        }
+        return rowsMap;
+    }, new Map());
 }

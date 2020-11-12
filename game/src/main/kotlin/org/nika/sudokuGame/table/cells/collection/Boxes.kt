@@ -6,7 +6,7 @@ import kotlin.math.max
 class Boxes(
     private val cells: List<Cell>
 ) : GroupedSelections() {
-    override fun groupedCells(): List<SelectionOfCells> { // TODO: Requires heavy testing
+    override fun groupedCells(): List<SelectionOfCells> {
         val biggestXBorder = calculateBiggestBorderValue(maxXCoordinate())
         val biggestYBorder = calculateBiggestBorderValue(maxYCoordinate())
 

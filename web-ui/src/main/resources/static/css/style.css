@@ -20,7 +20,7 @@ input{
 .boldBorderRow{
     border-bottom: 2px solid black !important;
 }
-.givenNumber{
+.closedCell{
     background-color:rgb(219, 219, 219);
 }
 .error{

@@ -23,6 +23,7 @@ function startTimer(){
     setInterval(addSecond, 1000);
 }
 
+
 function timerValue(value) {
     let valueString = value.toString();
     return (valueString.length === 1 ? "0" + valueString :  valueString)
