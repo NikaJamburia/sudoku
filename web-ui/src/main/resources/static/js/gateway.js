@@ -1,4 +1,4 @@
-let webService = "http://localhost:8080/sudoku/web/api/"
+let webService = "http://localhost:8080/sudoku/web/api/";
 let xhr = new XMLHttpRequest();
 
 function startNewGame(onSuccess, onFail) {
@@ -6,17 +6,17 @@ function startNewGame(onSuccess, onFail) {
     get(url, onSuccess, onFail)
 }
 
-function restartGame(gameState) {
+function restartGame(gameState, onSuccess, onFail) {
     let url = webService + "restart-game";
 
     let sudokuInteractionRequest = {
         gameState: gameState,
         timerValue: timer.innerHTML,
     };
-    post(url, JSON.stringify(sudokuInteractionRequest))
+    post(url, JSON.stringify(sudokuInteractionRequest), onSuccess, onFail)
 }
 
-function fillCell(value, x, y, gameState) {
+function fillCell(value, x, y, gameState, onSuccess, onFail) {
     let url = webService + "fill-cell";
 
     let fillCellRequest = {
@@ -26,10 +26,10 @@ function fillCell(value, x, y, gameState) {
         gameState: gameState,
         timerValue: timer.innerHTML,
     };
-    post(url, JSON.stringify(fillCellRequest))
+    post(url, JSON.stringify(fillCellRequest), onSuccess, onFail)
 }
 
-function emptyCell(x, y, gameState) {
+function emptyCell(x, y, gameState, onSuccess, onFail) {
     let url = webService + "empty-cell";
 
     let fillCellRequest = {
@@ -38,7 +38,7 @@ function emptyCell(x, y, gameState) {
         gameState: gameState,
         timerValue: timer.innerHTML,
     };
-    post(url, JSON.stringify(fillCellRequest))
+    post(url, JSON.stringify(fillCellRequest), onSuccess, onFail)
 }
 
 function saveGame(gameState) {
@@ -61,12 +61,16 @@ function loadGame(savedGameState) {
     post(url, JSON.stringify(loadGameRequest))
 }
 
-function post(url, jsonBody) {
+function post(url, jsonBody, onSuccess, onFail) {
     xhr.open('POST', url, true);
     xhr.setRequestHeader('Content-type', 'application/json');
 
     xhr.onload = function() {
-        return this.responseText
+        if (JSON.parse(this.responseText).isSuccessful) {
+            onSuccess(this.responseText);
+        } else {
+            onFail(this.responseText)
+        }
     };
 
     xhr.send(jsonBody);

@@ -15,7 +15,7 @@ class GameTimeFromString(
                 string.substring(3, 5).toInt(),
                 string.substring(6, 8).toInt())
         } else {
-            throw IllegalArgumentException("Wrong pattern")
+            throw IllegalArgumentException("Wrong time pattern")
         }
     }
 

@@ -8,24 +8,26 @@ td{
     width: 50px !important;
     height: 50px !important;
 }
+
 input{
     width:inherit;
     height:inherit;
     border: 0px;
     padding-left:18px;
 }
+
 .boldBorderCol{
     border-right: 2px solid black !important;
 }
+
 .boldBorderRow{
     border-bottom: 2px solid black !important;
 }
+
 .closedCell{
     background-color:rgb(219, 219, 219);
 }
-.error{
+
+.conflicted{
     color:red;
-}
-.noerror{
-    color:black;
 }

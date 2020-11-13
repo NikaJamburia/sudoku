@@ -1,9 +1,9 @@
 let seconds = 0;
 let minutes = 0;
 let hours = 0;
+let timerOn = false;
 
 timer = document.getElementById('timer');
-timer.addEventListener("render", startTimer);
 
 function addSecond(){
     if (seconds < 60){
@@ -17,10 +17,17 @@ function addSecond(){
         hours++;
         minutes = 0;
     }
-    timer.innerHTML = timerValue(hours) +" : "+ timerValue(minutes) +" : "+ timerValue(seconds);
+    timer.innerHTML = timerValue(hours) +":"+ timerValue(minutes) +":"+ timerValue(seconds);
 }
-function startTimer(){
-    setInterval(addSecond, 1000);
+function startTimer(timeString){
+    hours = timeString.substr(0, 2);
+    minutes = timeString.substr(3, 2);
+    seconds = timeString.substr(6, 2);
+
+    if (!timerOn) {
+        setInterval(addSecond, 1000);
+        timerOn = true;
+    }
 }
 
 
