@@ -41,7 +41,7 @@ function emptyCell(x, y, gameState, onSuccess, onFail) {
     post(url, JSON.stringify(fillCellRequest), onSuccess, onFail)
 }
 
-function saveGame(gameState) {
+function saveGame(gameState, onSuccess, onFail) {
     let url = webService + "save";
 
     let saveGameRequest = {
@@ -49,16 +49,16 @@ function saveGame(gameState) {
         gameState: gameState,
         timerValue: timer.innerHTML
     };
-    post(url, JSON.stringify(saveGameRequest))
+    post(url, JSON.stringify(saveGameRequest), onSuccess, onFail)
 }
 
-function loadGame(savedGameState) {
+function loadGame(savedGameState, onSuccess, onFail) {
     let url = webService + "load";
 
     let loadGameRequest = {
         savedSudokuGameState: savedGameState
     };
-    post(url, JSON.stringify(loadGameRequest))
+    post(url, JSON.stringify(loadGameRequest), onSuccess, onFail)
 }
 
 function post(url, jsonBody, onSuccess, onFail) {

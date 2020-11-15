@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication(scanBasePackages = ["org.nika.*"])
-class SudokuApplication
+class SudokuMainApplication
 
 fun main(args: Array<String>) {
-    runApplication<SudokuApplication>(*args)
+    runApplication<SudokuMainApplication>(*args)
 }

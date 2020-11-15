@@ -3,10 +3,13 @@ let lastResponseGameState;
 
 window.addEventListener('load', (event) => {
     new Promise(function (resolve, reject) {
-        fillTable("<button id='startBtn' class='btn btn-lg btn-success'>Start</button>", () => {});
+        emptyTable();
         resolve()
-    }).then(() =>
-        document.getElementById("startBtn").addEventListener('click', startGame))
+    }).then(() => {
+        document.getElementById("start-Btn").addEventListener('click', startGame);
+        document.getElementById("save-btn").addEventListener('click', save);
+        document.getElementById("load-btn").addEventListener('click', load);
+    })
 });
 
 document.getElementById("restart_game_btn").addEventListener('click', restart);
@@ -17,7 +20,7 @@ function startGame() {
         handle(response);
     }, response => {
         let error = JSON.parse(response);
-        displayError(error.message)
+        displayModal("Error Occurred", error.message)
     });
 }
 
@@ -26,7 +29,7 @@ function restart() {
         handle(response);
     }, response => {
         let error = JSON.parse(response);
-        displayError(error.message)
+        displayModal("Error Occurred", error.message)
     });
 }
 
@@ -35,7 +38,7 @@ function fill(value, x, y) {
         handle(response);
     }, response => {
         let error = JSON.parse(response);
-        displayError(error.message)
+        displayModal("Error Occurred", error.message)
     });
 }
 
@@ -44,21 +47,38 @@ function empty(x, y) {
         handle(response);
     }, response => {
         let error = JSON.parse(response);
-        displayError(error.message)
+        displayModal("Error Occurred", error.message)
     });
+}
+
+function save() {
+    console.log("save")
+}
+
+function load() {
+    console.log("load")
 }
 
 function handle(response) {
     let gameState = JSON.parse(response).content;
-    startTimer(gameState.playedTime);
-    lastResponseGameState = gameState;
-    fillTable(parseTableAsHtml(gameState.tableState), () => {
-        registerEventListenersForCells();
-    })
+
+    if (!gameState.gameIsWon) {
+        startTimer(gameState.playedTime);
+        lastResponseGameState = gameState;
+        fillTable(parseTableAsHtml(gameState.tableState), () => {
+            registerEventListenersForCells();
+        })
+    } else {
+        displayModal("You Won!",`Congratulations! You won in ${ gameState.playedTime } and ${ gameState.numberOfTurns } moves`);
+        emptyTable();
+        clearTimer(`<p class="text-success">Game Won!</p>`)
+    }
+
 }
 
-function displayError(errorText) {
-    document.getElementById("error_text_display").innerHTML = errorText;
+function displayModal(title, message) {
+    document.getElementById("modal-title").innerHTML = title;
+    document.getElementById("modal-message").innerHTML = message;
     $("#errorModal").modal();
 }
 

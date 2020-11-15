@@ -63,6 +63,10 @@ function fillTable(html, onTableFilled) {
     onTableFilled();
 }
 
+function emptyTable() {
+    fillTable("<button id='start-Btn' class='btn btn-lg btn-success'>Start New Game</button>", () => {})
+}
+
 function registerEventListenersForCells() {
     document.querySelectorAll('.' + cellClassName).forEach(cell => {
         cell.addEventListener('input', evt => {

@@ -2,6 +2,7 @@ let seconds = 0;
 let minutes = 0;
 let hours = 0;
 let timerOn = false;
+let interval;
 
 timer = document.getElementById('timer');
 
@@ -25,11 +26,27 @@ function startTimer(timeString){
     seconds = timeString.substr(6, 2);
 
     if (!timerOn) {
-        setInterval(addSecond, 1000);
+        interval = setInterval(addSecond, 1000);
         timerOn = true;
     }
 }
 
+function pauseTimer() {
+    clearInterval(interval)
+}
+
+function resumeTimer() {
+    interval = setInterval(addSecond, 1000)
+}
+
+function clearTimer(newValue) {
+    seconds = 0;
+    minutes = 0;
+    hours = 0;
+    timerOn = false;
+    clearInterval(interval);
+    timer.innerHTML = newValue;
+}
 
 function timerValue(value) {
     let valueString = value.toString();

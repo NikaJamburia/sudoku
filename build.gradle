@@ -73,3 +73,10 @@ allprojects {
 
 }
 
+jar {
+    manifest {
+        attributes 'Main-Class': 'SudokuMainApplication'
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}
+
