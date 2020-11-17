@@ -7,13 +7,12 @@ window.addEventListener('load', (event) => {
         resolve()
     }).then(() => {
         document.getElementById("start-Btn").addEventListener('click', startGame);
-        document.getElementById("save-btn").addEventListener('click', save);
+        document.getElementById("save-btn").addEventListener('click', saveGameModal);
         document.getElementById("load-btn").addEventListener('click', load);
+        document.getElementById("restart_game_btn").addEventListener('click', restart);
+        document.getElementById("generate_new_btn").addEventListener('click', startGame);
     })
 });
-
-document.getElementById("restart_game_btn").addEventListener('click', restart);
-document.getElementById("generate_new_btn").addEventListener('click', startGame);
 
 function startGame() {
     startNewGame(response => {
@@ -52,7 +51,12 @@ function empty(x, y) {
 }
 
 function save() {
-    console.log("save")
+    saveGame(lastResponseGameState, response => {
+        saveToLocalStorage(JSON.parse(response).savedGameState);
+    }, response => {
+        let error = JSON.parse(response);
+        displayModal("Error Occurred", error.message)
+    })
 }
 
 function load() {

@@ -32,11 +32,14 @@ function startTimer(timeString){
 }
 
 function pauseTimer() {
+    timerOn = false;
     clearInterval(interval)
 }
 
 function resumeTimer() {
-    interval = setInterval(addSecond, 1000)
+    if (!timerOn) {
+        interval = setInterval(addSecond, 1000)
+    }
 }
 
 function clearTimer(newValue) {
