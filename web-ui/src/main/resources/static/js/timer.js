@@ -38,7 +38,8 @@ function pauseTimer() {
 
 function resumeTimer() {
     if (!timerOn) {
-        interval = setInterval(addSecond, 1000)
+        interval = setInterval(addSecond, 1000);
+        timerOn = true;
     }
 }
 

@@ -7,8 +7,8 @@ window.addEventListener('load', (event) => {
         resolve()
     }).then(() => {
         document.getElementById("start-Btn").addEventListener('click', startGame);
-        document.getElementById("save-btn").addEventListener('click', saveGameModal);
-        document.getElementById("load-btn").addEventListener('click', load);
+        document.getElementById("save-btn").addEventListener('click', savedGamesModal);
+        document.getElementById("load-btn").addEventListener('click', loadGameModal);
         document.getElementById("restart_game_btn").addEventListener('click', restart);
         document.getElementById("generate_new_btn").addEventListener('click', startGame);
     })
@@ -59,8 +59,14 @@ function save() {
     })
 }
 
-function load() {
-    console.log("load")
+function load(savedGame) {
+    loadGame(savedGame, response => {
+        $("#saveGameModal").modal('hide');
+        handle(response)
+    }, response => {
+        let error = JSON.parse(response);
+        displayModal("Error Occurred", error.message)
+    })
 }
 
 function handle(response) {

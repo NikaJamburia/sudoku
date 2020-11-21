@@ -4,7 +4,7 @@ project(":game") {
     dependencies {
         implementation project(":interaction")
 
-        implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.1'
-        implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.11.1"
+        implementation 'com.fasterxml.jackson.core:jackson-databind:2.10.2'
+        implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.10.2"
     }
 }

@@ -64,18 +64,18 @@
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Save Game</h5>
+                <h5 class="modal-title">Saved Games</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    <span id="saveGameModalCloseX" aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#localSave" role="tab" aria-controls="home" aria-selected="true">Locally</a>
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#localSave" role="tab" aria-controls="home" aria-selected="true">Local</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#dbSave" role="tab" aria-controls="profile" aria-selected="false">To server Database</a>
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#dbSave" role="tab" aria-controls="profile" aria-selected="false">Server Database</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
@@ -86,7 +86,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn btn-primary">Ok</button>
+                <button type="button" id="saveGameModalCloseBtn" data-dismiss="modal" class="btn btn-primary">Ok</button>
             </div>
         </div>
     </div>
@@ -115,7 +115,8 @@
 <script src="../js/table.js"></script>
 <script src="../js/timer.js"></script>
 <script src="../js/gateway.js"></script>
-<script src="../js/saveload.js"></script>
+<script src="../js/saveGame.js"></script>
+<script src="../js/loadGame.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 </body>
 </html>

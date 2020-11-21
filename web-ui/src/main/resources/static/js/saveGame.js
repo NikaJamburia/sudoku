@@ -1,4 +1,4 @@
-const SAVE_GAMES_LOCAL_STORAGE_KEY = "savedGames"
+const SAVE_GAMES_LOCAL_STORAGE_KEY = "savedGames";
 
 function saveToLocalStorage(savedGameState) {
     let alreadySavedGames = getSavedGames();
@@ -65,11 +65,15 @@ function savedGamesTable() {
     return htmlTable;
 }
 
-function displaySaveGames() {
-    document.getElementById("localSave").innerHTML = savedGamesTable();
+function displaySaveGames(savedGamesHtml) {
+    document.getElementById("localSave").innerHTML = savedGamesHtml;
 
     document.querySelectorAll('.deleteSaveGameBtn').forEach(btn => {
         btn.addEventListener('click', evt => deleteSavedGame(evt))
+    });
+
+    document.querySelectorAll('.loadGameTableBtn').forEach(btn => {
+        btn.addEventListener('click', evt => makeLoadGameRequest(evt))
     });
 }
 
@@ -84,14 +88,22 @@ function createNewSaveGame() {
 function deleteSavedGame(event) {
     let saveId = event.target.getAttribute("saveId");
     localStorage.setItem(SAVE_GAMES_LOCAL_STORAGE_KEY, JSON.stringify(getSavedGames().filter(save => save.id != saveId)));
-    displaySaveGames();
+    displaySaveGames(savedGamesTable());
 }
 
 function onSuccessfulSave() {
-    displaySaveGames();
+    displaySaveGames(savedGamesTable());
 }
 
-function saveGameModal() {
-    displaySaveGames();
+function savedGamesModal() {
+    pauseTimer();
+    displaySaveGames(savedGamesTable());
     $("#saveGameModal").modal();
 }
+
+function getSavedGameById(id) {
+    return getSavedGames().find(save => save.id == id)
+}
+
+document.getElementById("saveGameModalCloseX").addEventListener('click', resumeTimer);
+document.getElementById("saveGameModalCloseBtn").addEventListener('click', resumeTimer);

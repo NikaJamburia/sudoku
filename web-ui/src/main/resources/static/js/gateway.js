@@ -52,11 +52,11 @@ function saveGame(gameState, onSuccess, onFail) {
     post(url, JSON.stringify(saveGameRequest), onSuccess, onFail)
 }
 
-function loadGame(savedGameState, onSuccess, onFail) {
+function loadGame(savedGame, onSuccess, onFail) {
     let url = webService + "load";
 
     let loadGameRequest = {
-        savedSudokuGameState: savedGameState
+        savedSudokuGameState: savedGame
     };
     post(url, JSON.stringify(loadGameRequest), onSuccess, onFail)
 }

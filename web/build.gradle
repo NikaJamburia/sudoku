@@ -7,8 +7,8 @@ project(":web") {
         implementation project(":service")
         implementation project(":interaction")
 
-        implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.1'
-        implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.11.1"
+        implementation 'com.fasterxml.jackson.core:jackson-databind:2.10.2'
+        implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.10.2"
 
         implementation 'org.springframework:spring-core:5.2.8.RELEASE'
         implementation 'org.springframework:spring-context:5.2.8.RELEASE'
