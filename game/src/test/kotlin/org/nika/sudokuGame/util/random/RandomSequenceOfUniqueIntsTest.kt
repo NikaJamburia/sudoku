@@ -2,6 +2,7 @@ package org.nika.sudokuGame.util.random
 
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
+import org.nika.sudokuTable.util.random.RandomSequenceOfUniqueInts
 import java.lang.IllegalStateException
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -9,12 +10,24 @@ import kotlin.test.assertTrue
 class RandomSequenceOfUniqueIntsTest  {
     @Test
     fun throwsExceptionWhenSequenceSizeIsGreaterThenRangeSize() {
-        assertThrows(IllegalStateException::class.java) { RandomSequenceOfUniqueInts(5, 1, 4) }
+        assertThrows(IllegalStateException::class.java) {
+            RandomSequenceOfUniqueInts(
+                5,
+                1,
+                4
+            )
+        }
     }
 
     @Test
     fun throwsExceptionWhenRangeIsIncorrect() {
-        assertThrows(IllegalStateException::class.java) { RandomSequenceOfUniqueInts(10, 100, 50) }
+        assertThrows(IllegalStateException::class.java) {
+            RandomSequenceOfUniqueInts(
+                10,
+                100,
+                50
+            )
+        }
     }
 
     @Test

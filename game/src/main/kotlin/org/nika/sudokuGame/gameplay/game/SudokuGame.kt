@@ -2,18 +2,18 @@ package org.nika.sudokuGame.gameplay.game
 
 import org.nika.sudokuGame.gameplay.game.time.GameTime
 import org.nika.sudokuGame.gameplay.game.time.GameTimeFromString
-import org.nika.sudokuGame.table.Coordinates
-import org.nika.sudokuGame.table.HasInternalState
-import org.nika.sudokuGame.table.SudokuTable
 import org.nika.sudokuInteraction.state.GameState
+import org.nika.sudokuTable.Coordinates
+import org.nika.sudokuInteraction.state.HasInternalState
+import org.nika.sudokuTable.SudokuTable
 
 class SudokuGame(
     private var gameStats: GameStats,
     private var sudokuTable: SudokuTable
 ): HasInternalState<GameState> {
 
-    fun fillCell(value: Int, coordinates: Coordinates, timePlayed: String): GameState {
-        sudokuTable.fillCell(value, coordinates)
+    fun fillCell(value: Int, coordinateX: Int, coordinateY: Int, timePlayed: String): GameState {
+        sudokuTable.fillCell(value, Coordinates(coordinateX, coordinateY))
         gameStats = gameStats.update(GameTimeFromString(timePlayed))
         return internalState()
     }

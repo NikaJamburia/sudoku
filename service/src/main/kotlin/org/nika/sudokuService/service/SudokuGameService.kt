@@ -5,7 +5,6 @@ import org.nika.sudokuGame.gameplay.game.neww.NewSudokuGame
 import org.nika.sudokuGame.gameplay.game.neww.SudokuTableGenerationParameters
 import org.nika.sudokuService.process.SudokuGameProcess
 import org.springframework.stereotype.Component
-import org.nika.sudokuGame.table.Coordinates
 import org.nika.sudokuInteraction.request.EmptyCellRequest
 import org.nika.sudokuInteraction.request.FillCellRequest
 import org.nika.sudokuInteraction.request.SudokuInteractionRequest
@@ -27,7 +26,7 @@ class SudokuGameService (
     override fun fillCell(request: FillCellRequest): SudokuInteractionResult {
         try {
             val game = SudokuGameFromState(request.gameState).generate()
-            val newGameState = game.fillCell(request.value, Coordinates(request.coordinateX, request.coordinateY), request.timerValue)
+            val newGameState = game.fillCell(request.value, request.coordinateX, request.coordinateY, request.timerValue)
             if (newGameState.gameIsWon) {
                 return GameWon(newGameState)
             }

@@ -1,13 +1,13 @@
 package org.nika.sudokuGame
 
-import org.nika.sudokuGame.table.Coordinates
-import org.nika.sudokuGame.table.SudokuTable
-import org.nika.sudokuGame.table.cells.ClosedCell
-import org.nika.sudokuGame.table.cells.NO_VALUE
-import org.nika.sudokuGame.table.cells.OpenCell
-import org.nika.sudokuGame.table.cells.collection.Boxes
 import org.nika.sudokuInteraction.state.CellState
 import org.nika.sudokuInteraction.state.TableState
+import org.nika.sudokuTable.Coordinates
+import org.nika.sudokuTable.SudokuTable
+import org.nika.sudokuTable.cells.ClosedCell
+import org.nika.sudokuTable.cells.NO_VALUE
+import org.nika.sudokuTable.cells.OpenCell
+import org.nika.sudokuTable.cells.collection.Boxes
 
 fun generate2X2Table(): SudokuTable {
     val cells= listOf(

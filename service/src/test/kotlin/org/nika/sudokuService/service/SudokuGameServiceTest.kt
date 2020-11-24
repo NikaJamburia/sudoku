@@ -3,7 +3,6 @@ package org.nika.sudokuService.service
 import org.junit.jupiter.api.Test
 import org.nika.sudokuGame.gameplay.game.neww.SudokuTableGenerationParameters
 import org.nika.sudokuGame.gameplay.game.neww.TableGenerationAlgorithm
-import org.nika.sudokuGame.table.Coordinates
 import org.nika.sudokuInteraction.request.EmptyCellRequest
 import org.nika.sudokuInteraction.request.FillCellRequest
 import org.nika.sudokuInteraction.request.SudokuInteractionRequest
@@ -30,7 +29,7 @@ class SudokuGameServiceTest {
         assertEquals("Successfully filled cell" , result.message)
         assertEquals("00:00:45" , result.content.playedTime)
         assertEquals(2 , result.content.numberOfTurns)
-        assertEquals(5 , result.content.tableState.cells.first { Coordinates(it.coordinateX, it.coordinateY) == Coordinates(1, 1) }.value)
+        assertEquals(5 , result.content.tableState.findCell(1, 1).value)
     }
 
     @Test

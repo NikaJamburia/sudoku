@@ -1,0 +1,9 @@
+project(":table") {
+    description = "sudoku table module"
+
+    apply plugin: "kotlin-spring"
+
+    dependencies {
+        implementation project(":interaction")
+    }
+}

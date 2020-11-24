@@ -1,11 +1,10 @@
 package org.nika.sudokuGame.gameplay.game.generation
 
 import org.junit.jupiter.api.Test
-import org.nika.sudokuGame.table.Coordinates
-import org.nika.sudokuGame.table.cells.NO_VALUE
 import org.nika.sudokuInteraction.state.CellState
 import org.nika.sudokuInteraction.state.GameState
 import org.nika.sudokuInteraction.state.TableState
+import org.nika.sudokuTable.cells.NO_VALUE
 
 import kotlin.test.assertEquals
 

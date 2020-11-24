@@ -2,6 +2,7 @@ project(":game") {
     description = "game module"
 
     dependencies {
+        implementation project(":table")
         implementation project(":interaction")
 
         implementation 'com.fasterxml.jackson.core:jackson-databind:2.10.2'

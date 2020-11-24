@@ -4,8 +4,8 @@ package org.nika.sudokuGame.gameplay.game.neww
 import org.nika.sudokuGame.gameplay.game.GameStats
 import org.nika.sudokuGame.gameplay.game.SudokuGame
 import org.nika.sudokuGame.gameplay.game.time.GameTime
-import org.nika.sudokuGame.table.generation.MockGeneratedSudokuTable
-import org.nika.sudokuGame.table.generation.RandomBasedNewSudokuTable
+import org.nika.sudokuTable.generation.MockGeneratedSudokuTable
+import org.nika.sudokuTable.generation.RandomBasedNewSudokuTable
 
 class NewSudokuGame (
     private val parameters: SudokuTableGenerationParameters

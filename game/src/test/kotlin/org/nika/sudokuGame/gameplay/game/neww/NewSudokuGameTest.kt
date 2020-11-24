@@ -2,14 +2,13 @@ package org.nika.sudokuGame.gameplay.game.neww
 
 import org.junit.jupiter.api.Test
 import org.nika.sudokuGame.coordinates
-import org.nika.sudokuGame.table.Coordinates
-import org.nika.sudokuGame.table.cells.Cell
-import org.nika.sudokuGame.table.cells.ClosedCell
-import org.nika.sudokuGame.table.cells.OpenCell
-import org.nika.sudokuGame.table.cells.collection.Columns
-import org.nika.sudokuGame.table.cells.collection.Rows
-import org.nika.sudokuGame.table.generation.MockGeneratedSudokuTable
 import org.nika.sudokuInteraction.state.CellState
+import org.nika.sudokuTable.cells.Cell
+import org.nika.sudokuTable.cells.ClosedCell
+import org.nika.sudokuTable.cells.OpenCell
+import org.nika.sudokuTable.cells.collection.Columns
+import org.nika.sudokuTable.cells.collection.Rows
+import org.nika.sudokuTable.generation.MockGeneratedSudokuTable
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue

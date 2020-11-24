@@ -10,8 +10,10 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/game" />
+            <option value="$PROJECT_DIR$/integration-tests" />
             <option value="$PROJECT_DIR$/interaction" />
             <option value="$PROJECT_DIR$/service" />
+            <option value="$PROJECT_DIR$/table" />
             <option value="$PROJECT_DIR$/web" />
             <option value="$PROJECT_DIR$/web-ui" />
           </set>

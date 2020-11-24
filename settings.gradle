@@ -1,7 +1,9 @@
 rootProject.name = 'sudoku'
+include 'table'
 include 'game'
 include 'service'
 include 'web'
 include 'interaction'
 include 'web-ui'
+include 'integration-tests'
 
