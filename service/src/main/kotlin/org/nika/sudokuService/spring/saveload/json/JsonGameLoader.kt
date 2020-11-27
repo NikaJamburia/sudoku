@@ -15,6 +15,6 @@ class JsonGameLoader: GameLoader {
     override fun supportedFormat(): SerializationFormat = SerializationFormat.JSON
 
     override fun load(savedSudokuGameState: SavedSudokuGameState): GameState =
-        JacksonDeserializedSudokuGameState(savedSudokuGameState.content).state()
+        JacksonDeserializedSudokuGameState(savedSudokuGameState.content).gameState()
 
 }

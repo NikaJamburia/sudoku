@@ -39,6 +39,6 @@ class SaveLoadSpringServiceIntegrationTest (
 
         assertEquals(SerializationFormat.JSON, result.savedGameState.serializationFormat)
         assertEquals(expectedJson, result.savedGameState.content)
-        assertEquals("00:03:05", JacksonDeserializedSudokuGameState(result.savedGameState.content).state().playedTime)
+        assertEquals("00:03:05", JacksonDeserializedSudokuGameState(result.savedGameState.content).gameState().playedTime)
     }
 }

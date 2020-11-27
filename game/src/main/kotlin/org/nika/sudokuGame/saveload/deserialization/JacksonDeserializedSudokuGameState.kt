@@ -7,7 +7,7 @@ import org.nika.sudokuInteraction.state.GameState
 class JacksonDeserializedSudokuGameState(
     private val stringGame: String
 ): DeserializedSudokuGame {
-    override fun state(): GameState =
+    override fun gameState(): GameState =
         ObjectMapper().registerModule(KotlinModule()).readValue(stringGame, GameState::class.java)
 
 }
