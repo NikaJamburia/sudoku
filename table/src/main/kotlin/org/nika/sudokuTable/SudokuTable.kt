@@ -33,7 +33,7 @@ class SudokuTable(
 
     private fun isFilled(): Boolean = !allCells().any { it.isEmpty() }
     private fun isEmpty(): Boolean = allCells().filterIsInstance<OpenCell>().all { it.isEmpty() }
-    private fun allCells(): List<Cell> = boxes.groupedCells().flatMap { it.content }
+    private fun allCells(): List<Cell> = boxes.asList().flatMap { it.content }
 
     private fun findConflicts(): List<CellConflict> {
         val rowConflicts = Rows(allCells()).findConflicts()

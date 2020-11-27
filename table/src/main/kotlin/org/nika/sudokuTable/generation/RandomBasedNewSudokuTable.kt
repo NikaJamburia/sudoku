@@ -8,7 +8,7 @@ import org.nika.sudokuTable.cells.NO_VALUE
 import org.nika.sudokuTable.cells.OpenCell
 import org.nika.sudokuTable.cells.collection.Boxes
 import org.nika.sudokuTable.cells.collection.Columns
-import org.nika.sudokuTable.cells.collection.GroupedSelections
+import org.nika.sudokuTable.cells.collection.GroupedCells
 import org.nika.sudokuTable.cells.collection.Rows
 import org.nika.sudokuTable.util.random.RandomCollectionOfUniqueCoordinates
 
@@ -62,8 +62,8 @@ class RandomBasedNewSudokuTable(
             findCellsInSameGroupedSelection(forCell, Boxes(inCellsList))
         ).flatten().toSet()
 
-    private fun findCellsInSameGroupedSelection(forCell: Cell, selection: GroupedSelections): List<Cell> =
-        selection.groupedCells()
+    private fun findCellsInSameGroupedSelection(forCell: Cell, selection: GroupedCells): List<Cell> =
+        selection.asList()
             .map { it.content }
             .first { it.any { c -> c.location() == forCell.location() } }
 

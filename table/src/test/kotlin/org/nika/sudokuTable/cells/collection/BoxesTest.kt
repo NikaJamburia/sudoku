@@ -18,21 +18,21 @@ class BoxesTest {
             OpenCell(3, Coordinates(4, 1)),
             OpenCell(4, Coordinates(4, 4))
         )
-        val listOfGroupedCells = Boxes(cells).groupedCells()
+        val listOfGroupedCells = Boxes(cells).asList()
         assertEquals(4, listOfGroupedCells.size)
         assertEquals(4, listOfGroupedCells.flatMap { it.content }.size)
     }
 
     @Test
     fun groupsTableWithOneBigCellCellCorrectly() {
-        val listOfGroupedCells = Boxes(cells2X2()).groupedCells()
+        val listOfGroupedCells = Boxes(cells2X2()).asList()
         assertEquals(4, listOfGroupedCells.flatMap { it.content }.size)
         assertEquals(1, listOfGroupedCells.size)
     }
 
     @Test
     fun groupsSmallSquareTableCellsCorrectly() {
-        val listOfGroupedCells = Boxes(cells6X6()).groupedCells()
+        val listOfGroupedCells = Boxes(cells6X6()).asList()
         assertEquals(4, listOfGroupedCells.size)
         assertEquals(36, listOfGroupedCells.flatMap { it.content }.size)
         assertTrue(listOfGroupedCells.all { it.content.size == 9 })
@@ -40,7 +40,7 @@ class BoxesTest {
 
     @Test
     fun groupsSmallRectangleTableCellsCorrectly() {
-        val listOfGroupedCells = Boxes(cells6X3()).groupedCells()
+        val listOfGroupedCells = Boxes(cells6X3()).asList()
         assertEquals(2, listOfGroupedCells.size)
         assertEquals(18, listOfGroupedCells.flatMap { it.content }.size)
         assertTrue(listOfGroupedCells.all { it.content.size == 9 })
@@ -57,7 +57,7 @@ class BoxesTest {
     }
 
     private fun fillCellIn(boxes: Boxes, value: Int, coordinates: Coordinates) {
-        boxes.groupedCells().flatMap { it.content }.first { it.location().equals(coordinates) }.fillValue(value)
+        boxes.asList().flatMap { it.content }.first { it.location().equals(coordinates) }.fillValue(value)
     }
 
     private fun cells6X6(): List<Cell> =

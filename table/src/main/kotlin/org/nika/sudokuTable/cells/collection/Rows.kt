@@ -4,8 +4,8 @@ import org.nika.sudokuTable.cells.Cell
 
 class Rows(
     private val source: List<Cell>
-) : GroupedSelections() {
-    override fun groupedCells(): List<SelectionOfCells> =
+) : GroupedCells() {
+    override fun asList(): List<SelectionOfCells> =
         source
             .groupBy { it.location().y }
             .values

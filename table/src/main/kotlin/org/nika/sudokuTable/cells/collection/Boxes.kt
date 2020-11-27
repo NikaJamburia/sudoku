@@ -5,16 +5,16 @@ import kotlin.math.max
 
 class Boxes(
     private val cells: List<Cell>
-) : GroupedSelections() {
-    override fun groupedCells(): List<SelectionOfCells> {
+) : GroupedCells() {
+    override fun asList(): List<SelectionOfCells> {
         val biggestXBorder = calculateBiggestBorderValue(maxXCoordinate())
         val biggestYBorder = calculateBiggestBorderValue(maxYCoordinate())
 
-        val bigCellXUpperBorders = (1..biggestXBorder).filter { it.canBeDividedBy(3) }
-        val bigCellYUpperBorders = (1..biggestYBorder).filter { it.canBeDividedBy(3) }
+        val boxUpperBordersX = (1..biggestXBorder).filter { it.canBeDividedBy(3) }
+        val boxUpperBordersY = (1..biggestYBorder).filter { it.canBeDividedBy(3) }
 
-        return bigCellXUpperBorders.map { x ->
-            bigCellYUpperBorders.map { y ->
+        return boxUpperBordersX.map { x ->
+            boxUpperBordersY.map { y ->
                 SelectionOfCells(
                     cells.filter {
                         cellFitsIntoBorders(it, y, x)
