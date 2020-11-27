@@ -1,7 +1,7 @@
 package org.nika.sudokuService.spring.service
 
-import org.nika.sudokuService.spring.saveload.GameLoader
-import org.nika.sudokuService.spring.saveload.GameSaver
+import org.nika.sudokuService.GameLoader
+import org.nika.sudokuService.GameSaver
 import io.mockk.every
 import io.mockk.mockk
 import org.junit.jupiter.api.Test

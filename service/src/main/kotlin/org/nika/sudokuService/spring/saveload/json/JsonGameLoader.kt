@@ -1,7 +1,7 @@
 package org.nika.sudokuService.spring.saveload.json
 
 
-import org.nika.sudokuService.spring.saveload.GameLoader
+import org.nika.sudokuService.GameLoader
 
 import org.nika.sudokuGame.saveload.deserialization.JacksonDeserializedSudokuGameState
 import org.nika.sudokuInteraction.enums.SerializationFormat

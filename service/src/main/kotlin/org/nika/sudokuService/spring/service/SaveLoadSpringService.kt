@@ -2,8 +2,8 @@ package org.nika.sudokuService.spring.service
 
 
 import org.nika.sudokuService.SaveLoadService
-import org.nika.sudokuService.spring.saveload.GameLoader
-import org.nika.sudokuService.spring.saveload.GameSaver
+import org.nika.sudokuService.GameLoader
+import org.nika.sudokuService.GameSaver
 import org.nika.sudokuInteraction.request.LoadGameRequest
 import org.nika.sudokuInteraction.request.SaveGameRequest
 import org.nika.sudokuInteraction.result.*

@@ -1,10 +1,10 @@
-package org.nika.sudokuService.spring.saveload
+package org.nika.sudokuService
 
 import org.nika.sudokuInteraction.enums.SerializationFormat
 import org.nika.sudokuInteraction.state.GameState
 import org.nika.sudokuInteraction.state.SavedSudokuGameState
 
-interface GameLoader {
+interface GameSaver {
     fun supportedFormat(): SerializationFormat
-    fun load(savedSudokuGameState: SavedSudokuGameState): GameState
+    fun save(gameState: GameState): SavedSudokuGameState
 }
