@@ -3,13 +3,13 @@ package org.nika.sudokuTable.generation
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
-class RandomBasedNewSudokuTableTest {
+class RandomBasedSudokuTableTest {
     @Test
     fun shouldNotGenerateAnyConflictsEver() {
         var numberOfTimesFailed = 0
         var numberOfGeneratedConflicts = 0
         repeat(1000) {
-            val randomTableState = RandomBasedNewSudokuTable(9, 9, 20).generate().internalState()
+            val randomTableState = RandomBasedSudokuTable(9, 9, 20).generate().internalState()
             assertEquals(81, randomTableState.cells.size)
 
             if (randomTableState.conflicts.isNotEmpty()) {

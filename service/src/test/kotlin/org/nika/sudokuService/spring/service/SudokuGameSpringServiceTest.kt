@@ -1,8 +1,8 @@
 package org.nika.sudokuService.spring.service
 
 import org.junit.jupiter.api.Test
-import org.nika.sudokuGame.neww.SudokuTableGenerationParameters
-import org.nika.sudokuGame.neww.TableGenerationAlgorithm
+import org.nika.sudokuGame.generation.SudokuTableGenerationParameters
+import org.nika.sudokuGame.generation.TableGenerationAlgorithm
 import org.nika.sudokuInteraction.request.EmptyCellRequest
 import org.nika.sudokuInteraction.request.FillCellRequest
 import org.nika.sudokuInteraction.request.SudokuInteractionRequest
@@ -132,6 +132,12 @@ class SudokuGameSpringServiceTest {
         assertEquals("Value of closed cell can not be changed", closedCellResult.message)
     }
 
-    private val defaultTableGeneration = SudokuTableGenerationParameters(TableGenerationAlgorithm.MOCKED, 0, 0, 0)
+    private val defaultTableGeneration =
+        SudokuTableGenerationParameters(
+            TableGenerationAlgorithm.MOCKED,
+            0,
+            0,
+            0
+        )
 
 }

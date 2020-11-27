@@ -12,7 +12,7 @@ import org.nika.sudokuTable.cells.collection.GroupedCells
 import org.nika.sudokuTable.cells.collection.Rows
 import org.nika.sudokuTable.util.random.RandomCollectionOfUniqueCoordinates
 
-class RandomBasedNewSudokuTable(
+class RandomBasedSudokuTable(
     private val cellsOnXAxis: Int,
     private val cellsOnYAxis: Int,
     private val numberOfClosedCells: Int

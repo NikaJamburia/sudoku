@@ -1,8 +1,8 @@
 package org.nika.sudokuService.spring.service
 
 import org.nika.sudokuGame.generation.SudokuGameFromState
-import org.nika.sudokuGame.neww.NewSudokuGame
-import org.nika.sudokuGame.neww.SudokuTableGenerationParameters
+import org.nika.sudokuGame.generation.NewSudokuGame
+import org.nika.sudokuGame.generation.SudokuTableGenerationParameters
 import org.nika.sudokuService.SudokuGameService
 import org.springframework.stereotype.Component
 import org.nika.sudokuInteraction.request.EmptyCellRequest
@@ -46,7 +46,7 @@ class SudokuGameSpringService (
 
     override fun startNewGame(): SudokuInteractionResult =
         try {
-            val game = NewSudokuGame(sudokuTableGenerationParameters).start()
+            val game = NewSudokuGame(sudokuTableGenerationParameters).generate()
             GameStarted(game.internalState())
         } catch (e: Exception) {
             NoGameError(e.message ?: let { "Unknown error" })

@@ -2,6 +2,9 @@ package org.nika.sudokuGame.neww
 
 import org.junit.jupiter.api.Test
 import org.nika.sudokuGame.coordinates
+import org.nika.sudokuGame.generation.NewSudokuGame
+import org.nika.sudokuGame.generation.SudokuTableGenerationParameters
+import org.nika.sudokuGame.generation.TableGenerationAlgorithm
 import org.nika.sudokuInteraction.state.CellState
 import org.nika.sudokuTable.cells.Cell
 import org.nika.sudokuTable.cells.ClosedCell
@@ -17,8 +20,13 @@ class NewSudokuGameTest {
 
     @Test
     fun startsNewGameWithMockedTable() {
-        val params = SudokuTableGenerationParameters(TableGenerationAlgorithm.MOCKED, 0, 0, 0)
-        val newGameState = NewSudokuGame(params).start().internalState()
+        val params = SudokuTableGenerationParameters(
+            TableGenerationAlgorithm.MOCKED,
+            0,
+            0,
+            0
+        )
+        val newGameState = NewSudokuGame(params).generate().internalState()
 
         assertEquals(0, newGameState.numberOfTurns)
         assertEquals("00:00:00", newGameState.playedTime)
@@ -29,8 +37,13 @@ class NewSudokuGameTest {
 
     @Test
     fun startsNewGameWithRandomTable() {
-        val params = SudokuTableGenerationParameters(TableGenerationAlgorithm.RANDOM, 9, 9, 20)
-        val newGameState = NewSudokuGame(params).start().internalState()
+        val params = SudokuTableGenerationParameters(
+            TableGenerationAlgorithm.RANDOM,
+            9,
+            9,
+            20
+        )
+        val newGameState = NewSudokuGame(params).generate().internalState()
 
         assertTrue(newGameState.tableState.tableIsEmpty)
         assertEquals(20, newGameState.tableState.cells.count { !it.cellIsOpen })

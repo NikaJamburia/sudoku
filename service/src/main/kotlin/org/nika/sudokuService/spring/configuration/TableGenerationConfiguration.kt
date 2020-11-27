@@ -1,7 +1,7 @@
 package org.nika.sudokuService.spring.configuration
 
-import org.nika.sudokuGame.neww.SudokuTableGenerationParameters
-import org.nika.sudokuGame.neww.TableGenerationAlgorithm
+import org.nika.sudokuGame.generation.SudokuTableGenerationParameters
+import org.nika.sudokuGame.generation.TableGenerationAlgorithm
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -18,6 +18,11 @@ class TableGenerationConfiguration {
         @Value("\${table.generation.row-size:9}") rowSize: Int,
         @Value("\${table.generation.closed-cells:17}") closedCellsNumber: Int
     ): SudokuTableGenerationParameters {
-        return SudokuTableGenerationParameters(generationAlgorithm, rowSize, columnSize, closedCellsNumber)
+        return SudokuTableGenerationParameters(
+            generationAlgorithm,
+            rowSize,
+            columnSize,
+            closedCellsNumber
+        )
     }
 }
