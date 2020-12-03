@@ -57,13 +57,13 @@ class RandomBasedSudokuTable(
 
     private fun findPotentialConflicts(forCell: Cell, inCellsList: List<OpenCell>): Set<Cell> =
         listOf(
-            findCellsInSameGroupedSelection(forCell, Rows(inCellsList)),
-            findCellsInSameGroupedSelection(forCell, Columns(inCellsList)),
-            findCellsInSameGroupedSelection(forCell, Boxes(inCellsList))
+            findCellsInSameGroup(forCell, Rows(inCellsList)),
+            findCellsInSameGroup(forCell, Columns(inCellsList)),
+            findCellsInSameGroup(forCell, Boxes(inCellsList))
         ).flatten().toSet()
 
-    private fun findCellsInSameGroupedSelection(forCell: Cell, selection: GroupedCells): List<Cell> =
-        selection.asList()
+    private fun findCellsInSameGroup(forCell: Cell, group: GroupedCells): List<Cell> =
+        group.asList()
             .map { it.content }
             .first { it.any { c -> c.location() == forCell.location() } }
 

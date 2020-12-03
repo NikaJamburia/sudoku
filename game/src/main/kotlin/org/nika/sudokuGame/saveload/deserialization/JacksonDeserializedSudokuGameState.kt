@@ -9,5 +9,4 @@ class JacksonDeserializedSudokuGameState(
 ): DeserializedSudokuGame {
     override fun gameState(): GameState =
         ObjectMapper().registerModule(KotlinModule()).readValue(stringGame, GameState::class.java)
-
 }
