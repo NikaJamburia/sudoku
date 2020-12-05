@@ -22,7 +22,7 @@ class NewSudokuGame (
             TableGenerationAlgorithm.MOCKED -> MockGeneratedSudokuTable().generate()
             TableGenerationAlgorithm.RANDOM -> RandomBasedSudokuTable(generationParameters.xCells, generationParameters.yCells, generationParameters.defaultClosedCells).generate()
             TableGenerationAlgorithm.BACKTRACKING -> BacktrackedSudokuTable(81 - difficultyParameters.numberOfClosedCells).generate()
-            TableGenerationAlgorithm.RANDOM_EMPTY -> CleanSudokuTable().generate()
+            TableGenerationAlgorithm.EMPTY_TABLE -> CleanSudokuTable().generate()
         }
         return SudokuGame(
             GameStats(difficultyParameters.chosenDifficulty, GameTime(0, 0, 0), 0),

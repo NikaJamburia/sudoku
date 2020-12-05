@@ -1,7 +1,7 @@
 package org.nika.sudokuGame.generation.parameters
 
 enum class TableGenerationAlgorithm {
-    MOCKED, RANDOM, BACKTRACKING, RANDOM_EMPTY
+    MOCKED, RANDOM, BACKTRACKING, EMPTY_TABLE
 }
 
 data class SudokuTableGenerationParameters (
