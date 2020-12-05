@@ -40,6 +40,6 @@ class SaveLoadSpringService(
         }
 
     private fun GameState.withNewTimerValue(newValue: String): GameState =
-        GameState(newValue, this.numberOfTurns, this.gameIsWon, this.tableState)
+        GameState(this.difficulty, newValue, this.numberOfTurns, this.gameIsWon, this.tableState)
 
 }

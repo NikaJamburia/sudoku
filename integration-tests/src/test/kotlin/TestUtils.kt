@@ -1,4 +1,5 @@
 import com.fasterxml.jackson.databind.ObjectMapper
+import org.nika.sudokuInteraction.enums.SudokuDifficulty
 import org.nika.sudokuInteraction.state.CellState
 import org.nika.sudokuInteraction.state.GameState
 import org.nika.sudokuInteraction.state.TableState
@@ -16,7 +17,7 @@ fun game4X4With1Empty(playedTime: String, turns: Int): GameState {
             CellState(0, 2, 2, true)
         ), listOf(), false, false)
 
-    return GameState(playedTime, turns, false, tableState)
+    return GameState(SudokuDifficulty.HARD, playedTime, turns, false, tableState)
 }
 
 fun rowSize(tableState: TableState): Int =

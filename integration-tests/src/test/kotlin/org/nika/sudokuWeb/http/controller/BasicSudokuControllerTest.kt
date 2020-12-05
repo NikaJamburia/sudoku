@@ -6,6 +6,7 @@ import com.fasterxml.jackson.module.kotlin.KotlinModule
 import org.junit.jupiter.api.Test
 import org.nika.sudokuInteraction.enums.SerializationFormat.JSON
 import org.nika.sudokuInteraction.enums.SerializationFormat.XML
+import org.nika.sudokuInteraction.enums.SudokuDifficulty
 import org.nika.sudokuInteraction.request.*
 import org.nika.sudokuInteraction.state.GameState
 import org.nika.sudokuInteraction.state.SavedSudokuGameState
@@ -28,8 +29,16 @@ class BasicSudokuControllerTest(
 
     @Test
     fun startsNewGameCorrectly() {
-        mockMvc.perform(get(controllerPath + "start-new-game"))
+        mockMvc.perform(
+            postWithJson(controllerPath + "start-new-game", asJsonString(StartNewGameRequest(SudokuDifficulty.NO_DIFFICULTY)))
+        )
             .andExpect(status().isOk)
+            .andExpect(jsonPath("$.isSuccessful").value(true))
+            .andExpect(jsonPath("$.message").value("New game started"))
+            .andExpect(jsonPath("$.content.difficulty").value("NO_DIFFICULTY"))
+            .andExpect(jsonPath("$.content.playedTime").value("00:00:00"))
+            .andExpect(jsonPath("$.content.numberOfTurns").value(0))
+            .andExpect(jsonPath("$.content.tableState.conflicts").isEmpty)
     }
 
     @Test

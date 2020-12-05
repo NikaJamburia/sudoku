@@ -6,6 +6,7 @@ import org.nika.sudokuGame.GameStats
 import org.nika.sudokuGame.SudokuGame
 import org.nika.sudokuGame.findCell
 import org.nika.sudokuGame.generate2X2Table
+import org.nika.sudokuInteraction.enums.SudokuDifficulty
 import org.nika.sudokuTable.SudokuTable
 import org.nika.sudokuTable.cells.NO_VALUE
 import kotlin.test.assertEquals
@@ -70,7 +71,7 @@ class SudokuGameTest {
 
     private fun newGame(sudokuTable: SudokuTable): SudokuGame =
         SudokuGame(
-            GameStats(GameTime(0, 0, 0), 0),
+            GameStats(SudokuDifficulty.EASY, GameTime(0, 0, 0), 0),
             sudokuTable
         )
 }

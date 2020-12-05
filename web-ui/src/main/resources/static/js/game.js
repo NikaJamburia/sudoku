@@ -15,7 +15,7 @@ window.addEventListener('load', (event) => {
 });
 
 function startGame() {
-    startNewGame(response => {
+    startNewGame("HARD", response => {
         handle(response);
     }, response => {
         let error = JSON.parse(response);

@@ -1,5 +1,6 @@
 package org.nika.sudokuInteraction.result
 
+import org.nika.sudokuInteraction.enums.SudokuDifficulty
 import org.nika.sudokuInteraction.state.GameState
 import org.nika.sudokuInteraction.state.TableState
 
@@ -18,7 +19,7 @@ class Error (
 
 class NoGameError (
     errorMsg: String
-): SudokuInteractionResult(false, errorMsg, GameState("", 0, false, TableState(listOf(), listOf(), false, false)))
+): SudokuInteractionResult(false, errorMsg, GameState(SudokuDifficulty.EASY,"", 0, false, TableState(listOf(), listOf(), false, false)))
 
 class GameStarted (
     gameState: GameState

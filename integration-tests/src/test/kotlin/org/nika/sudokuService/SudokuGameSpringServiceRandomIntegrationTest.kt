@@ -3,6 +3,8 @@ package org.nika.sudokuService
 import columnSize
 import countClosedCells
 import org.junit.jupiter.api.Test
+import org.nika.sudokuInteraction.enums.SudokuDifficulty
+import org.nika.sudokuInteraction.request.StartNewGameRequest
 import org.nika.sudokuService.spring.service.SudokuGameSpringService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -18,7 +20,7 @@ class SudokuGameSpringServiceRandomIntegrationTest(
 ) {
     @Test
     fun correctlyUsesPropertiesToStartNewGame() {
-        val result = gameSpringService.startNewGame()
+        val result = gameSpringService.startNewGame(StartNewGameRequest(SudokuDifficulty.NO_DIFFICULTY))
 
         assertTrue(result.isSuccessful)
         assertEquals(20, rowSize(result.content.tableState))

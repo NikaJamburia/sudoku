@@ -1,6 +1,7 @@
 package org.nika.sudokuGame.generation
 
 import org.junit.jupiter.api.Test
+import org.nika.sudokuInteraction.enums.SudokuDifficulty
 import org.nika.sudokuInteraction.state.CellState
 import org.nika.sudokuInteraction.state.GameState
 import org.nika.sudokuInteraction.state.TableState
@@ -12,6 +13,7 @@ class SudokuGameFromStateTest {
     @Test
     fun correctlyGeneratesGameFromState() {
         val initialState = GameState(
+            SudokuDifficulty.EASY,
             "00:01:40",
             5,
             false,

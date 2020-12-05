@@ -11,7 +11,7 @@ class SudokuGameFromState(
 ): GeneratedSudokuGame {
     override fun generate(): SudokuGame =
         SudokuGame(
-            GameStats(GameTimeFromString(state.playedTime), state.numberOfTurns),
+            GameStats(state.difficulty, GameTimeFromString(state.playedTime), state.numberOfTurns),
             SudokuTableFromState(state.tableState).generate()
         )
 }

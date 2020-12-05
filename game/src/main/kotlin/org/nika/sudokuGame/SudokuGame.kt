@@ -19,7 +19,7 @@ class SudokuGame(
     }
 
     fun restart(): GameState {
-        gameStats = GameStats(GameTime(0, 0, 0), 0)
+        gameStats = GameStats(this.gameStats.difficulty, GameTime(0, 0, 0), 0)
         sudokuTable.emptyTable()
         return internalState()
     }
@@ -31,7 +31,7 @@ class SudokuGame(
     }
 
     override fun internalState(): GameState =
-        GameState(gameStats.playedTime.asString(), gameStats.numberOfTurns, isGameWon(), sudokuTable.internalState())
+        GameState(gameStats.difficulty, gameStats.playedTime.asString(), gameStats.numberOfTurns, isGameWon(), sudokuTable.internalState())
 
     private fun isGameWon(): Boolean =
         sudokuTable.internalState().tableIsFull

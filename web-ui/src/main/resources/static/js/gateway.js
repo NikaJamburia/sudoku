@@ -1,9 +1,14 @@
 let webService = "http://localhost:8080/sudoku/web/api/";
 let xhr = new XMLHttpRequest();
 
-function startNewGame(onSuccess, onFail) {
+function startNewGame(difficulty, onSuccess, onFail) {
     let url = webService + "start-new-game";
-    get(url, onSuccess, onFail)
+
+    let startNewGameRequest = {
+        difficulty: difficulty
+    };
+
+    post(url, JSON.stringify(startNewGameRequest), onSuccess, onFail)
 }
 
 function restartGame(gameState, onSuccess, onFail) {

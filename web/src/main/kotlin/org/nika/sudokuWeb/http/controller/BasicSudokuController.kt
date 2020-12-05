@@ -19,9 +19,9 @@ class BasicSudokuController (
     @Autowired private val saveLoadService: SaveLoadService
 ) {
 
-    @GetMapping("start-new-game")
-    fun startNewGame(): ResponseEntity<SudokuInteractionResult> =
-        SudokuInteractionResponseEntity(gameService.startNewGame()).respond()
+    @PostMapping("start-new-game")
+    fun startNewGame(@RequestBody request: StartNewGameRequest): ResponseEntity<SudokuInteractionResult> =
+        SudokuInteractionResponseEntity(gameService.startNewGame(request)).respond()
 
     @PostMapping("restart-game")
     fun restartGame(@RequestBody request: SudokuInteractionRequest): ResponseEntity<SudokuInteractionResult> =

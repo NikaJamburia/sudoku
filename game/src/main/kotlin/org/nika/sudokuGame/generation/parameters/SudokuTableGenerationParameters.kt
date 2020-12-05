@@ -1,12 +1,12 @@
-package org.nika.sudokuGame.generation
+package org.nika.sudokuGame.generation.parameters
 
 enum class TableGenerationAlgorithm {
-    MOCKED, RANDOM, BACKTRACKING, EMPTY
+    MOCKED, RANDOM, BACKTRACKING, RANDOM_EMPTY
 }
 
 data class SudokuTableGenerationParameters (
     val tableGenerationAlgorithm: TableGenerationAlgorithm,
     val xCells: Int,
     val yCells: Int,
-    val closedCells: Int
+    val defaultClosedCells: Int
 )
