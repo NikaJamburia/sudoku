@@ -8,7 +8,9 @@ function startNewGame(difficulty, onSuccess, onFail) {
         difficulty: difficulty
     };
 
-    post(url, JSON.stringify(startNewGameRequest), onSuccess, onFail)
+    withLoadingAnimation(
+        post(url, JSON.stringify(startNewGameRequest), onSuccess, onFail)
+    );
 }
 
 function restartGame(gameState, onSuccess, onFail) {
@@ -79,7 +81,16 @@ function post(url, jsonBody, onSuccess, onFail) {
     };
 
     xhr.send(jsonBody);
+}
 
+function withLoadingAnimation(afterLoad) {
+    let loadingHtml = ` <div class="text-center">
+                            <p><b>Generating Table...</b></p> 
+                            <br>
+                            <img width="300" height="300" src="../src/gif/loading.gif" />
+                        </div>`;
+    table.innerHTML = loadingHtml;
+    afterLoad()
 }
 
 function get(url, onSuccess, onFail) {

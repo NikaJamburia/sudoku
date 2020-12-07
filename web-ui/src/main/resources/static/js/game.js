@@ -6,16 +6,27 @@ window.addEventListener('load', (event) => {
         emptyTable();
         resolve()
     }).then(() => {
-        document.getElementById("start-Btn").addEventListener('click', startGame);
+        document.getElementById("start-Btn").addEventListener('click', showStartGameModal);
         document.getElementById("save-btn").addEventListener('click', savedGamesModal);
         document.getElementById("load-btn").addEventListener('click', loadGameModal);
         document.getElementById("restart_game_btn").addEventListener('click', restart);
-        document.getElementById("generate_new_btn").addEventListener('click', startGame);
+        document.getElementById("generate_new_btn").addEventListener('click', showStartGameModal);
+
+        document.querySelectorAll('.game-difficulty-button').forEach(btn => {
+            btn.addEventListener('click', evt => startGame(evt))
+        });
     })
 });
 
-function startGame() {
-    startNewGame("HARD", response => {
+function showStartGameModal() {
+    $("#startGameModal").modal();
+}
+
+function startGame(event) {
+    $("#startGameModal").modal('hide');
+    let difficulty = event.target.getAttribute("difficulty");
+
+    startNewGame(difficulty, response => {
         handle(response);
     }, response => {
         let error = JSON.parse(response);
