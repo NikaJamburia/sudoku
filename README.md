@@ -5,17 +5,6 @@ Above all that we have SudokuMainApplication and gradle file with its properties
 or web with little javascript app I've made (:web-ui). Or maybe add a module with a desktop app, and just run that.
 
 <hr>
-<h3>Key Concepts</h3>
-<p>Architecture and code style of this project were influenced by several concepts about object-oriented development. The most important ones are:</p>
-<ul>
-    <li>
-        <b>Layered/Onion/Clean Architecture: </b>Project architecture can be represented as set of concentric circles. Each circle is a layer, that only depends on the inner layer and knows nothing about what's outside it. So all the dependencies point inwards.
-        At the core are our domain layers (:table, :game) that contain code that make our project unique. Core should not depend or know about any framework, database provider and so on, anything that is not a part of our domain 
-    </li>
-    <li>...</li>
-</ul>
-
-<hr>
 <h3>Modules</h3>
 <ul>
         <li>
