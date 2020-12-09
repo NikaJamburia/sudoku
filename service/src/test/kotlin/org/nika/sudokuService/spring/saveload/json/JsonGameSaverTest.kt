@@ -18,7 +18,7 @@ class JsonGameSaverTest {
 
     @Test
     fun savesGameAsJson() {
-        val expectedJson = """{"difficulty":HARD","playedTime":"00:00:30","numberOfTurns":3,"gameIsWon":false,"tableState":{"cells":[{"value":0,"coordinateX":1,"coordinateY":1,"cellIsOpen":true},{"value":2,"coordinateX":1,"coordinateY":2,"cellIsOpen":false}],"conflicts":[],"tableIsFull":false,"tableIsEmpty":false}}"""
+        val expectedJson = """{"difficulty":"HARD","playedTime":"00:00:30","numberOfTurns":3,"gameIsWon":false,"tableState":{"cells":[{"value":0,"coordinateX":1,"coordinateY":1,"cellIsOpen":true},{"value":2,"coordinateX":1,"coordinateY":2,"cellIsOpen":false}],"conflicts":[],"tableIsFull":false,"tableIsEmpty":false}}"""
 
         val tableState = TableState(
             listOf(CellState(0, 1, 1, true), CellState(2, 1, 2, false)),

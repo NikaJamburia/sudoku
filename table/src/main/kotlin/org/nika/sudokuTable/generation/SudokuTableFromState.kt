@@ -18,13 +18,6 @@ class SudokuTableFromState (
         return SudokuTable(Boxes(cells))
     }
 
-    private fun createConflicts(cells: List<Cell>): List<CellConflict> =
-        state.conflicts
-            .map { it.conflictedCells.map { cellState -> Coordinates(cellState.coordinateX, cellState.coordinateY) } }
-            .map { it.map { cells.first {cell -> cell.location().equals(it) } } }
-            .map { CellConflict(it.toMutableList()) }
-
-
     private fun createCellFrom(it: CellState): Cell {
         return if (it.cellIsOpen) {
             OpenCell(it.value, Coordinates(it.coordinateX, it.coordinateY))

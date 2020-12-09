@@ -5,7 +5,7 @@ import org.nika.sudokuInteraction.state.HasInternalState
 import org.nika.sudokuTable.cells.Cell
 
 class CellConflict (
-    val conflictedCells: MutableList<Cell>
+    val conflictedCells: List<Cell>
 ): HasInternalState<ConflictState> {
 
     override fun internalState(): ConflictState =

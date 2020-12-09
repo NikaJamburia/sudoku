@@ -35,7 +35,8 @@ class Boxes(
     }
 
     private fun cellFitsIntoBorders(it: Cell, y: Int, x: Int) =
-        (it.location().y <= y && it.location().y > y - 3) && (it.location().x <= x && it.location().x > x - 3)
+        (it.location().y <= y && it.location().y > y - 3)
+                && (it.location().x <= x && it.location().x > x - 3)
 
     private fun maxYCoordinate() = cells.map { it.location().y }.max()!!
     private fun maxXCoordinate() = cells.map { it.location().x }.max()!!

@@ -38,9 +38,9 @@ class SudokuTable(
     private fun findConflicts(): List<CellConflict> {
         val rowConflicts = Rows(allCells()).findConflicts()
         val columnConflicts = Columns(allCells()).findConflicts()
-        val bigCellConflicts = boxes.findConflicts()
+        val boxesConflicts = boxes.findConflicts()
 
-        return listOf(rowConflicts, columnConflicts, bigCellConflicts).flatten()
+        return listOf(rowConflicts, columnConflicts, boxesConflicts).flatten()
     }
 
     private fun findCellBy(coordinates: Coordinates) =

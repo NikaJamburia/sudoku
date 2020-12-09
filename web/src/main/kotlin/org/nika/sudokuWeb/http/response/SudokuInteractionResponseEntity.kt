@@ -5,8 +5,9 @@ import org.springframework.http.ResponseEntity
 
 class SudokuInteractionResponseEntity (
     private val sudokuInteractionResult: SudokuInteractionResult
-) {
-    fun respond(): ResponseEntity<SudokuInteractionResult> {
+) : SudokuWebResponse<SudokuInteractionResult> {
+
+    override fun respond(): ResponseEntity<SudokuInteractionResult> {
         return if (sudokuInteractionResult.isSuccessful) {
             ResponseEntity.ok(sudokuInteractionResult)
         } else {
