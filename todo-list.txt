@@ -1,3 +1,4 @@
 1. Optimize backtracking algorithm so it's not so damn slow
 2. MAYBE: Make OpenCell and SudokuTable completely immutable
 3. MAYBE: Move spring components from service layer separate layer
+4. Add ability to save game to database
